@@ -6,6 +6,7 @@
     { name: "Waves", icon: "〰", colour: "#168eb2" },
     { name: "Nuclear Radiation", icon: "☢", colour: "#d97925" },
     { name: "Particle Physics", icon: "●", colour: "#2c9b69" },
+    { name: "Scientific Skills", icon: "⌁", colour: "#b04475" },
   ];
 
   const questions = [];
@@ -418,6 +419,157 @@
     ["Convert 300 K to degrees Celsius.", "27°C."],
     ["For a fixed mass of gas at constant temperature, what is the relationship between pressure and volume?", "pressure × volume is constant; pV = constant."],
     ["A gas is compressed to half its volume at constant temperature. What happens to its pressure?", "It doubles."],
+  ]);
+
+  // AQA GCSE working scientifically and mathematical skills
+  addMany("Scientific Skills", "Variables and hypotheses", [
+    ["What is the independent variable?", "The variable that is deliberately changed in an investigation."],
+    ["What is the dependent variable?", "The variable that is measured in response to changing the independent variable."],
+    ["What is a control variable?", "A variable kept the same so that it does not affect the results."],
+    ["Why should control variables be kept constant?", "So any change in the dependent variable is more likely to be caused by the independent variable."],
+    ["What is a hypothesis?", "A testable prediction about how the independent variable will affect the dependent variable."],
+    ["What should a good hypothesis include?", "The independent variable, dependent variable and the predicted relationship between them."],
+    ["A student changes the length of a pendulum and measures its period. What is the independent variable?", "The length of the pendulum."],
+    ["A student changes the length of a pendulum and measures its period. What is the dependent variable?", "The period of the pendulum."],
+    ["A student investigates how wire length affects resistance. Give one control variable.", "Any suitable answer, such as the wire material, wire thickness or wire temperature."],
+    ["A student investigates how surface colour affects cooling. What is the independent variable?", "The colour or surface finish."],
+    ["A student investigates how surface colour affects cooling. What is the dependent variable?", "The temperature decrease, cooling rate or temperature after a fixed time."],
+    ["Write a suitable hypothesis for an investigation into wire length and resistance.", "As the length of the wire increases, its resistance will increase."],
+  ]);
+
+  addMany("Scientific Skills", "Accuracy, precision and uncertainty", [
+    ["What does accurate mean?", "Close to the true or accepted value."],
+    ["What does precise mean?", "Repeated measurements are close together."],
+    ["Can results be precise but not accurate?", "Yes. They can be close together but all far from the true value."],
+    ["What is measurement uncertainty?", "The range within which the true value is expected to lie."],
+    ["For an analogue scale, what is a common estimate of reading uncertainty?", "Approximately plus or minus half the smallest scale division."],
+    ["A ruler has millimetre divisions. What is a common uncertainty for one reading?", "±0.5 mm."],
+    ["A digital balance reads to the nearest 0.01 g. What is its resolution?", "0.01 g."],
+    ["What is resolution?", "The smallest change that a measuring instrument can detect."],
+    ["How can parallax error be reduced when reading a scale?", "Read the scale at eye level and perpendicular to it."],
+    ["Why should a measuring instrument be checked for zero error?", "A zero error shifts every reading away from the correct value."],
+    ["Which is more precise for measuring 24.6 cm: a metre ruler marked every centimetre or one marked every millimetre?", "The ruler marked every millimetre because it has better resolution."],
+    ["A thermometer always reads 2°C too high. What type of error is this?", "A systematic error."],
+    ["What is a random error?", "An unpredictable variation that makes repeated readings differ."],
+    ["How can random error be reduced?", "Take repeat readings and calculate a mean."],
+    ["How can a systematic error be reduced?", "Identify and correct the cause, such as calibrating the instrument or accounting for zero error."],
+  ]);
+
+  addMany("Scientific Skills", "Repeats, reliability and means", [
+    ["Why are repeat measurements taken?", "To identify anomalous results and calculate a mean, reducing the effect of random error."],
+    ["What does repeatable mean?", "The same person using the same method and equipment obtains similar results."],
+    ["What does reproducible mean?", "Different people or different equipment and methods obtain similar results."],
+    ["What is an anomalous result?", "A result that does not fit the pattern of the other results."],
+    ["What should be done before excluding an anomalous result from a mean?", "Repeat or check the measurement and justify why it is anomalous."],
+    ["How is a mean calculated?", "Add the valid results and divide by the number of valid results."],
+    ["Calculate the mean of 12, 14 and 16.", "14."],
+    ["Calculate the mean time for 8.2 s, 8.4 s and 8.3 s.", "8.3 s."],
+    ["The results are 20, 21, 20 and 35. Which result is probably anomalous?", "35."],
+    ["Calculate the mean of 20, 21 and 20 after excluding the anomalous result of 35.", "20.3 to 1 decimal place."],
+    ["A student gets 4.1, 4.2 and 4.1 N. What do these closely grouped readings suggest?", "The measurements are precise."],
+    ["Does repeating a measurement automatically make it accurate?", "No. Repeats reduce random error but do not remove systematic error."],
+    ["How can the reliability of a conclusion be improved?", "Use repeat measurements, a suitable range and interval, and enough data to reveal a clear pattern."],
+    ["Why is using only one reading at each value of the independent variable weak?", "Anomalies cannot be identified and random variation may strongly affect the conclusion."],
+  ]);
+
+  addMany("Scientific Skills", "Tables and recording data", [
+    ["Where should units be written in a results table?", "In the column headings, not beside every value."],
+    ["What should each column heading in a results table contain?", "The name of the quantity and its unit."],
+    ["How should repeated measurements usually be recorded?", "In separate columns, with an additional column for the mean."],
+    ["Why should measurements in one column use consistent decimal places?", "They were measured with the same instrument and should show consistent precision."],
+    ["Which notation is suitable for a table heading: time/s or time × s?", "time/s."],
+    ["A student measures length in centimetres. Give a suitable column heading.", "Length / cm."],
+    ["Should the independent or dependent variable normally be placed first in a results table?", "The independent variable."],
+    ["Why should raw data be recorded before calculating a mean?", "It allows repeats, spread and anomalies to be checked."],
+    ["Why should calculated values not be recorded with unjustified extra decimal places?", "The precision of the answer should reflect the precision of the measurements."],
+    ["What information should accompany qualitative observations?", "A clear description of what was observed, recorded consistently for each condition."],
+  ]);
+
+  addMany("Scientific Skills", "Graphs", [
+    ["Which variable is normally plotted on the x-axis?", "The independent variable."],
+    ["Which variable is normally plotted on the y-axis?", "The dependent variable."],
+    ["What must each graph axis include?", "The quantity and its unit."],
+    ["How much of the graph grid should the chosen scale use?", "At least half of the available grid in both directions where possible."],
+    ["Should a graph scale always start at zero?", "No. Use a sensible linear scale that displays the data clearly, unless zero is scientifically important."],
+    ["What type of graph is normally used when both variables are continuous?", "A scatter graph or line graph with a line of best fit."],
+    ["What type of graph is suitable for categories?", "A bar chart."],
+    ["Should dot-to-dot lines normally be used for experimental data?", "No. Draw a line or curve of best fit unless there is a reason to join points."],
+    ["What is a line of best fit?", "A straight line or smooth curve that represents the overall trend in the data."],
+    ["Should a line of best fit pass through every point?", "No. It should represent the overall pattern with points reasonably balanced around it."],
+    ["How can an anomaly be identified on a graph?", "It lies well away from the overall trend or line of best fit."],
+    ["What does a positive correlation mean?", "As one variable increases, the other tends to increase."],
+    ["What does a negative correlation mean?", "As one variable increases, the other tends to decrease."],
+    ["What does no correlation mean?", "There is no clear relationship between the variables."],
+    ["Does correlation by itself prove causation?", "No. Other variables or explanations may be responsible."],
+    ["What does the gradient of a straight-line graph represent?", "The change in y divided by the change in x."],
+    ["Write the equation used to calculate a gradient.", "gradient = change in y ÷ change in x."],
+    ["Why should a large triangle be used to calculate a gradient?", "It reduces the percentage effect of reading uncertainty."],
+    ["A line rises by 12 units while moving 3 units across. Calculate its gradient.", "12 ÷ 3 = 4."],
+    ["A graph passes through (2, 5) and (6, 13). Calculate its gradient.", "(13 − 5) ÷ (6 − 2) = 8 ÷ 4 = 2."],
+    ["What is the y-intercept?", "The y-value where the line crosses the y-axis."],
+    ["What does a straight line through the origin show?", "The variables are directly proportional."],
+    ["How can a curve make calculating a gradient difficult?", "The gradient changes, so a tangent is needed at the point of interest."],
+    ["How is the gradient of a curve found at one point?", "Draw a tangent at that point and calculate the tangent's gradient."],
+  ]);
+
+  addMany("Scientific Skills", "Conclusions and evaluation", [
+    ["What should a conclusion be based on?", "The pattern and evidence in the results."],
+    ["What should be quoted when describing a relationship in the results?", "Relevant data values, including units."],
+    ["What is a causal conclusion?", "A conclusion that changing one variable causes a change in another."],
+    ["Why should a conclusion mention the range tested?", "The relationship may not apply beyond the measured range."],
+    ["What is the difference between a result and a conclusion?", "A result is a measurement or observation; a conclusion explains the overall pattern shown by the results."],
+    ["What makes an evaluation useful?", "It identifies a specific limitation, explains its effect and suggests a realistic improvement."],
+    ["Why is 'human error' usually a weak evaluation?", "It is vague and does not identify the exact problem or how it affected the results."],
+    ["Improve the statement 'use better equipment'.", "Name a suitable instrument with better resolution or control and explain how it improves the measurement."],
+    ["Why should an improvement be linked to a limitation?", "The improvement must address a real source of uncertainty or weakness in the method."],
+    ["A stopwatch is used for a very short event. Give one limitation.", "Human reaction time is large compared with the measured time."],
+    ["How could the percentage effect of reaction time be reduced when timing a pendulum?", "Time many oscillations and divide by the number of oscillations."],
+    ["Why should only one variable be deliberately changed at a time?", "So the effect of that variable can be identified."],
+    ["What is validity in an investigation?", "Whether the method measures what it is intended to measure and supports the stated conclusion."],
+    ["How can the validity of an investigation be improved?", "Control other variables and use a method that directly measures the intended quantities."],
+  ]);
+
+  addMany("Scientific Skills", "Equipment and measurement", [
+    ["Which instrument is suitable for measuring a small current?", "An ammeter connected in series."],
+    ["Which instrument measures potential difference?", "A voltmeter connected in parallel across a component."],
+    ["Which instrument is most suitable for measuring a liquid volume accurately: a beaker or measuring cylinder?", "A measuring cylinder."],
+    ["Why is a pipette more suitable than a beaker for transferring one accurate fixed volume?", "It has a smaller uncertainty and is designed to deliver a precise volume."],
+    ["What should be done to a balance before adding a sample container?", "Zero or tare it, either before use or with the empty container on it."],
+    ["How should the bottom of a water meniscus be read?", "At eye level, using the bottom of the meniscus."],
+    ["How can the diameter of a thin wire be measured more precisely than with a ruler?", "Use a micrometer."],
+    ["How can the thickness of one sheet of paper be estimated using a ruler?", "Measure the thickness of many sheets together and divide by the number of sheets."],
+    ["Why should the same measuring instrument be used for all readings of one quantity?", "To keep the resolution and any systematic error consistent."],
+    ["What is calibration?", "Checking or adjusting an instrument using known reference values."],
+  ]);
+
+  addMany("Scientific Skills", "Units and calculations", [
+    ["What is the SI unit of length?", "The metre (m)."],
+    ["What is the SI unit of time?", "The second (s)."],
+    ["What is the SI unit of mass?", "The kilogram (kg)."],
+    ["Convert 250 cm to metres.", "2.5 m."],
+    ["Convert 45 mm to metres.", "0.045 m."],
+    ["Convert 3.2 km to metres.", "3200 m."],
+    ["Convert 500 g to kilograms.", "0.5 kg."],
+    ["Convert 2 minutes to seconds.", "120 s."],
+    ["What does the prefix milli mean?", "One thousandth, or 10⁻³."],
+    ["What does the prefix kilo mean?", "One thousand, or 10³."],
+    ["Write 0.00045 in standard form.", "4.5 × 10⁻⁴."],
+    ["Write 620000 in standard form.", "6.2 × 10⁵."],
+    ["What is percentage change?", "(change ÷ original value) × 100%."],
+    ["A value increases from 20 to 25. Calculate the percentage increase.", "(5 ÷ 20) × 100% = 25%."],
+    ["What is percentage uncertainty?", "(absolute uncertainty ÷ measured value) × 100%."],
+    ["A length is 50.0 ± 0.5 cm. Calculate the percentage uncertainty.", "(0.5 ÷ 50.0) × 100% = 1%."],
+  ]);
+
+  addMany("Scientific Skills", "Risk and safety", [
+    ["What is a hazard?", "Something with the potential to cause harm."],
+    ["What is a risk?", "The likelihood and possible severity of harm from a hazard."],
+    ["What is a control measure?", "An action taken to reduce the likelihood or severity of harm."],
+    ["What should a risk assessment identify?", "Hazards, who or what may be harmed, the level of risk and suitable control measures."],
+    ["Why is 'be careful' not a strong control measure?", "It is vague and does not state a specific action that reduces the risk."],
+    ["Give a suitable control measure when heating with a Bunsen burner.", "Wear eye protection, keep flammable materials away and use a heatproof mat."],
+    ["Give a suitable control measure when using radioactive sources at school.", "Minimise exposure time, maximise distance and use shielding, following local rules."],
+    ["Why should electrical equipment be switched off before changing a circuit?", "To reduce the risk of electric shock, short circuits and overheating components."],
   ]);
 
   window.YEAR11_PHYSICS_DATA = { topicMeta, questions };
