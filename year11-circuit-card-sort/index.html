@@ -120,9 +120,9 @@
 
     .bank {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: 1fr 1fr 1.35fr;
       gap: 14px;
-      margin-bottom: 22px;
+      margin-bottom: 12px;
     }
 
     .bank-column {
@@ -141,12 +141,12 @@
 
     .card-list {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 9px;
     }
 
     .bank-column[data-type="function"] .card-list {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .card {
@@ -417,11 +417,11 @@
       if (id === 'voltmeter') return wrap(`<path ${common} d="M10 25 H55 M105 25 H150"/><circle ${common} cx="80" cy="25" r="23"/><text x="80" y="33" text-anchor="middle" font-size="24" font-weight="700" fill="currentColor" stroke="none">V</text>`);
       if (id === 'ammeter') return wrap(`<path ${common} d="M10 25 H55 M105 25 H150"/><circle ${common} cx="80" cy="25" r="23"/><text x="80" y="33" text-anchor="middle" font-size="24" font-weight="700" fill="currentColor" stroke="none">A</text>`);
       if (id === 'resistor') return wrap(`<path ${common} d="M10 25 H48 M112 25 H150"/><rect ${common} x="48" y="12" width="64" height="26" rx="1"/>`);
-      if (id === 'ldr') return wrap(`<path ${common} d="M10 25 H47 M113 25 H150"/><circle ${common} cx="80" cy="25" r="30"/><rect ${common} x="53" y="15" width="54" height="20" rx="1"/><path ${common} d="M126 3 L109 14 M109 14 L114 7 M109 14 L117 14 M140 12 L123 23 M123 23 L128 16 M123 23 L131 23"/>`);
-      if (id === 'thermistor') return wrap(`<path ${common} d="M10 25 H48 M112 25 H150"/><rect ${common} x="48" y="12" width="64" height="26" rx="1"/><path ${common} d="M42 43 L118 5 M42 43 H55"/>`);
-      if (id === 'variable-resistor') return wrap(`<path ${common} d="M10 25 H48 M112 25 H150"/><rect ${common} x="48" y="12" width="64" height="26" rx="1"/><path ${common} d="M40 44 L120 5 M120 5 L108 7 M120 5 L114 16"/>`);
-      if (id === 'diode') return wrap(`<path ${common} d="M10 25 H60 M101 25 H150"/><path ${common} d="M60 7 L99 25 L60 43 Z M100 7 V43"/>`);
-      if (id === 'led') return wrap(`<path ${common} d="M10 29 H58 M99 29 H150"/><path ${common} d="M58 11 L97 29 L58 47 Z M98 11 V47 M106 17 L124 5 M124 5 L114 6 M124 5 L120 14 M116 27 L137 14 M137 14 L127 15 M137 14 L133 23"/>`);
+      if (id === 'ldr') return wrap(`<path ${common} d="M10 25 H52 M108 25 H150"/><circle ${common} cx="80" cy="25" r="28"/><rect ${common} x="53" y="16" width="54" height="18" rx="1"/><path ${common} d="M48 2 L59 13 M59 13 L52 11 M59 13 L57 6 M38 9 L50 21 M50 21 L43 19 M50 21 L48 14"/>`);
+      if (id === 'thermistor') return wrap(`<path ${common} d="M10 25 H48 M112 25 H150"/><rect ${common} x="48" y="12" width="64" height="26" rx="1"/><path ${common} d="M42 43 H53 L119 5"/>`);
+      if (id === 'variable-resistor') return wrap(`<path ${common} d="M10 25 H48 M112 25 H150"/><rect ${common} x="48" y="12" width="64" height="26" rx="1"/><path ${common} d="M41 44 L119 5 M119 5 L107 7 M119 5 L113 16"/>`);
+      if (id === 'diode') return wrap(`<path ${common} d="M10 25 H52 M108 25 H150"/><circle ${common} cx="80" cy="25" r="28"/><path ${common} d="M52 25 H62 M99 25 H108 M62 10 L98 25 L62 40 Z M99 9 V41"/>`);
+      if (id === 'led') return wrap(`<path ${common} d="M10 28 H52 M108 28 H150"/><circle ${common} cx="80" cy="28" r="27"/><path ${common} d="M53 28 H62 M99 28 H107 M62 13 L98 28 L62 43 Z M99 12 V44 M104 12 L116 2 M116 2 L109 3 M116 2 L114 9 M112 18 L126 7 M126 7 L119 8 M126 7 L124 14"/>`);
       if (id === 'fuse') return wrap(`<path ${common} d="M10 25 H48 M112 25 H150"/><rect ${common} x="48" y="12" width="64" height="26" rx="1"/><path ${common} d="M52 25 H108"/>`);
       if (id === 'cell') return wrap(`<path ${common} d="M10 25 H70 M94 25 H150"/><path ${common} d="M70 6 V44 M94 14 V36"/>`);
       if (id === 'battery') return wrap(`<path ${common} d="M8 25 H44 M97 25 H152"/><path ${common} d="M44 6 V44 M61 14 V36 M80 6 V44 M97 14 V36"/>`);
@@ -627,4 +627,3 @@
   </script>
 </body>
 </html>
-
