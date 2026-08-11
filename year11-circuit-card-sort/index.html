@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Year 11 Electrical Circuit Card Sort</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5f6b7a;
+      --line: #d8deea;
+      --accent: #5b4fc7;
+      --accent-soft: #efedff;
+      --symbol: #eef6ff;
+      --component: #f4f0ff;
+      --function: #fff8df;
+      --correct: #dff6e5;
+      --correct-line: #2e8b57;
+      --incorrect: #ffe8e5;
+      --incorrect-line: #c64f45;
+      --incomplete: #fff5d8;
+      --incomplete-line: #b27d00;
+      --shadow: 0 8px 24px rgba(30, 42, 70, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    button { font: inherit; }
+
+    .page {
+      width: min(1480px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 28px 0 50px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #29245c 0%, #5b4fc7 100%);
+      color: white;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.7rem, 3vw, 2.7rem);
+      line-height: 1.05;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 900px;
+      line-height: 1.55;
+      color: rgba(255,255,255,.9);
+    }
+
+    .toolbar {
+      margin: 18px 0;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .toolbar button {
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--ink);
+      padding: 10px 15px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .toolbar button.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: white;
+    }
+
+    .toolbar button:focus-visible,
+    .card:focus-visible,
+    .slot:focus-visible {
+      outline: 3px solid #ffd45a;
+      outline-offset: 2px;
+    }
+
+    .status {
+      margin-left: auto;
+      min-width: 210px;
+      text-align: right;
+    }
+
+    .status strong { display: block; }
+    .status span { color: var(--muted); font-size: .92rem; }
+
+    .instructions {
+      margin: 0 0 18px;
+      background: var(--accent-soft);
+      border: 1px solid #d9d5ff;
+      border-radius: 16px;
+      padding: 14px 16px;
+      line-height: 1.5;
+    }
+
+    .instructions b { color: #37307f; }
+
+    .bank {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .bank-column {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      min-width: 0;
+    }
+
+    .bank-column h2,
+    .board-title {
+      margin: 0 0 12px;
+      font-size: 1.05rem;
+    }
+
+    .card-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    .bank-column[data-type="function"] .card-list {
+      grid-template-columns: 1fr;
+    }
+
+    .card {
+      width: 100%;
+      min-height: 88px;
+      border: 2px solid transparent;
+      border-radius: 14px;
+      padding: 10px;
+      color: var(--ink);
+      cursor: grab;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      text-align: center;
+      user-select: none;
+      transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease;
+    }
+
+    .card:hover { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(30,42,70,.1); }
+    .card.selected { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(91,79,199,.13); }
+    .card.dragging { opacity: .45; }
+    .card[data-type="symbol"] { background: var(--symbol); }
+    .card[data-type="component"] { background: var(--component); }
+    .card[data-type="function"] { background: var(--function); min-height: 72px; }
+
+    .card .type-tag {
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .card .label {
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .symbol-svg {
+      width: 100%;
+      max-width: 112px;
+      height: 38px;
+      overflow: visible;
+    }
+
+    .board {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .board-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .board-title-row small { color: var(--muted); }
+
+    .trays {
+      display: grid;
+      gap: 10px;
+    }
+
+    .tray {
+      display: grid;
+      grid-template-columns: 52px 1fr 1fr 1.55fr;
+      gap: 9px;
+      align-items: stretch;
+      border: 2px solid var(--line);
+      border-radius: 16px;
+      padding: 9px;
+      background: #fafbfe;
+      transition: background .15s ease, border-color .15s ease;
+    }
+
+    .tray.correct { background: var(--correct); border-color: var(--correct-line); }
+    .tray.incorrect { background: var(--incorrect); border-color: var(--incorrect-line); }
+    .tray.incomplete { background: var(--incomplete); border-color: var(--incomplete-line); }
+
+    .tray-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: var(--muted);
+    }
+
+    .slot {
+      min-height: 105px;
+      border: 2px dashed #b8c0cf;
+      border-radius: 13px;
+      padding: 7px;
+      background: rgba(255,255,255,.72);
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .slot::before {
+      content: attr(data-label);
+      position: absolute;
+      top: 5px;
+      left: 8px;
+      font-size: .67rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: #8a94a6;
+      pointer-events: none;
+    }
+
+    .slot.over { border-color: var(--accent); background: var(--accent-soft); }
+    .slot .card { min-height: 100%; margin-top: 10px; cursor: grab; }
+    .slot[data-slot="function"] .card { align-items: flex-start; text-align: left; }
+
+    .feedback {
+      margin-top: 14px;
+      min-height: 28px;
+      font-weight: 750;
+    }
+
+    .legend {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+    .dot.correct { background: var(--correct-line); }
+    .dot.incorrect { background: var(--incorrect-line); }
+    .dot.incomplete { background: var(--incomplete-line); }
+
+    @media (max-width: 1100px) {
+      .card-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .tray { grid-template-columns: 42px 1fr 1fr; }
+      .slot[data-slot="function"] { grid-column: 2 / 4; }
+    }
+
+    @media (max-width: 760px) {
+      .page { width: min(100% - 18px, 1480px); padding-top: 10px; }
+      .hero { border-radius: 18px; padding: 20px; }
+      .bank { grid-template-columns: 1fr; }
+      .bank-column .card-list,
+      .bank-column[data-type="function"] .card-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .tray { grid-template-columns: 38px 1fr; }
+      .slot { min-height: 92px; grid-column: 2; }
+      .status { width: 100%; margin-left: 0; text-align: left; }
+    }
+
+    @media (max-width: 470px) {
+      .bank-column .card-list,
+      .bank-column[data-type="function"] .card-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <h1>Year 11 Electrical Circuit Card Sort</h1>
+      <p>Match each circuit symbol with the correct component name and function. Build fourteen complete sets, then check your answers.</p>
+    </section>
+
+    <div class="toolbar" aria-label="Activity controls">
+      <button class="primary" id="checkBtn" type="button">Check answers</button>
+      <button id="restartBtn" type="button">Shuffle &amp; restart</button>
+      <button id="clearBtn" type="button">Clear board</button>
+      <div class="status" aria-live="polite">
+        <strong id="scoreText">0 of 14 sets correct</strong>
+        <span id="placedText">0 of 42 cards placed</span>
+      </div>
+    </div>
+
+    <div class="instructions">
+      <b>How to play:</b> Drag cards into the matching slots below. On a touchscreen, you can also tap a card to select it, then tap a slot. Each row should contain one symbol, one component name and its matching function.
+    </div>
+
+    <section class="bank" aria-label="Card bank">
+      <div class="bank-column" data-type="symbol">
+        <h2>Symbols</h2>
+        <div class="card-list" id="symbolBank"></div>
+      </div>
+      <div class="bank-column" data-type="component">
+        <h2>Components</h2>
+        <div class="card-list" id="componentBank"></div>
+      </div>
+      <div class="bank-column" data-type="function">
+        <h2>Functions</h2>
+        <div class="card-list" id="functionBank"></div>
+      </div>
+    </section>
+
+    <section class="board" aria-label="Matching board">
+      <div class="board-title-row">
+        <h2 class="board-title">Build the matching sets</h2>
+        <small>Rows can be in any order.</small>
+      </div>
+      <div class="trays" id="trays"></div>
+      <div class="feedback" id="feedback" aria-live="polite"></div>
+      <div class="legend" aria-label="Check answer colour key">
+        <span><i class="dot correct"></i> correct set</span>
+        <span><i class="dot incorrect"></i> complete but mismatched</span>
+        <span><i class="dot incomplete"></i> incomplete</span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const items = [
+      { id: 'open-switch', component: 'Open Switch', fn: 'Breaks the circuit, so current cannot flow.' },
+      { id: 'closed-switch', component: 'Closed Switch', fn: 'Completes the circuit, so current can flow.' },
+      { id: 'lamp', component: 'Lamp', fn: 'Converts electrical energy into light and heat.' },
+      { id: 'voltmeter', component: 'Voltmeter', fn: 'Measures voltage across a component.' },
+      { id: 'ammeter', component: 'Ammeter', fn: 'Measures current flowing in a circuit.' },
+      { id: 'resistor', component: 'Resistor', fn: 'Reduces or limits current.' },
+      { id: 'ldr', component: 'LDR', fn: 'Resistor controlled by light level.' },
+      { id: 'thermistor', component: 'Thermistor', fn: 'Resistor controlled by temperature.' },
+      { id: 'variable-resistor', component: 'Variable Resistor', fn: 'Allows resistance to be changed.' },
+      { id: 'diode', component: 'Diode', fn: 'Allows current to flow one way only.' },
+      { id: 'led', component: 'LED', fn: 'A diode that gives out light.' },
+      { id: 'fuse', component: 'Fuse', fn: 'Melts and breaks the circuit if current is too high.' },
+      { id: 'cell', component: 'Cell', fn: 'Provides voltage to push charge around the circuit.' },
+      { id: 'battery', component: 'Battery', fn: 'Two or more cells providing voltage.' }
+    ];
+
+    const banks = {
+      symbol: document.getElementById('symbolBank'),
+      component: document.getElementById('componentBank'),
+      function: document.getElementById('functionBank')
+    };
+
+    const traysEl = document.getElementById('trays');
+    const scoreText = document.getElementById('scoreText');
+    const placedText = document.getElementById('placedText');
+    const feedback = document.getElementById('feedback');
+
+    let selectedCard = null;
+    let draggedCard = null;
+    let cardMap = new Map();
+
+    function shuffled(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function symbolSVG(id) {
+      const common = 'stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"';
+      const wrap = inner => `<svg class="symbol-svg" viewBox="0 0 160 50" role="img" aria-label="Circuit symbol" xmlns="http://www.w3.org/2000/svg">${inner}</svg>`;
+
+      if (id === 'open-switch') return wrap(`<path ${common} d="M10 27 H58 M102 27 H150"/><circle ${common} cx="61" cy="27" r="4"/><circle ${common} cx="99" cy="27" r="4"/><path ${common} d="M64 24 L94 10"/>`);
+      if (id === 'closed-switch') return wrap(`<path ${common} d="M10 27 H58 M102 27 H150"/><circle ${common} cx="61" cy="27" r="4"/><circle ${common} cx="99" cy="27" r="4"/><path ${common} d="M65 26 L95 26"/>`);
+      if (id === 'lamp') return wrap(`<path ${common} d="M10 25 H55 M105 25 H150"/><circle ${common} cx="80" cy="25" r="23"/><path ${common} d="M65 10 L95 40 M95 10 L65 40"/>`);
+      if (id === 'voltmeter') return wrap(`<path ${common} d="M10 25 H55 M105 25 H150"/><circle ${common} cx="80" cy="25" r="23"/><text x="80" y="33" text-anchor="middle" font-size="24" font-weight="700" fill="currentColor" stroke="none">V</text>`);
+      if (id === 'ammeter') return wrap(`<path ${common} d="M10 25 H55 M105 25 H150"/><circle ${common} cx="80" cy="25" r="23"/><text x="80" y="33" text-anchor="middle" font-size="24" font-weight="700" fill="currentColor" stroke="none">A</text>`);
+      if (id === 'resistor') return wrap(`<path ${common} d="M10 25 H48 M112 25 H150"/><rect ${common} x="48" y="12" width="64" height="26" rx="1"/>`);
+      if (id === 'ldr') return wrap(`<path ${common} d="M10 25 H47 M113 25 H150"/><circle ${common} cx="80" cy="25" r="30"/><rect ${common} x="53" y="15" width="54" height="20" rx="1"/><path ${common} d="M126 3 L109 14 M109 14 L114 7 M109 14 L117 14 M140 12 L123 23 M123 23 L128 16 M123 23 L131 23"/>`);
+      if (id === 'thermistor') return wrap(`<path ${common} d="M10 25 H48 M112 25 H150"/><rect ${common} x="48" y="12" width="64" height="26" rx="1"/><path ${common} d="M42 43 L118 5 M42 43 H55"/>`);
+      if (id === 'variable-resistor') return wrap(`<path ${common} d="M10 25 H48 M112 25 H150"/><rect ${common} x="48" y="12" width="64" height="26" rx="1"/><path ${common} d="M40 44 L120 5 M120 5 L108 7 M120 5 L114 16"/>`);
+      if (id === 'diode') return wrap(`<path ${common} d="M10 25 H60 M101 25 H150"/><path ${common} d="M60 7 L99 25 L60 43 Z M100 7 V43"/>`);
+      if (id === 'led') return wrap(`<path ${common} d="M10 29 H58 M99 29 H150"/><path ${common} d="M58 11 L97 29 L58 47 Z M98 11 V47 M106 17 L124 5 M124 5 L114 6 M124 5 L120 14 M116 27 L137 14 M137 14 L127 15 M137 14 L133 23"/>`);
+      if (id === 'fuse') return wrap(`<path ${common} d="M10 25 H48 M112 25 H150"/><rect ${common} x="48" y="12" width="64" height="26" rx="1"/><path ${common} d="M52 25 H108"/>`);
+      if (id === 'cell') return wrap(`<path ${common} d="M10 25 H70 M94 25 H150"/><path ${common} d="M70 6 V44 M94 14 V36"/>`);
+      if (id === 'battery') return wrap(`<path ${common} d="M8 25 H44 M97 25 H152"/><path ${common} d="M44 6 V44 M61 14 V36 M80 6 V44 M97 14 V36"/>`);
+      return '';
+    }
+
+    function createCard(type, item) {
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'card';
+      card.draggable = true;
+      card.dataset.type = type;
+      card.dataset.id = item.id;
+      card.dataset.cardKey = `${type}:${item.id}`;
+      card.setAttribute('aria-label', `${type} card`);
+
+      const tag = `<span class="type-tag">${type}</span>`;
+      if (type === 'symbol') {
+        card.innerHTML = `${tag}${symbolSVG(item.id)}`;
+      } else if (type === 'component') {
+        card.innerHTML = `${tag}<span class="label">${item.component}</span>`;
+      } else {
+        card.innerHTML = `${tag}<span class="label">${item.fn}</span>`;
+      }
+
+      card.addEventListener('click', () => selectCard(card));
+      card.addEventListener('dragstart', e => {
+        draggedCard = card;
+        selectedCard = null;
+        clearSelection();
+        card.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', card.dataset.cardKey);
+      });
+      card.addEventListener('dragend', () => {
+        card.classList.remove('dragging');
+        draggedCard = null;
+        document.querySelectorAll('.slot.over').forEach(slot => slot.classList.remove('over'));
+      });
+      return card;
+    }
+
+    function selectCard(card) {
+      if (selectedCard === card) {
+        selectedCard = null;
+        clearSelection();
+        return;
+      }
+      selectedCard = card;
+      clearSelection();
+      card.classList.add('selected');
+    }
+
+    function clearSelection() {
+      document.querySelectorAll('.card.selected').forEach(c => c.classList.remove('selected'));
+      if (selectedCard) selectedCard.classList.add('selected');
+    }
+
+    function makeTray(index) {
+      const tray = document.createElement('div');
+      tray.className = 'tray';
+      tray.dataset.tray = index;
+      tray.innerHTML = `<div class="tray-number">${index + 1}</div>`;
+
+      [['symbol','Symbol'], ['component','Component'], ['function','Function']].forEach(([type, label]) => {
+        const slot = document.createElement('div');
+        slot.className = 'slot';
+        slot.dataset.slot = type;
+        slot.dataset.label = label;
+        slot.setAttribute('role', 'button');
+        slot.setAttribute('aria-label', `Set ${index + 1}: ${label} slot`);
+        slot.tabIndex = 0;
+
+        slot.addEventListener('dragover', e => {
+          if (!draggedCard || draggedCard.dataset.type !== type) return;
+          e.preventDefault();
+          slot.classList.add('over');
+          e.dataTransfer.dropEffect = 'move';
+        });
+        slot.addEventListener('dragleave', () => slot.classList.remove('over'));
+        slot.addEventListener('drop', e => {
+          e.preventDefault();
+          slot.classList.remove('over');
+          const key = e.dataTransfer.getData('text/plain');
+          const card = cardMap.get(key) || draggedCard;
+          if (card) placeCard(card, slot);
+        });
+        slot.addEventListener('click', e => {
+          if (e.target.closest('.card')) return;
+          if (selectedCard) placeCard(selectedCard, slot);
+        });
+        slot.addEventListener('keydown', e => {
+          if ((e.key === 'Enter' || e.key === ' ') && selectedCard) {
+            e.preventDefault();
+            placeCard(selectedCard, slot);
+          }
+        });
+        tray.appendChild(slot);
+      });
+      return tray;
+    }
+
+    function placeCard(card, slot) {
+      if (card.dataset.type !== slot.dataset.slot) {
+        feedback.textContent = `That is a ${card.dataset.type} card. Place it in a ${card.dataset.type} slot.`;
+        return;
+      }
+
+      const existing = slot.querySelector('.card');
+      if (existing && existing !== card) returnToBank(existing);
+
+      slot.appendChild(card);
+      selectedCard = null;
+      clearSelection();
+      clearTrayChecks();
+      feedback.textContent = '';
+      updateStatus();
+    }
+
+    function returnToBank(card) {
+      banks[card.dataset.type].appendChild(card);
+    }
+
+    function clearTrayChecks() {
+      document.querySelectorAll('.tray').forEach(t => t.classList.remove('correct', 'incorrect', 'incomplete'));
+      scoreText.textContent = `0 of ${items.length} sets correct`;
+    }
+
+    function updateStatus() {
+      const placed = document.querySelectorAll('.slot .card').length;
+      placedText.textContent = `${placed} of ${items.length * 3} cards placed`;
+    }
+
+    function checkAnswers() {
+      let correct = 0;
+      let complete = 0;
+
+      document.querySelectorAll('.tray').forEach(tray => {
+        tray.classList.remove('correct', 'incorrect', 'incomplete');
+        const cards = [...tray.querySelectorAll('.card')];
+
+        if (cards.length < 3) {
+          tray.classList.add('incomplete');
+          return;
+        }
+
+        complete++;
+        const ids = cards.map(c => c.dataset.id);
+        const isCorrect = ids.every(id => id === ids[0]);
+        if (isCorrect) {
+          correct++;
+          tray.classList.add('correct');
+        } else {
+          tray.classList.add('incorrect');
+        }
+      });
+
+      scoreText.textContent = `${correct} of ${items.length} sets correct`;
+      if (correct === items.length) {
+        feedback.textContent = `Excellent — all ${items.length} circuit component sets are correct.`;
+      } else if (complete < items.length) {
+        feedback.textContent = `${correct} correct so far. Finish the incomplete rows, then check again.`;
+      } else {
+        feedback.textContent = `${correct} correct. Rearrange the red rows and check again.`;
+      }
+    }
+
+    function clearBoard() {
+      document.querySelectorAll('.slot .card').forEach(returnToBank);
+      selectedCard = null;
+      clearSelection();
+      clearTrayChecks();
+      feedback.textContent = '';
+      updateStatus();
+    }
+
+    function restart() {
+      selectedCard = null;
+      cardMap = new Map();
+      Object.values(banks).forEach(bank => bank.innerHTML = '');
+      traysEl.innerHTML = '';
+
+      for (let i = 0; i < items.length; i++) traysEl.appendChild(makeTray(i));
+
+      ['symbol','component','function'].forEach(type => {
+        shuffled(items).forEach(item => {
+          const card = createCard(type, item);
+          cardMap.set(card.dataset.cardKey, card);
+          banks[type].appendChild(card);
+        });
+      });
+
+      scoreText.textContent = `0 of ${items.length} sets correct`;
+      feedback.textContent = '';
+      updateStatus();
+    }
+
+    document.getElementById('checkBtn').addEventListener('click', checkAnswers);
+    document.getElementById('restartBtn').addEventListener('click', restart);
+    document.getElementById('clearBtn').addEventListener('click', clearBoard);
+
+    restart();
+  </script>
+</body>
+</html>
+
