@@ -344,7 +344,7 @@
       if (id === 'resistor') return wrap(`<path ${common} d="M10 25 H48 M112 25 H150"/><rect ${common} x="48" y="12" width="64" height="26" rx="1"/>`);
       if (id === 'fuse') return wrap(`<path ${common} d="M10 25 H48 M112 25 H150"/><rect ${common} x="48" y="12" width="64" height="26" rx="1"/><path ${common} d="M52 25 H108"/>`);
       if (id === 'cell') return wrap(`<path ${common} d="M10 25 H70 M94 25 H150"/><path ${common} d="M70 6 V44 M94 14 V36"/>`);
-      if (id === 'battery') return wrap(`<path ${common} d="M8 25 H44 M97 25 H152"/><path ${common} d="M44 6 V44 M61 14 V36 M80 6 V44 M97 14 V36"/>`);
+      if (id === 'battery') return wrap(`<path ${common} d="M8 25 H44 M116 25 H152"/><path ${common} d="M44 6 V44 M58 14 V36 M102 6 V44 M116 14 V36"/><path ${common} d="M69 25 H76 M84 25 H91"/>`);
       return '';
     }
 
