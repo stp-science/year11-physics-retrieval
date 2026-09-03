@@ -18,7 +18,7 @@
       name: "Particle Model",
       number: "01",
       colour: "#6554c0",
-      intro: "Use the particle model to explain solids, liquids, gases, Brownian motion, internal energy and changes of state.",
+      intro: "Use the particle model to explain solids, liquids, gases, internal energy and changes of state.",
       lessons: [
         {
           title: "The particle model",
@@ -49,24 +49,6 @@
               <tr><td>Gas</td><td>Fills container</td><td>Not fixed</td><td>Can be compressed</td></tr>
             </tbody></table>
             ${videos.states}
-          `,
-        },
-        {
-          title: "Brownian motion",
-          body: `
-            <p>Brownian motion is the random, jerky movement of visible particles in a liquid or gas. It is evidence that smaller, invisible particles are moving randomly.</p>
-            <div class="diagram-wrap">
-              <svg viewBox="0 0 760 230" role="img" aria-label="A large smoke particle follows a random path as smaller air molecules collide with it">
-                <defs><marker id="arrowP" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#6554c0"/></marker></defs>
-                <rect x="10" y="10" width="740" height="210" rx="18" fill="none" stroke="currentColor" opacity=".2"/>
-                <g fill="#00a9d6" opacity=".78">${Array.from({length:22},(_,i)=>`<circle cx="${35+(i*83)%690}" cy="${35+(i*47)%160}" r="5"/>`).join("")}</g>
-                <path d="M95 150 L170 83 L235 142 L315 70 L387 126 L470 52 L565 105 L650 58" fill="none" stroke="#6554c0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowP)"/>
-                <circle cx="95" cy="150" r="18" fill="#f2b84b" stroke="#936013" stroke-width="3"/>
-                <text x="28" y="202" fill="currentColor" font-size="18">visible smoke particle</text>
-                <text x="505" y="190" fill="currentColor" font-size="18">random, jerky path</text>
-              </svg>
-            </div>
-            <div class="worked"><strong>Explain it fully</strong><p>Air particles move randomly and hit the larger smoke particle from different directions. The pushes are uneven, so the smoke particle follows a random path.</p></div>
           `,
         },
         {
@@ -211,7 +193,6 @@
 
   const checks = [
     q("p1","particle","In a solid, how do particles usually move?",["They travel freely in straight lines.","They vibrate about fixed positions.","They remain completely still.","They slide past one another."],1,"Solid particles vibrate about fixed positions."),
-    q("p2","particle","What causes the random movement seen in Brownian motion?",["Gravity pulling visible particles down","Uneven collisions by smaller particles","The visible particles expanding","A chemical reaction with air"],1,"Much smaller particles hit the visible particle unevenly from different directions."),
     q("p3","particle","What is internal energy?",["Only the kinetic energy of the fastest particle","The energy transferred by heating each second","The total kinetic and potential energy of all particles","The temperature multiplied by the mass"],2,"Internal energy is the total kinetic and potential energy of the particles."),
     q("p4","particle","Which change of state is gas directly to solid?",["Sublimation","Condensation","Melting","Freezing"],1,"In this course, gas changing directly to solid is called condensation."),
     q("p5","particle","During melting, what happens while the temperature stays constant?",["Particle kinetic energy steadily decreases","Energy changes particle separation and potential energy","All particles stop moving","The mass of the substance increases"],1,"The supplied energy changes arrangement and potential energy rather than temperature."),
@@ -228,12 +209,6 @@
   ];
 
   const examQuestions = [
-    exam("pe1","particle",4,"Explain how Brownian motion provides evidence for the particle model.",[
-      mp("The suspended particle moves randomly or jerkily",[["random","move"],["jerky","move"],["irregular","path"]]),
-      mp("Invisible fluid particles are in constant random motion",[["air","particle","random"],["fluid","particle","random"],["molecule","random","motion"]]),
-      mp("The fluid particles collide with the visible particle",[["collid","visible","particle"],["hit","smoke","particle"]]),
-      mp("Uneven collisions push it in different directions",[["uneven","collision"],["resultant","force","chang"],["different","direction","collision"]]),
-    ],"The visible particle moves in a random, jerky way. Much smaller particles are moving randomly and hit it unevenly from different directions. This is evidence that the smaller, invisible particles are moving."),
     exam("pe2","particle",3,"Compare the particle arrangement and movement in a solid and a gas.",[
       mp("Solid particles are closely packed in a regular arrangement",[["solid","clos","regular"],["solid","closely packed"]]),
       mp("Solid particles vibrate about fixed positions",[["solid","vibrat","fixed"]]),
@@ -426,7 +401,7 @@
   function heading(title,intro,number=modules[state.module].number){ return `<div class="section-heading"><div><h3>${title}</h3><p>${intro}</p></div><span class="module-number">${number}</span></div>`; }
   function knowledgeSummary(key){
     const items={
-      particle:[["Particle model","Arrangement and movement explain the three states."],["Brownian motion","Random movement is evidence that tiny particles move."],["Internal energy","Total kinetic and potential energy of the particles."],["State changes","Know melting, freezing, boiling, condensation and sublimation."]],
+      particle:[["Particle model","Arrangement and movement explain the three states."],["Internal energy","Total kinetic and potential energy of the particles."],["State changes","Know melting, freezing, boiling, condensation and sublimation."]],
       thermal:[["Temperature","A measure of average particle kinetic energy."],["Energy transfer","Conduction, convection and infrared radiation."],["Heating","Use Q = mcΔT and convert values into the correct units."],["Changing state","Use Q = mL; temperature stays constant during the change."]],
       nuclear:[["The atom","Know the charge, mass and location of each particle."],["A and Z","Mass number = protons + neutrons; atomic number = protons."],["Isotopes","Same protons but different neutrons."],["Decay","Alpha: A −4, Z −2. Beta-minus: A same, Z +1."]],
     };
