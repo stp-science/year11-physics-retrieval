@@ -665,19 +665,22 @@
   function masteredQuickChecks(){
     return checks.filter(item=>progress.earned.includes(item.id)).length;
   }
-  function masteredExamQuestions(){
-    return examQuestions.filter(item=>Number(progress.examBest[item.id]||0)>=item.marks).length;
+  function examMarksEarned(){
+    return examQuestions.reduce((sum,item)=>sum+Math.min(item.marks,Number(progress.examBest[item.id]||0)),0);
+  }
+  function examMarksAvailable(){
+    return examQuestions.reduce((sum,item)=>sum+item.marks,0);
   }
   function masteryStatus(){
     const quickDone=masteredQuickChecks();
-    const examDone=masteredExamQuestions();
     const quickTotal=checks.length;
-    const examTotal=examQuestions.length;
+    const examMarksDone=examMarksEarned();
+    const examMarksTotal=examMarksAvailable();
     return {
-      quickDone, examDone, quickTotal, examTotal,
-      done:quickDone+examDone,
-      total:quickTotal+examTotal,
-      complete:quickDone===quickTotal && examDone===examTotal
+      quickDone, quickTotal, examMarksDone, examMarksTotal,
+      done:quickDone+examMarksDone,
+      total:quickTotal+examMarksTotal,
+      complete:quickDone===quickTotal && examMarksDone===examMarksTotal
     };
   }
   function awardCheck(id){
@@ -702,14 +705,14 @@
 
     gamesBadge.textContent=mastery.complete ? "3/3" : "0/3";
     if(mastery.complete){
-      nextUnlock.textContent="All Quick Checks and exam questions mastered — arcade unlocked!";
+      nextUnlock.textContent="All Quick Checks complete and all Exam Practice marks earned — arcade unlocked!";
     } else {
       const quickLeft=mastery.quickTotal-mastery.quickDone;
-      const examLeft=mastery.examTotal-mastery.examDone;
+      const marksLeft=mastery.examMarksTotal-mastery.examMarksDone;
       const parts=[];
       if(quickLeft) parts.push(`${quickLeft} Quick Check${quickLeft===1?"":"s"}`);
-      if(examLeft) parts.push(`${examLeft} exam question${examLeft===1?"":"s"}`);
-      nextUnlock.textContent=`Master ${parts.join(" and ")} to unlock the arcade`;
+      if(marksLeft) parts.push(`${marksLeft} Exam Practice mark${marksLeft===1?"":"s"}`);
+      nextUnlock.textContent=`Complete ${parts.join(" and ")} to unlock the arcade`;
     }
   }
   function toast(message){ const old=document.querySelector(".toast"); old?.remove(); const el=document.createElement("div"); el.className="toast"; el.textContent=message; document.body.append(el); setTimeout(()=>el.remove(),2400); }
@@ -792,11 +795,10 @@
   function renderGames(){
     const mastery=masteryStatus();
     const open=mastery.complete;
-    const remaining=mastery.total-mastery.done;
 
-    panel.innerHTML=`<div class="games-intro"><div><h3>Revision Arcade</h3><p>The arcade unlocks only after every Quick Check has been answered correctly and every exam-style question has achieved full marks. Wrong first attempts are fine — go back, improve them and master them.</p></div><span class="mark-badge">${open?"3 of 3 unlocked":`${mastery.done} / ${mastery.total} mastered`}</span></div>
-      ${open?"":`<div class="mastery-gate"><strong>🔒 Arcade locked</strong><p>You still need to master <strong>${remaining}</strong> question${remaining===1?"":"s"}.</p><div class="mastery-breakdown"><span>Quick Check: <b>${mastery.quickDone}/${mastery.quickTotal}</b></span><span>Exam Practice: <b>${mastery.examDone}/${mastery.examTotal}</b></span></div><p class="provisional">A question counts once you eventually get it correct. Earlier incorrect attempts do not count against you.</p></div>`}
-      <div class="game-grid">${Object.entries(gameData).map(([key,g])=>`<article class="game-card ${open?"":"locked"}" style="--game:${g.colour}"><span class="game-icon">${g.icon}</span><span class="lock-label">${open?`Best: ${progress.gameBest[key]||0}`:"🔒 Master all questions"}</span><h4>${g.title}</h4><p>${g.description}</p><button class="${open?"primary-button":"secondary-button"}" data-game="${key}" type="button" ${open?"":"disabled"}>${open?"Play game":"Locked"}</button></article>`).join("")}</div><div id="game-stage"></div>`;
+    panel.innerHTML=`<div class="games-intro"><div><h3>Revision Arcade</h3><p>The arcade unlocks only after every Quick Check has been answered correctly and every available Exam Practice mark has been earned. Wrong first attempts are fine — go back, improve them and master them.</p></div><span class="mark-badge">${open?"3 of 3 unlocked":`QCs ${mastery.quickDone}/${mastery.quickTotal} · Marks ${mastery.examMarksDone}/${mastery.examMarksTotal}`}</span></div>
+      ${open?"":`<div class="mastery-gate"><strong>🔒 Arcade locked</strong><p>Keep improving any incomplete answers until you have earned every available mark.</p><div class="mastery-breakdown"><span>Quick Check: <b>${mastery.quickDone}/${mastery.quickTotal}</b></span><span>Exam Practice: <b>${mastery.examMarksDone}/${mastery.examMarksTotal} marks</b></span></div><p class="provisional">Earlier incorrect attempts do not count against you. Your best mark for each question is kept.</p></div>`}
+      <div class="game-grid">${Object.entries(gameData).map(([key,g])=>`<article class="game-card ${open?"":"locked"}" style="--game:${g.colour}"><span class="game-icon">${g.icon}</span><span class="lock-label">${open?`Best: ${progress.gameBest[key]||0}`:"🔒 Earn all marks"}</span><h4>${g.title}</h4><p>${g.description}</p><button class="${open?"primary-button":"secondary-button"}" data-game="${key}" type="button" ${open?"":"disabled"}>${open?"Play game":"Locked"}</button></article>`).join("")}</div><div id="game-stage"></div>`;
 
     panel.querySelectorAll("[data-game]").forEach(b=>b.addEventListener("click",()=>startGame(b.dataset.game)));
     if(state.activeGame && open) renderGameStage();
