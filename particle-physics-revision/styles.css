@@ -332,3 +332,51 @@ footer span { margin:0 4px; }
   .sourced-diagram figcaption { font-size:.82rem; }
   .lesson-body p, .lesson-body li { font-size:.98rem; }
 }
+
+
+/* Supporting concept diagrams */
+.support-visual-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  margin:16px 0 18px;
+}
+.support-visual {
+  margin:0;
+  padding:10px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:13px;
+  overflow:hidden;
+}
+.support-visual img {
+  display:block;
+  width:100%;
+  height:260px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:9px;
+}
+.support-visual figcaption {
+  display:grid;
+  gap:3px;
+  margin-top:8px;
+  text-align:center;
+}
+.support-visual figcaption strong {
+  color:var(--module);
+  font-size:.9rem;
+}
+.support-visual figcaption span {
+  color:var(--muted);
+  font-size:.72rem;
+  line-height:1.35;
+}
+@media (min-width:1250px) {
+  .support-visual-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .support-visual img { height:290px; }
+}
+@media (max-width:700px) {
+  .support-visual-grid { grid-template-columns:1fr; }
+  .support-visual img { height:auto; max-height:340px; }
+}
