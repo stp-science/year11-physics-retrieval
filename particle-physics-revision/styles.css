@@ -430,3 +430,87 @@ footer span { margin:0 4px; }
   line-height:1.45;
   font-size:.88rem;
 }
+
+
+/* Section-by-section mastery progress */
+.section-progress-card {
+  display:grid;
+  gap:12px;
+}
+.section-progress-row {
+  padding-top:10px;
+  border-top:1px solid var(--line);
+}
+.section-progress-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:6px;
+  font-size:.82rem;
+  font-weight:850;
+}
+.section-progress-head strong {
+  font-size:.9rem;
+}
+.section-progress-row .progress-track {
+  margin:0 0 5px;
+}
+.section-progress-row p {
+  margin:0;
+  color:var(--muted);
+  font-size:.72rem;
+  line-height:1.35;
+}
+.particle-progress .progress-track span { background:var(--particle); }
+.thermal-progress .progress-track span { background:var(--thermal); }
+.nuclear-progress .progress-track span { background:var(--nuclear); }
+
+.section-mastery-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin:0 0 16px;
+}
+.section-mastery-card {
+  padding:12px;
+  background:var(--card-soft);
+  border:1px solid var(--line);
+  border-top:4px solid var(--section);
+  border-radius:12px;
+}
+.section-mastery-head {
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:7px;
+}
+.section-mastery-head strong { font-size:.88rem; }
+.section-mastery-head b { color:var(--section); }
+.section-mastery-track {
+  height:8px;
+  margin-bottom:7px;
+  overflow:hidden;
+  background:var(--background);
+  border-radius:999px;
+}
+.section-mastery-track span {
+  display:block;
+  height:100%;
+  background:var(--section);
+  border-radius:inherit;
+}
+.section-mastery-card small {
+  color:var(--muted);
+  line-height:1.35;
+}
+.game-unlock-note {
+  min-height:42px;
+  margin:0 0 10px;
+  color:var(--muted);
+  font-size:.76rem;
+  line-height:1.35;
+}
+@media (max-width:900px) {
+  .section-mastery-grid { grid-template-columns:1fr; }
+}
