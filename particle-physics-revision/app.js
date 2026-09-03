@@ -132,19 +132,49 @@
         {
           title: "Conduction, convection and radiation",
           body: `
-            ${diagram("transfer")}
             <div class="concept-grid">
               <div class="concept"><strong>Conduction</strong><p>Energy is passed between neighbouring particles. In metals, free electrons also transfer energy quickly, so metals are good thermal conductors.</p></div>
               <div class="concept"><strong>Convection</strong><p>Heating a liquid or gas makes it expand. The same mass occupies a larger volume, so its density decreases and it rises. Cooler, denser fluid sinks.</p></div>
               <div class="concept"><strong>Radiation</strong><p>Infrared electromagnetic waves transfer energy. Radiation does not need particles, so it can travel through a vacuum.</p></div>
             </div>
+
+            <div class="support-visual-grid">
+              <figure class="support-visual">
+                <img loading="lazy" src="https://bam.files.bbci.co.uk/bam/live/content/zrwccmn/large" alt="BBC Bitesize conduction experiment using metal rods heated by a Bunsen burner">
+                <figcaption><strong>Conduction in metals</strong><span>BBC Bitesize GCSE Science</span></figcaption>
+              </figure>
+              <figure class="support-visual">
+                <img loading="lazy" src="https://ichef.bbci.co.uk/images/ic/976xn/p09vxnxl.png" alt="BBC Bitesize convection current showing hot less dense water rising and cooler denser water sinking">
+                <figcaption><strong>Convection current in water</strong><span>BBC Bitesize GCSE Science</span></figcaption>
+              </figure>
+              <figure class="support-visual">
+                <img loading="lazy" src="https://igcsepro.org/content/images/2025/04/Matt-black-shiny-surface-experiment-igcse-physics.png" alt="Radiation absorption experiment comparing a shiny surface and a dull black surface">
+                <figcaption><strong>Infrared absorption</strong><span>Dull black absorbs more; shiny surfaces reflect more</span></figcaption>
+              </figure>
+              <figure class="support-visual">
+                <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Vacuum%20Dewar%20Flask.svg?width=700" alt="Cross-section of a vacuum flask showing the insulated double-wall structure">
+                <figcaption><strong>Vacuum flask</strong><span>Vacuum reduces conduction and convection; reflective surfaces reduce radiation</span></figcaption>
+              </figure>
+              <figure class="support-visual">
+                <img loading="lazy" src="https://images.imagerenderer.com/images/artworkimages/mediumlarge/2/thermal-conduction-in-water-science-photo-library.jpg" alt="Boiling tube demonstration showing water boiling at the top while ice remains at the bottom">
+                <figcaption><strong>Water is a poor conductor</strong><span>Heating at the top transfers energy downward only slowly</span></figcaption>
+              </figure>
+            </div>
+
             <div class="worked"><strong>Good and poor conductors</strong><p>Metals are good conductors. Materials such as plastic, wood and trapped air are poor conductors and are used as thermal insulators. Water is also a relatively poor conductor, which is why heating water from above transfers energy downward only slowly.</p></div>
             <table class="mini-table"><thead><tr><th>Surface</th><th>Infrared absorption</th><th>Infrared emission</th><th>Reflection</th></tr></thead><tbody>
               <tr><td>Dull black</td><td>Best absorber</td><td>Best emitter</td><td>Poor reflector</td></tr>
               <tr><td>Shiny / light</td><td>Poor absorber</td><td>Poor emitter</td><td>Good reflector</td></tr>
             </tbody></table>
             <div class="worked"><strong>Explaining convection fully</strong><p>Do not say that the particles themselves become less dense. Heating makes the fluid expand because the particles become more spread out. The fluid's density decreases, so that region rises and cooler, denser fluid moves in to replace it.</p></div>
-            <div class="worked"><strong>Vacuum flask</strong><p>The vacuum reduces conduction and stops convection. Shiny surfaces reduce infrared emission and absorption. An insulating stopper reduces conduction.</p></div>
+            <div class="worked"><strong>Vacuum flask example</strong>
+              <ul>
+                <li><strong>Vacuum:</strong> there are no particles between the walls, so conduction is greatly reduced and convection cannot occur there.</li>
+                <li><strong>Shiny/silvered surfaces:</strong> reflect infrared radiation and are poor emitters.</li>
+                <li><strong>Plastic/cork stopper:</strong> a poor conductor that also prevents convection through the opening.</li>
+                <li><strong>Outer case/supports:</strong> reduce direct contact and help limit conduction.</li>
+              </ul>
+            </div>
             ${videos.transfer}
           `,
         },
@@ -583,9 +613,9 @@
         caption:"Conduction through a metal"
       },
       shc: {
-        url:"https://bam.files.bbci.co.uk/bam/live/content/zxxb7p3/large",
-        alt:"BBC Bitesize diagram showing a substance being heated",
-        caption:"Energy transferred by heating raises temperature"
+        url:"https://bam.files.bbci.co.uk/bam/live/content/ztdp97h/medium",
+        alt:"BBC Bitesize specific heat capacity practical apparatus with thermometer beakers and stopwatch",
+        caption:"Specific heat capacity practical setup"
       },
       mixing: null,
       latent: {
