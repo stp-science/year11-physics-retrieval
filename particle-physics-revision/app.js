@@ -6,7 +6,7 @@
 
   const videos = {
     states: video("OTksau0_VoI", "Particle theory and states of matter", "Cognito", "Focus on particle arrangement, movement and changes of state."),
-    transfer: video("Eizsm5V8c_c", "Conduction, convection and radiation", "Cognito", "A clear GCSE explanation of all three thermal-transfer pathways."),
+    transfer: video("Eizsm5V8c_c", "Conduction, convection and radiation", "Cognito", "A clear GCSE explanation of the three ways thermal energy is transferred."),
     shc: video("LUHGFLR2p8k", "Specific heat capacity and internal energy", "Cognito", "Links temperature change to Q = mcΔT and works through the calculation."),
     latent: video("VFwf1JldiJA", "Specific latent heat", "Cognito", "Explains fusion, vaporisation and Q = mL during a change of state."),
     atom: video("KwOHJbE4Tro", "Atomic structure and isotopes", "Cognito", "Focus on protons, neutrons, electrons and isotopes. Electron shells are extension material for this course."),
@@ -18,17 +18,18 @@
       name: "Particle Model",
       number: "01",
       colour: "#6554c0",
-      intro: "Use the kinetic model to explain solids, liquids, gases, Brownian motion, internal energy and changes of state.",
+      intro: "Use the particle model to explain solids, liquids, gases, Brownian motion, internal energy and changes of state.",
       lessons: [
         {
-          title: "The kinetic model and its assumptions",
+          title: "The particle model",
           body: `
-            <p>The kinetic model represents matter as a very large number of tiny particles. It helps us explain observations that are too small to see directly.</p>
+            ${diagram("kinetic")}
+            <p>The particle model says that all substances are made from tiny particles. We use it to explain things that are too small to see.</p>
             <ul>
-              <li>Particles are in constant motion.</li>
-              <li>Their arrangement, spacing and freedom to move depend on the state.</li>
-              <li>Particles interact through forces; their potential energy changes when their spacing changes.</li>
-              <li>Collisions transfer energy and momentum.</li>
+              <li>Particles are always moving.</li>
+              <li>The arrangement, spacing and movement of particles depend on the state.</li>
+              <li>There are forces of attraction between particles.</li>
+              <li>Particles collide with each other and with the walls of their container.</li>
             </ul>
             <div class="mistake"><strong>Common mistake:</strong> Particles do not expand when a substance is heated. Their motion and average separation change.</div>
           `,
@@ -36,6 +37,7 @@
         {
           title: "Solids, liquids and gases",
           body: `
+            ${diagram("states")}
             <div class="concept-grid">
               <div class="concept"><strong>Solid</strong><p>Closely packed in a regular arrangement. Particles vibrate about fixed positions.</p></div>
               <div class="concept"><strong>Liquid</strong><p>Closely packed but irregular. Particles move past one another.</p></div>
@@ -52,7 +54,7 @@
         {
           title: "Brownian motion",
           body: `
-            <p>Brownian motion is the random, jerky movement of visible particles suspended in a fluid. It provides evidence that much smaller, invisible molecules are moving randomly.</p>
+            <p>Brownian motion is the random, jerky movement of visible particles in a liquid or gas. It is evidence that smaller, invisible particles are moving randomly.</p>
             <div class="diagram-wrap">
               <svg viewBox="0 0 760 230" role="img" aria-label="A large smoke particle follows a random path as smaller air molecules collide with it">
                 <defs><marker id="arrowP" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#6554c0"/></marker></defs>
@@ -64,12 +66,13 @@
                 <text x="505" y="190" fill="currentColor" font-size="18">random, jerky path</text>
               </svg>
             </div>
-            <div class="worked"><strong>Explain it fully</strong><p>Air molecules move randomly and collide unevenly with the larger smoke particle. The resultant force keeps changing direction, so the smoke particle follows an irregular path.</p></div>
+            <div class="worked"><strong>Explain it fully</strong><p>Air particles move randomly and hit the larger smoke particle from different directions. The pushes are uneven, so the smoke particle follows a random path.</p></div>
           `,
         },
         {
           title: "Internal energy and changes of state",
           body: `
+            ${diagram("changes")}
             <p><strong>Internal energy</strong> is the total kinetic energy and potential energy of all the particles in a system.</p>
             <ul>
               <li>Heating within one state usually increases average kinetic energy and temperature.</li>
@@ -78,7 +81,7 @@
             <table class="mini-table"><thead><tr><th>Change</th><th>From</th><th>To</th></tr></thead><tbody>
               <tr><td>Melting</td><td>Solid</td><td>Liquid</td></tr><tr><td>Freezing</td><td>Liquid</td><td>Solid</td></tr>
               <tr><td>Boiling / evaporation</td><td>Liquid</td><td>Gas</td></tr><tr><td>Condensation</td><td>Gas</td><td>Liquid</td></tr>
-              <tr><td>Sublimation</td><td>Solid</td><td>Gas</td></tr><tr><td>Deposition</td><td>Gas</td><td>Solid</td></tr>
+              <tr><td>Sublimation</td><td>Solid</td><td>Gas</td></tr><tr><td>Condensation</td><td>Gas</td><td>Solid</td></tr>
             </tbody></table>
           `,
         },
@@ -93,6 +96,7 @@
         {
           title: "Temperature, Celsius and Kelvin",
           body: `
+            ${diagram("temperature")}
             <p>Temperature measures the <strong>average kinetic energy</strong> of the particles. It is not the same as internal energy, which depends on all particles and includes potential energy.</p>
             <div class="equation">temperature in K = temperature in °C + 273</div>
             <div class="worked"><strong>Example</strong><p>25 °C = 25 + 273 = 298 K. Absolute zero is 0 K, approximately -273 °C.</p></div>
@@ -102,9 +106,10 @@
         {
           title: "Conduction, convection and radiation",
           body: `
+            ${diagram("transfer")}
             <div class="concept-grid">
               <div class="concept"><strong>Conduction</strong><p>Energy passes through collisions and vibrations between neighbouring particles. Free electrons make metals effective conductors.</p></div>
-              <div class="concept"><strong>Convection</strong><p>Warmer, less-dense fluid rises while cooler, denser fluid sinks, creating a convection current.</p></div>
+              <div class="concept"><strong>Convection</strong><p>Warmer, less-dense liquids and gases rise. Cooler, denser liquids and gases sink. This makes a convection current.</p></div>
               <div class="concept"><strong>Radiation</strong><p>Infrared electromagnetic waves transfer energy and do not require particles.</p></div>
             </div>
             <div class="worked"><strong>Vacuum flask</strong><p>The vacuum reduces conduction and stops convection. Shiny surfaces reduce infrared emission and absorption. An insulating stopper reduces conduction.</p></div>
@@ -114,6 +119,7 @@
         {
           title: "Specific heat capacity",
           body: `
+            ${diagram("shc")}
             <p>Specific heat capacity, <strong>c</strong>, is the energy required to raise the temperature of 1 kg of a substance by 1 °C (or 1 K).</p>
             <div class="equation">Q = mcΔT</div>
             <table class="mini-table"><tbody><tr><th>Q</th><td>energy transferred, J</td><th>m</th><td>mass, kg</td></tr><tr><th>c</th><td>specific heat capacity, J kg⁻¹ °C⁻¹</td><th>ΔT</th><td>temperature change, °C or K</td></tr></tbody></table>
@@ -124,7 +130,8 @@
         {
           title: "Mixing substances",
           body: `
-            <p>When an isolated hot substance is mixed with a colder substance, they reach one final temperature. Assuming no energy escapes:</p>
+            ${diagram("mixing")}
+            <p>When a hot substance is mixed with a colder substance, thermal energy moves from hot to cold until both reach the same temperature. If no energy escapes:</p>
             <div class="equation">thermal energy lost by hot material = thermal energy gained by cold material</div>
             <p>For each material, calculate energy with Q = mcΔT. Use the final temperature to define the two temperature changes, then solve.</p>
             <div class="mistake"><strong>Check:</strong> The final temperature must lie between the two starting temperatures.</div>
@@ -133,6 +140,7 @@
         {
           title: "Specific latent heat",
           body: `
+            ${diagram("latent")}
             <p>Specific latent heat is the energy needed to change the state of 1 kg of a substance without changing its temperature.</p>
             <div class="equation">Q = mL</div>
             <ul><li><strong>Specific latent heat of fusion:</strong> solid ↔ liquid.</li><li><strong>Specific latent heat of vaporisation:</strong> liquid ↔ gas.</li></ul>
@@ -151,6 +159,7 @@
         {
           title: "Inside the atom",
           body: `
+            ${diagram("atom")}
             <table class="mini-table"><thead><tr><th>Particle</th><th>Relative charge</th><th>Relative mass</th><th>Location</th></tr></thead><tbody>
               <tr><td>Proton</td><td>+1</td><td>1</td><td>Nucleus</td></tr><tr><td>Neutron</td><td>0</td><td>1</td><td>Nucleus</td></tr><tr><td>Electron</td><td>-1</td><td>Very small (about 1/1836)</td><td>Around the nucleus</td></tr>
             </tbody></table>
@@ -177,13 +186,15 @@
         {
           title: "Natural radioactivity",
           body: `
-            <p>Some nuclei are unstable. They decay spontaneously and randomly, emitting radiation as they become more stable. The decay of one nucleus cannot be predicted, although large samples show regular patterns.</p>
+            ${diagram("radioactivity")}
+            <p>Some nuclei are unstable. They give out radiation to become more stable. This decay is random, so we cannot predict exactly when one nucleus will decay.</p>
             <div class="mistake"><strong>Course boundary:</strong> You need alpha and beta decay here. Half-life, fission and fusion are not included in this topic overview.</div>
           `,
         },
         {
           title: "Alpha and beta decay",
           body: `
+            ${diagram("decay")}
             <div class="concept-grid">
               <div class="concept"><strong>Alpha decay</strong><p>The nucleus loses 2 protons and 2 neutrons. Mass number decreases by 4; atomic number decreases by 2.</p></div>
               <div class="concept"><strong>Beta decay</strong><p>A neutron changes into a proton and an electron is emitted. Mass number stays the same; atomic number increases by 1.</p></div>
@@ -200,11 +211,11 @@
 
   const checks = [
     q("p1","particle","In a solid, how do particles usually move?",["They travel freely in straight lines.","They vibrate about fixed positions.","They remain completely still.","They slide past one another."],1,"Solid particles vibrate about fixed positions."),
-    q("p2","particle","What causes the random movement seen in Brownian motion?",["Gravity pulling visible particles down","Uneven collisions by smaller fluid particles","The visible particles expanding","A chemical reaction with air"],1,"Random collisions from much smaller fluid particles continually change the resultant force."),
+    q("p2","particle","What causes the random movement seen in Brownian motion?",["Gravity pulling visible particles down","Uneven collisions by smaller particles","The visible particles expanding","A chemical reaction with air"],1,"Much smaller particles hit the visible particle unevenly from different directions."),
     q("p3","particle","What is internal energy?",["Only the kinetic energy of the fastest particle","The energy transferred by heating each second","The total kinetic and potential energy of all particles","The temperature multiplied by the mass"],2,"Internal energy is the total kinetic and potential energy of the particles."),
-    q("p4","particle","Which change of state is gas directly to solid?",["Sublimation","Deposition","Condensation","Freezing"],1,"Gas changing directly to solid is deposition."),
+    q("p4","particle","Which change of state is gas directly to solid?",["Sublimation","Condensation","Melting","Freezing"],1,"In this course, gas changing directly to solid is called condensation."),
     q("p5","particle","During melting, what happens while the temperature stays constant?",["Particle kinetic energy steadily decreases","Energy changes particle separation and potential energy","All particles stop moving","The mass of the substance increases"],1,"The supplied energy changes arrangement and potential energy rather than temperature."),
-    q("t1","thermal","What does temperature measure in the kinetic model?",["Total potential energy","Average kinetic energy of particles","Total internal energy","The number of particles"],1,"Temperature measures average particle kinetic energy."),
+    q("t1","thermal","What does temperature measure in the particle model?",["Total potential energy","Average kinetic energy of particles","Total internal energy","The number of particles"],1,"Temperature measures average particle kinetic energy."),
     q("t2","thermal","What temperature is 25 °C on the Kelvin scale?",["248 K","273 K","298 K","325 K"],2,"25 + 273 = 298 K."),
     q("t3","thermal","How much energy heats 2.0 kg of water by 10 °C if c = 4180 J kg⁻¹ °C⁻¹?",["836 J","8,360 J","41,800 J","83,600 J"],3,"Q = mcΔT = 2.0 × 4180 × 10 = 83,600 J."),
     q("t4","thermal","Which process can transfer thermal energy through a vacuum?",["Conduction only","Convection only","Infrared radiation","Conduction and convection"],2,"Electromagnetic radiation does not require particles."),
@@ -217,12 +228,12 @@
   ];
 
   const examQuestions = [
-    exam("pe1","particle",4,"Explain how observing Brownian motion provides evidence for the kinetic model.",[
+    exam("pe1","particle",4,"Explain how Brownian motion provides evidence for the particle model.",[
       mp("The suspended particle moves randomly or jerkily",[["random","move"],["jerky","move"],["irregular","path"]]),
       mp("Invisible fluid particles are in constant random motion",[["air","particle","random"],["fluid","particle","random"],["molecule","random","motion"]]),
       mp("The fluid particles collide with the visible particle",[["collid","visible","particle"],["hit","smoke","particle"]]),
-      mp("Uneven collisions create a changing resultant force or direction",[["uneven","collision"],["resultant","force","chang"],["different","direction","collision"]]),
-    ],"The visible particle moves in a random, jerky way because much smaller fluid particles, which are in constant random motion, collide unevenly with it. These changing collisions create a changing resultant force, providing evidence that the invisible fluid particles are moving."),
+      mp("Uneven collisions push it in different directions",[["uneven","collision"],["resultant","force","chang"],["different","direction","collision"]]),
+    ],"The visible particle moves in a random, jerky way. Much smaller particles are moving randomly and hit it unevenly from different directions. This is evidence that the smaller, invisible particles are moving."),
     exam("pe2","particle",3,"Compare the particle arrangement and movement in a solid and a gas.",[
       mp("Solid particles are closely packed in a regular arrangement",[["solid","clos","regular"],["solid","closely packed"]]),
       mp("Solid particles vibrate about fixed positions",[["solid","vibrat","fixed"]]),
@@ -233,6 +244,22 @@
       mp("Energy weakens or overcomes forces between particles, increasing potential energy",[["overcome","force"],["weaken","force"],["potential energy","increas"]]),
       mp("Average kinetic energy does not increase, so temperature remains constant",[["kinetic energy","not increas"],["average kinetic","constant"],["temperature","constant","kinetic"]]),
     ],"The energy supplied is used to weaken the forces between particles and change their arrangement, increasing particle potential energy. It does not increase their average kinetic energy, so the temperature remains constant."),
+    exam("pe4","particle",3,"Compare the arrangement and movement of particles in a liquid and a gas.",[
+      mp("Liquid particles are close together",[["liquid","close"]]),
+      mp("Liquid particles move past one another",[["liquid","move past"],["liquid","slide"]]),
+      mp("Gas particles are far apart and move quickly in random directions",[["gas","far apart","random"],["gas","spread","quick"]]),
+    ],"Liquid particles are close together but can move past one another. Gas particles are much further apart and move quickly in random directions."),
+    exam("pe5","particle",3,"A solid is heated but does not melt. Explain what happens to its particles and internal energy.",[
+      mp("The particles gain kinetic energy",[["gain","kinetic energy"],["kinetic energy","increase"]]),
+      mp("The particles vibrate faster",[["vibrat","faster"],["vibrat","more"]]),
+      mp("Its temperature and internal energy increase",[["temperature","increase","internal energy"],["internal energy","increase"]]),
+    ],"The particles gain kinetic energy and vibrate faster about their fixed positions. The temperature rises, so the internal energy of the solid increases."),
+    exam("pe6","particle",4,"Name and describe the changes when a solid changes directly into a gas and when a gas changes directly into a solid.",[
+      mp("Solid to gas is sublimation",[["solid","gas","sublimation"]]),
+      mp("Gas to solid is condensation",[["gas","solid","condensation"]]),
+      mp("Sublimation requires energy to be supplied",[["sublimation","energy","supplied"],["solid","gas","heating"]]),
+      mp("Condensation transfers energy away from the substance",[["condensation","energy","away"],["gas","solid","cool"]]),
+    ],"A solid changing directly into a gas is sublimation and needs energy to be supplied. In this course, a gas changing directly into a solid is called condensation; energy is transferred away from the substance."),
     exam("te1","thermal",4,"Calculate the energy needed to heat 2.0 kg of water from 20 °C to 30 °C. The specific heat capacity of water is 4180 J kg⁻¹ °C⁻¹.",[
       mp("Uses Q = mcΔT",[["q","m","c"],["energy","mass","specific heat","temperature"]]),
       mp("Finds ΔT = 10 °C",[["10","temperature"],["30","20","10"]]),
@@ -251,6 +278,21 @@
       mp("Uses Q = mcΔT for both samples",[["q","m","c"],["mc","temperature"]]),
       mp("Solves for a shared final temperature between the starting temperatures",[["final temperature","between"],["same temperature"],["shared temperature"]]),
     ],"Set the energy lost by the hot water equal to the energy gained by the cold water. Write Q = mcΔT for each sample using the same unknown final temperature, then solve. The result must lie between the two starting temperatures."),
+    exam("te4","thermal",3,"Calculate the energy needed to melt 0.25 kg of ice. The specific latent heat of fusion of ice is 334,000 J kg⁻¹.",[
+      mp("Uses Q = mL",[["q","m","l"],["energy","mass","latent heat"]]),
+      mp("Substitutes 0.25 × 334,000",[["0.25","334000"],["0.25","334 000"]]),
+      mp("Gives 83,500 J or 83.5 kJ",[["83500","j"],["83 500","j"],["83.5","kj"]]),
+    ],"Q = mL = 0.25 × 334,000 = 83,500 J, or 83.5 kJ."),
+    exam("te5","thermal",2,"Convert 35 °C to kelvin and state the temperature of absolute zero in kelvin.",[
+      mp("35 °C is 308 K",[["308","k"]]),
+      mp("Absolute zero is 0 K",[["absolute zero","0 k"],["0","kelvin"]]),
+    ],"35 °C = 35 + 273 = 308 K. Absolute zero is 0 K."),
+    exam("te6","thermal",4,"Explain how thermal energy is transferred through the metal base and the water in a saucepan.",[
+      mp("Energy passes through the metal by conduction",[["metal","conduction"]]),
+      mp("Particles in the metal vibrate and pass energy to neighbours",[["particle","vibrat","neighbour"],["collision","metal","energy"]]),
+      mp("Water at the bottom warms, expands and becomes less dense",[["water","bottom","less dense"],["water","warm","expand"]]),
+      mp("Warm water rises and cooler water sinks to form a convection current",[["warm","rise","cool","sink"],["convection current"]]),
+    ],"Energy moves through the metal base by conduction as vibrating particles pass energy to neighbouring particles. Water at the bottom warms, expands and becomes less dense, so it rises. Cooler, denser water sinks, forming a convection current."),
     exam("ne1","nuclear",3,"State the numbers of protons, neutrons and electrons in a neutral carbon-14 atom. Carbon has atomic number 6.",[
       mp("6 protons",[["6","proton"]]),
       mp("8 neutrons",[["8","neutron"]]),
@@ -268,12 +310,29 @@
       mp("Mass number stays 14 while atomic number rises from 6 to 7",[["mass number","same","14"],["atomic number","6","7"]]),
       mp("The daughter nucleus is nitrogen-14",[["nitrogen 14"],["14","7","n"]]),
     ],"A neutron changes into a proton and an electron is emitted. The mass number remains 14, while the atomic number increases from 6 to 7, so the daughter nucleus is nitrogen-14."),
+    exam("ne4","nuclear",3,"Explain why carbon-12 and carbon-14 are isotopes of the same element.",[
+      mp("They both have 6 protons",[["both","6","proton"],["same","proton"]]),
+      mp("They have different numbers of neutrons",[["different","neutron"]]),
+      mp("Carbon-12 has 6 neutrons and carbon-14 has 8",[["12","6 neutron","14","8 neutron"],["6","8","neutron"]]),
+    ],"Both atoms have 6 protons, so they are the same element. Carbon-12 has 6 neutrons, while carbon-14 has 8 neutrons, so they are different isotopes."),
+    exam("ne5","nuclear",4,"Radium-226 has atomic number 88 and undergoes alpha decay. State the mass number and atomic number of the daughter nucleus and explain your answer.",[
+      mp("An alpha particle contains 2 protons and 2 neutrons",[["2 proton","2 neutron"],["alpha","helium nucleus"]]),
+      mp("Mass number decreases by 4",[["mass number","decrease","4"]]),
+      mp("Daughter mass number is 222",[["222","mass number"],["226","222"]]),
+      mp("Daughter atomic number is 86",[["86","atomic number"],["88","86"]]),
+    ],"An alpha particle contains 2 protons and 2 neutrons. The mass number decreases by 4 to 222 and the atomic number decreases by 2 to 86."),
+    exam("ne6","nuclear",4,"A nucleus has mass number 24 and atomic number 11. It undergoes beta-minus decay. Describe the change and give the two numbers for the daughter nucleus.",[
+      mp("A neutron changes into a proton",[["neutron","proton"]]),
+      mp("An electron or beta particle is emitted",[["electron","emit"],["beta","emit"]]),
+      mp("Mass number stays 24",[["mass number","24","same"],["mass number","unchanged"]]),
+      mp("Atomic number increases to 12",[["atomic number","12"],["11","12"]]),
+    ],"A neutron changes into a proton and an electron is emitted. The mass number stays 24 and the atomic number increases from 11 to 12."),
   ];
 
   const gameData = {
     particle: {
-      title: "Particle Sort", colour: "#6554c0", icon: "●", unlock: 3,
-      description: "Sort particle descriptions into solid, liquid or gas before your streak breaks.",
+      title: "Particle Catch", colour: "#6554c0", icon: "●", unlock: 3,
+      description: "Move the collector and catch falling particle clues in the correct state lane.",
       cards: [
         ["Particles vibrate about fixed positions", "Solid"], ["Particles move rapidly in random directions", "Gas"],
         ["Particles are close together but can move past each other", "Liquid"], ["Has a fixed shape", "Solid"],
@@ -281,8 +340,8 @@
       ],
     },
     thermal: {
-      title: "Heat Transfer Match", colour: "#e56b2f", icon: "↟", unlock: 7,
-      description: "Match each real situation to conduction, convection or radiation.",
+      title: "Heat Blaster", colour: "#e56b2f", icon: "✦", unlock: 7,
+      description: "Blast moving examples that match the mission before the timer reaches zero.",
       cards: [
         ["A metal spoon becomes hot in soup", "Conduction"], ["Warm air rises above a heater", "Convection"],
         ["Energy travels from the Sun to Earth", "Radiation"], ["A pan handle heats from the pan", "Conduction"],
@@ -290,19 +349,23 @@
       ],
     },
     nuclear: {
-      title: "Nuclear Decay Challenge", colour: "#17875f", icon: "⚛", unlock: 12,
-      description: "Complete alpha and beta-decay changes without losing the nucleus.",
+      title: "Decay Reactor", colour: "#17875f", icon: "⚛", unlock: 12,
+      description: "Control mass and atomic number to stabilise each daughter nucleus against the clock.",
       cards: [
-        ["U-238 emits alpha. What daughter forms?", ["Th-234", "Pa-238", "U-234", "Th-236"], 0],
-        ["C-14 emits beta-minus. What daughter forms?", ["N-14", "B-14", "C-13", "N-13"], 0],
-        ["What changes in alpha decay?", ["A -4, Z -2", "A same, Z +1", "A -2, Z -4", "A +4, Z +2"], 0],
-        ["What changes in beta-minus decay?", ["A same, Z +1", "A -4, Z -2", "A +1, Z same", "A same, Z -1"], 0],
+        { parent:"²³⁸₉₂U", decay:"alpha", a:238, z:92, targetA:234, targetZ:90, daughter:"Th" },
+        { parent:"¹⁴₆C", decay:"beta-minus", a:14, z:6, targetA:14, targetZ:7, daughter:"N" },
+        { parent:"²¹⁰₈₄Po", decay:"alpha", a:210, z:84, targetA:206, targetZ:82, daughter:"Pb" },
+        { parent:"⁹⁰₃₈Sr", decay:"beta-minus", a:90, z:38, targetA:90, targetZ:39, daughter:"Y" },
       ],
     },
   };
 
   let progress = loadProgress();
-  const state = { view: "learn", module: "particle", checkIndex: 0, checkAnswered: null, examId: "pe1", activeGame: null, gameIndex: 0, gameScore: 0 };
+  const state = { view: "learn", module: "particle", checkIndex: 0, checkAnswered: null, examId: "pe1", activeGame: null, gameIndex: 0, gameScore: 0, gameLives: 3, gameTime: 0, gamePosition: 1, reactorA: 0, reactorZ: 0 };
+  let arcadeFrame = null;
+  let arcadeInterval = null;
+  let arcadeTimeout = null;
+  let arcadeRun = 0;
   const panel = document.querySelector("#content-panel");
   const xpTotal = document.querySelector("#xp-total");
   const progressBar = document.querySelector("#progress-bar");
@@ -313,6 +376,23 @@
 
   function video(id, title, channel, note) {
     return `<div class="video-card"><div class="video-frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/${id}" title="${title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="video-copy"><h5>${title}</h5><p><strong>${channel}</strong></p><p>${note}</p><a href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener">Open on YouTube ↗</a></div></div>`;
+  }
+  function diagram(type) {
+    const diagrams = {
+      kinetic: ["Particles are always moving", `<circle cx="55" cy="65" r="13"/><circle cx="138" cy="42" r="13"/><circle cx="210" cy="88" r="13"/><circle cx="290" cy="48" r="13"/><path d="M72 62h38m45-13 31 20m42 9 35-22"/><path d="m99 53 11 9-11 9m77-10 10 8-13 4m80-25 10 8-12 5"/>`],
+      states: ["Particle arrangement in each state", `<g><text x="58" y="24">solid</text><circle cx="45" cy="55" r="9"/><circle cx="70" cy="55" r="9"/><circle cx="95" cy="55" r="9"/><circle cx="45" cy="80" r="9"/><circle cx="70" cy="80" r="9"/><circle cx="95" cy="80" r="9"/></g><g><text x="145" y="24">liquid</text><circle cx="140" cy="70" r="9"/><circle cx="164" cy="78" r="9"/><circle cx="190" cy="67" r="9"/><circle cx="151" cy="48" r="9"/><circle cx="180" cy="43" r="9"/></g><g><text x="250" y="24">gas</text><circle cx="240" cy="48" r="9"/><circle cx="305" cy="80" r="9"/><circle cx="273" cy="35" r="9"/><circle cx="247" cy="91" r="9"/></g>`],
+      changes: ["Changes of state", `<rect x="18" y="45" width="78" height="42" rx="10"/><rect x="121" y="45" width="78" height="42" rx="10"/><rect x="224" y="45" width="78" height="42" rx="10"/><text x="39" y="71">solid</text><text x="137" y="71">liquid</text><text x="250" y="71">gas</text><path d="M96 56h25m78 0h25M121 78H96m128 0h-25"/><text x="96" y="25">heating →</text><text x="106" y="111">← cooling</text>`],
+      temperature: ["Higher temperature means faster average motion", `<g opacity=".65"><circle cx="48" cy="62" r="11"/><circle cx="92" cy="39" r="11"/><circle cx="118" cy="82" r="11"/><path d="M60 60h15m28-17 10-9"/></g><path d="M157 20v82"/><g><circle cx="205" cy="65" r="11"/><circle cx="265" cy="34" r="11"/><circle cx="303" cy="82" r="11"/><path d="M218 61h35m24-22 22-13m-5 51 28 13"/></g><text x="38" y="112">cooler</text><text x="248" y="112">hotter</text>`],
+      transfer: ["Three pathways for thermal energy", `<rect x="12" y="35" width="88" height="48" rx="9"/><text x="20" y="28">conduction</text><circle cx="32" cy="59" r="7"/><circle cx="54" cy="59" r="7"/><circle cx="76" cy="59" r="7"/><path d="M100 59h28"/><text x="130" y="28">convection</text><path d="M155 82c-22-28 25-55 45-27m0 0-1-17m1 17-17-2"/><text x="235" y="28">radiation</text><path d="M238 53c17-18 34 18 51 0m-51 20c17-18 34 18 51 0"/>`],
+      shc: ["Energy raises the temperature", `<path d="M40 84h150l-16-52H56z"/><path d="M115 20v58"/><circle cx="115" cy="84" r="10"/><path d="M218 26v62m-12 0h24"/><text x="244" y="62">ΔT</text><text x="62" y="108">mass m, capacity c</text>`],
+      mixing: ["Energy lost equals energy gained", `<path d="M28 42h82l-9 61H37z"/><path d="M212 42h82l-9 61h-64z"/><path d="M110 70h91m-12-9 12 9-12 9"/><text x="45" y="31">hot</text><text x="235" y="31">cold</text><text x="111" y="101">shared final temperature</text>`],
+      latent: ["Temperature stays level during a state change", `<path d="M25 100 92 52h82l68-35"/><path d="M92 52h82" stroke-width="7"/><text x="98" y="43">change of state</text><path d="M21 14v91h285M18 17l3-7 3 7m279 85 8 3-8 3"/><text x="3" y="64" transform="rotate(-90 3 64)">temperature</text>`],
+      atom: ["A tiny nucleus with electrons around it", `<ellipse cx="160" cy="65" rx="125" ry="38"/><ellipse cx="160" cy="65" rx="38" ry="58" transform="rotate(60 160 65)"/><circle cx="160" cy="65" r="25"/><circle cx="38" cy="65" r="7"/><circle cx="278" cy="65" r="7"/><circle cx="180" cy="12" r="7"/><text x="138" y="71">nucleus</text>`],
+      radioactivity: ["Unstable nuclei decay randomly", `<circle cx="78" cy="65" r="40"/><circle cx="68" cy="57" r="10"/><circle cx="89" cy="71" r="10"/><circle cx="70" cy="80" r="8"/><path d="M120 65h80m-12-9 12 9-12 9"/><circle cx="242" cy="65" r="25"/><path d="M270 52l38-22m-35 38h43m-46 12 38 22"/><text x="29" y="118">unstable</text><text x="221" y="118">more stable</text>`],
+      decay: ["Track A and Z through decay", `<rect x="13" y="18" width="140" height="42" rx="9"/><text x="26" y="44">alpha: A −4, Z −2</text><rect x="13" y="76" width="160" height="42" rx="9"/><text x="26" y="102">beta: A same, Z +1</text><path d="M181 38h112m-12-9 12 9-12 9M181 96h112m-12-9 12 9-12 9"/>`],
+    };
+    const [label, shapes] = diagrams[type];
+    return `<figure class="info-diagram"><svg viewBox="0 0 330 130" role="img" aria-label="${label}"><g>${shapes}</g></svg><figcaption>${label}</figcaption></figure>`;
   }
   function q(id,module,question,options,correct,explanation){ return {id,module,question,options,correct,explanation}; }
   function mp(label,tests){ return {label,tests}; }
@@ -344,9 +424,17 @@
   }
 
   function heading(title,intro,number=modules[state.module].number){ return `<div class="section-heading"><div><h3>${title}</h3><p>${intro}</p></div><span class="module-number">${number}</span></div>`; }
+  function knowledgeSummary(key){
+    const items={
+      particle:[["Particle model","Arrangement and movement explain the three states."],["Brownian motion","Random movement is evidence that tiny particles move."],["Internal energy","Total kinetic and potential energy of the particles."],["State changes","Know melting, freezing, boiling, condensation and sublimation."]],
+      thermal:[["Temperature","A measure of average particle kinetic energy."],["Energy transfer","Conduction, convection and infrared radiation."],["Heating","Use Q = mcΔT and convert values into the correct units."],["Changing state","Use Q = mL; temperature stays constant during the change."]],
+      nuclear:[["The atom","Know the charge, mass and location of each particle."],["A and Z","Mass number = protons + neutrons; atomic number = protons."],["Isotopes","Same protons but different neutrons."],["Decay","Alpha: A −4, Z −2. Beta-minus: A same, Z +1."]],
+    };
+    return `<section class="knowledge-summary"><div class="summary-title"><span>KNOWLEDGE ORGANISER</span><strong>Must know</strong></div><div class="summary-grid">${items[key].map(([title,text])=>`<div><strong>${title}</strong><p>${text}</p></div>`).join("")}</div></section>`;
+  }
   function renderLearn(){
     const m=modules[state.module];
-    panel.innerHTML=heading(m.name,m.intro)+`<div class="lesson-grid">${m.lessons.map((l,i)=>`<article class="lesson-card"><button class="lesson-toggle" data-lesson="${i}" type="button" aria-expanded="false"><span>${l.title}</span><span class="chevron" aria-hidden="true">⌄</span></button><div class="lesson-body">${l.body}</div></article>`).join("")}</div>`;
+    panel.innerHTML=heading(m.name,m.intro)+knowledgeSummary(state.module)+`<div class="lesson-grid">${m.lessons.map((l,i)=>`<article class="lesson-card open"><button class="lesson-toggle" data-lesson="${i}" type="button" aria-expanded="true"><span class="lesson-title"><b>${String(i+1).padStart(2,"0")}</b>${l.title}</span><span class="chevron" aria-hidden="true">⌄</span></button><div class="lesson-body">${l.body}</div></article>`).join("")}</div>`;
     panel.querySelectorAll(".lesson-toggle").forEach(button=>button.addEventListener("click",()=>{
       const card=button.closest(".lesson-card"); const open=!card.classList.contains("open"); card.classList.toggle("open",open); button.setAttribute("aria-expanded",String(open));
       if(open){ const key=`${state.module}:${button.dataset.lesson}`; if(!progress.visited.includes(key)){ progress.visited.push(key); saveProgress(); } }
@@ -370,7 +458,7 @@
   function moduleExams(){ return examQuestions.filter(item=>item.module===state.module); }
   function renderExam(){
     const pool=moduleExams(); if(!pool.some(q=>q.id===state.examId)) state.examId=pool[0].id; const item=pool.find(q=>q.id===state.examId);
-    panel.innerHTML=heading("Exam Practice","Write a complete answer, then use the smart marker to check which physics points you included.","✎")+`<div class="exam-shell"><div class="exam-picker">${pool.map((q,i)=>`<button data-exam="${q.id}" class="${q.id===item.id?"active":""}" type="button">Question ${i+1}</button>`).join("")}</div><article class="question-card"><div class="question-meta"><span>${modules[state.module].name}</span><span class="mark-badge">${item.marks} marks</span></div><h4>${item.question}</h4><textarea class="answer-input" id="exam-answer" placeholder="Write your answer here..." aria-label="Your exam answer"></textarea><div class="control-row"><button class="primary-button" id="mark-answer" type="button">Check my answer</button><button class="secondary-button" id="clear-answer" type="button">Clear</button></div><div id="marker-output"></div></article><p class="provisional">The smart marker checks for required ideas and gives provisional feedback. Compare your wording with the model answer before deciding what to improve.</p></div>`;
+    panel.innerHTML=heading("Exam Practice","Write a complete answer, then check which marking points you included.","✎")+`<div class="exam-shell"><div class="exam-picker">${pool.map((q,i)=>`<button data-exam="${q.id}" class="${q.id===item.id?"active":""}" type="button">Question ${i+1}</button>`).join("")}</div><article class="question-card"><div class="question-meta"><span>${modules[state.module].name}</span><span class="mark-badge">${item.marks} marks</span></div><h4>${item.question}</h4><textarea class="answer-input" id="exam-answer" placeholder="Write your answer here..." aria-label="Your exam answer"></textarea><div class="control-row"><button class="primary-button" id="mark-answer" type="button">Check my answer</button><button class="secondary-button" id="clear-answer" type="button">Clear</button></div><div id="marker-output"></div></article><p class="provisional">This gives an estimated mark by checking for key physics ideas. Always compare your answer with the model answer.</p></div>`;
     panel.querySelectorAll("[data-exam]").forEach(b=>b.addEventListener("click",()=>{state.examId=b.dataset.exam;renderExam();}));
     document.querySelector("#mark-answer").addEventListener("click",()=>markExam(item)); document.querySelector("#clear-answer").addEventListener("click",()=>{document.querySelector("#exam-answer").value="";document.querySelector("#marker-output").innerHTML="";});
   }
@@ -380,7 +468,7 @@
     const raw=document.querySelector("#exam-answer").value.trim(); if(raw.length<8){toast("Write a fuller answer before checking.");return;}
     const answer=normalise(raw); const hits=item.points.map(p=>pointHit(answer,p)); const score=hits.filter(Boolean).length; const old=Number(progress.examBest[item.id]||0);
     if(score>old){ progress.examBest[item.id]=score; saveProgress(); toast(`Best score improved: +${score-old} XP`); }
-    document.querySelector("#marker-output").innerHTML=`<div class="marker-result"><div class="score-line"><strong>${score} / ${item.marks}</strong><span class="provisional">provisional smart-marker score</span></div><div class="mark-points">${item.points.map((p,i)=>`<div class="mark-point ${hits[i]?"hit":"miss"}"><span aria-hidden="true">${hits[i]?"✓":"○"}</span><span>${hits[i]?"Included":"Add"}: ${p.label}</span></div>`).join("")}</div><div class="model-answer"><strong>Model answer</strong>${item.model}</div></div>`;
+    document.querySelector("#marker-output").innerHTML=`<div class="marker-result"><div class="score-line"><strong>${score} / ${item.marks}</strong><span class="provisional">estimated mark</span></div><div class="mark-points">${item.points.map((p,i)=>`<div class="mark-point ${hits[i]?"hit":"miss"}"><span aria-hidden="true">${hits[i]?"✓":"○"}</span><span>${hits[i]?"Included":"Add"}: ${p.label}</span></div>`).join("")}</div><div class="model-answer"><strong>Model answer</strong>${item.model}</div></div>`;
   }
 
   function renderGames(){
@@ -389,31 +477,98 @@
     panel.querySelectorAll("[data-game]").forEach(b=>b.addEventListener("click",()=>startGame(b.dataset.game)));
     if(state.activeGame && score>=gameData[state.activeGame].unlock) renderGameStage();
   }
-  function startGame(key){ state.activeGame=key;state.gameIndex=0;state.gameScore=0;renderGames(); }
-  function renderGameStage(){
-    const stage=document.querySelector("#game-stage"); const g=gameData[state.activeGame]; const card=g.cards[state.gameIndex];
-    if(!card){ finishGame();return; }
-    let controls="";
-    if(state.activeGame==="particle") controls=`<div class="particle-card">${card[0]}</div><div class="sort-bins">${["Solid","Liquid","Gas"].map(x=>`<button class="sort-bin" data-game-answer="${x}" type="button"><strong>${x}</strong><span>Choose this state</span></button>`).join("")}</div>`;
-    else if(state.activeGame==="thermal") controls=`<div class="particle-card">${card[0]}</div><div class="match-grid">${["Conduction","Convection","Radiation"].map(x=>`<button class="match-button" data-game-answer="${x}" type="button">${x}</button>`).join("")}</div>`;
-    else controls=`<div class="decay-equation">${card[0]}</div><div class="decay-options">${card[1].map((x,i)=>`<button class="match-button" data-game-answer="${i}" type="button">${x}</button>`).join("")}</div>`;
-    stage.innerHTML=`<section class="game-stage"><div class="question-meta"><span>${g.title}</span><span>Round ${state.gameIndex+1} of ${g.cards.length} · Score ${state.gameScore}</span></div>${controls}<div class="game-feedback" id="game-feedback"></div></section>`;
-    stage.scrollIntoView({behavior:"smooth",block:"start"}); stage.querySelectorAll("[data-game-answer]").forEach(b=>b.addEventListener("click",()=>answerGame(b.dataset.gameAnswer)));
+  function stopArcade(){
+    arcadeRun++;
+    if(arcadeFrame) cancelAnimationFrame(arcadeFrame);
+    if(arcadeInterval) clearInterval(arcadeInterval);
+    if(arcadeTimeout) clearTimeout(arcadeTimeout);
+    arcadeFrame=arcadeInterval=arcadeTimeout=null;
   }
-  function answerGame(value){
-    const g=gameData[state.activeGame]; const card=g.cards[state.gameIndex]; const correct=state.activeGame==="nuclear"?Number(value)===card[2]:value===card[1];
-    if(correct) state.gameScore++; document.querySelector("#game-feedback").textContent=correct?"Correct!":"Not this time — the correct answer was "+(state.activeGame==="nuclear"?card[1][card[2]]:card[1])+".";
-    document.querySelectorAll("[data-game-answer]").forEach(b=>b.disabled=true);
-    setTimeout(()=>{state.gameIndex++;renderGames();},850);
+  function startGame(key){
+    stopArcade(); state.activeGame=key;state.gameIndex=0;state.gameScore=0;state.gameLives=3;state.gamePosition=1;
+    renderGames();
+  }
+  function renderGameStage(){
+    if(state.activeGame==="particle") startParticleCatch();
+    else if(state.activeGame==="thermal") startHeatBlaster();
+    else startDecayReactor();
+  }
+
+  function arcadeHud(title, time=""){
+    return `<div class="arcade-hud"><strong>${title}</strong><span>Score <b id="arcade-score">${state.gameScore}</b></span><span>Lives <b id="arcade-lives">${"♥".repeat(state.gameLives)}</b></span>${time?`<span>Time <b id="arcade-time">${time}</b></span>`:""}</div>`;
+  }
+  function updateArcadeHud(){
+    const score=document.querySelector("#arcade-score"); const lives=document.querySelector("#arcade-lives");
+    if(score) score.textContent=state.gameScore; if(lives) lives.textContent="♥".repeat(Math.max(0,state.gameLives));
+  }
+
+  function startParticleCatch(){
+    const stage=document.querySelector("#game-stage"); const run=arcadeRun;
+    stage.innerHTML=`<section class="game-stage arcade-shell">${arcadeHud("Particle Catch")}<p class="arcade-instruction">Move the collector beneath the correct state. Use the arrow keys or buttons.</p><div class="catch-arena"><div class="lane-labels"><span>Solid</span><span>Liquid</span><span>Gas</span></div><div class="falling-clue" id="falling-clue"></div><div class="collector" id="collector">COLLECT</div></div><div class="arcade-controls"><button data-move="-1" type="button">◀ Move</button><button data-move="1" type="button">Move ▶</button></div><div class="game-feedback" id="game-feedback"></div></section>`;
+    stage.scrollIntoView({behavior:"smooth",block:"start"});
+    stage.querySelectorAll("[data-move]").forEach(b=>b.addEventListener("click",()=>moveCollector(Number(b.dataset.move))));
+    placeCollector(); startFallingClue(run);
+  }
+  function moveCollector(change){ state.gamePosition=Math.max(0,Math.min(2,state.gamePosition+change));placeCollector(); }
+  function placeCollector(){ const el=document.querySelector("#collector"); if(el) el.style.left=`calc(${state.gamePosition*33.333+16.666}% - 48px)`; }
+  function startFallingClue(run){
+    const g=gameData.particle; if(run!==arcadeRun)return; if(state.gameIndex>=g.cards.length||state.gameLives<=0){finishGame();return;}
+    const clue=document.querySelector("#falling-clue"); const feedback=document.querySelector("#game-feedback"); if(!clue)return;
+    clue.textContent=g.cards[state.gameIndex][0]; feedback.textContent=""; let y=38; let previous=performance.now();
+    const tick=now=>{ if(run!==arcadeRun)return; y+=(now-previous)*(0.075+state.gameIndex*0.006);previous=now;clue.style.transform=`translate(-50%, ${y}px)`;
+      if(y<238){arcadeFrame=requestAnimationFrame(tick);return;}
+      const answer=["Solid","Liquid","Gas"][state.gamePosition]; const correct=answer===g.cards[state.gameIndex][1];
+      if(correct)state.gameScore+=2;else state.gameLives--; updateArcadeHud(); feedback.textContent=correct?"Caught! +2":"Missed — that clue was "+g.cards[state.gameIndex][1]+"."; state.gameIndex++;
+      arcadeTimeout=setTimeout(()=>startFallingClue(run),650);
+    };
+    arcadeFrame=requestAnimationFrame(tick);
+  }
+
+  function startHeatBlaster(){
+    const stage=document.querySelector("#game-stage"); state.gameTime=30; const run=arcadeRun;
+    stage.innerHTML=`<section class="game-stage arcade-shell">${arcadeHud("Heat Blaster",state.gameTime)}<p class="arcade-mission">BLAST: <strong id="heat-mission">Radiation</strong> examples</p><div class="blaster-arena" id="blaster-arena"></div><p class="arcade-instruction">Targets keep moving. A wrong hit costs a life.</p><div class="game-feedback" id="game-feedback"></div></section>`;
+    stage.scrollIntoView({behavior:"smooth",block:"start"}); spawnHeatTargets();
+    arcadeInterval=setInterval(()=>{if(run!==arcadeRun)return;state.gameTime--;const el=document.querySelector("#arcade-time");if(el)el.textContent=state.gameTime;if(state.gameTime<=0||state.gameLives<=0)finishGame();},1000);
+  }
+  function spawnHeatTargets(){
+    const arena=document.querySelector("#blaster-arena"); if(!arena)return; const methods=["Conduction","Convection","Radiation"]; const mission=methods[Math.floor(Math.random()*methods.length)];
+    document.querySelector("#heat-mission").textContent=mission; const cards=[...gameData.thermal.cards].sort(()=>Math.random()-.5).slice(0,5);
+    arena.innerHTML=cards.map((card,i)=>`<button class="heat-target" data-method="${card[1]}" style="--x:${8+(i*19)%83}%;--y:${10+(i*37)%68}%;--delay:${i*.17}s" type="button">${card[0]}</button>`).join("");
+    arena.querySelectorAll(".heat-target").forEach(b=>b.addEventListener("click",()=>{
+      const correct=b.dataset.method===mission; if(correct)state.gameScore+=2;else state.gameLives--; updateArcadeHud();document.querySelector("#game-feedback").textContent=correct?"Direct hit! +2":"Wrong target — life lost.";
+      if(state.gameLives<=0){finishGame();return;} spawnHeatTargets();
+    }));
+  }
+
+  function startDecayReactor(){
+    const stage=document.querySelector("#game-stage"); const run=arcadeRun; state.gameTime=12;
+    stage.innerHTML=`<section class="game-stage arcade-shell">${arcadeHud("Decay Reactor",state.gameTime)}<p class="arcade-instruction">Adjust the daughter nucleus, then press STABILISE before the reactor overloads.</p><div id="reactor-board"></div><div class="game-feedback" id="game-feedback"></div></section>`;
+    stage.scrollIntoView({behavior:"smooth",block:"start"}); loadReactorRound();
+    arcadeInterval=setInterval(()=>{if(run!==arcadeRun)return;state.gameTime--;const el=document.querySelector("#arcade-time");if(el)el.textContent=state.gameTime;if(state.gameTime<=0){state.gameLives--;state.gameIndex++;updateArcadeHud();if(state.gameLives<=0||state.gameIndex>=gameData.nuclear.cards.length)finishGame();else{state.gameTime=12;loadReactorRound();}}},1000);
+  }
+  function loadReactorRound(){
+    const card=gameData.nuclear.cards[state.gameIndex]; if(!card){finishGame();return;} state.reactorA=card.a;state.reactorZ=card.z;
+    const board=document.querySelector("#reactor-board"); if(!board)return;
+    board.innerHTML=`<div class="reactor-equation"><span>${card.parent}</span><span class="decay-beam">${card.decay} →</span><span class="daughter-display"><sup id="reactor-a">${state.reactorA}</sup><sub id="reactor-z">${state.reactorZ}</sub>${card.daughter}</span></div><div class="reactor-controls"><div><span>Mass number A</span><button data-reactor="a:-1" type="button">− 1</button><button data-reactor="a:1" type="button">+ 1</button></div><div><span>Atomic number Z</span><button data-reactor="z:-1" type="button">− 1</button><button data-reactor="z:1" type="button">+ 1</button></div><button class="stabilise" id="stabilise" type="button">STABILISE</button></div>`;
+    board.querySelectorAll("[data-reactor]").forEach(b=>b.addEventListener("click",()=>{const [key,value]=b.dataset.reactor.split(":");if(key==="a")state.reactorA+=Number(value);else state.reactorZ+=Number(value);document.querySelector("#reactor-a").textContent=state.reactorA;document.querySelector("#reactor-z").textContent=state.reactorZ;}));
+    document.querySelector("#stabilise").addEventListener("click",()=>{
+      const correct=state.reactorA===card.targetA&&state.reactorZ===card.targetZ;if(correct)state.gameScore+=3;else state.gameLives--;state.gameIndex++;updateArcadeHud();document.querySelector("#game-feedback").textContent=correct?"Reactor stable! +3":`Unstable — target was A ${card.targetA}, Z ${card.targetZ}.`;
+      if(state.gameLives<=0||state.gameIndex>=gameData.nuclear.cards.length){arcadeTimeout=setTimeout(finishGame,650);}else{state.gameTime=12;arcadeTimeout=setTimeout(loadReactorRound,650);}
+    });
   }
   function finishGame(){
-    const key=state.activeGame; progress.gameBest[key]=Math.max(Number(progress.gameBest[key]||0),state.gameScore); saveProgress();
-    const stage=document.querySelector("#game-stage"); if(stage) stage.innerHTML=`<section class="game-stage"><h4>Game complete</h4><p>You scored ${state.gameScore} out of ${gameData[key].cards.length}.</p><button class="primary-button" id="play-again" type="button">Play again</button></section>`;
+    const key=state.activeGame; stopArcade(); progress.gameBest[key]=Math.max(Number(progress.gameBest[key]||0),state.gameScore); saveProgress();
+    const stage=document.querySelector("#game-stage"); if(stage) stage.innerHTML=`<section class="game-stage arcade-finish"><span class="game-icon" style="--game:${gameData[key].colour}">${gameData[key].icon}</span><h4>Game over</h4><p>Final score: <strong>${state.gameScore}</strong> · Best score: <strong>${progress.gameBest[key]}</strong></p><button class="primary-button" id="play-again" type="button">Play again</button></section>`;
     document.querySelector("#play-again")?.addEventListener("click",()=>startGame(key));
   }
 
-  document.querySelectorAll(".mode-tab").forEach(button=>button.addEventListener("click",()=>{state.view=button.dataset.view;state.activeGame=null;render();}));
-  document.querySelectorAll(".module-button").forEach(button=>button.addEventListener("click",()=>{state.module=button.dataset.module;state.checkIndex=0;state.checkAnswered=null;state.examId=moduleExams()[0].id;render();}));
+  document.addEventListener("keydown",event=>{
+    if(state.view!=="games"||state.activeGame!=="particle")return;
+    if(event.key==="ArrowLeft"){event.preventDefault();moveCollector(-1);}
+    if(event.key==="ArrowRight"){event.preventDefault();moveCollector(1);}
+  });
+  document.querySelectorAll(".mode-tab").forEach(button=>button.addEventListener("click",()=>{stopArcade();state.view=button.dataset.view;state.activeGame=null;render();}));
+  document.querySelectorAll(".module-button").forEach(button=>button.addEventListener("click",()=>{stopArcade();state.module=button.dataset.module;state.checkIndex=0;state.checkAnswered=null;state.examId=moduleExams()[0].id;render();}));
   function applyTheme(theme){ document.documentElement.dataset.theme=theme; themeToggle.textContent=theme==="dark"?"☀":"☾"; themeToggle.setAttribute("aria-label",theme==="dark"?"Use light theme":"Use dark theme"); }
   themeToggle.addEventListener("click",()=>{const next=document.documentElement.dataset.theme==="dark"?"light":"dark";applyTheme(next);try{localStorage.setItem(THEME_KEY,next);}catch{}});
   let storedTheme=null; try{storedTheme=localStorage.getItem(THEME_KEY);}catch{} applyTheme(storedTheme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
