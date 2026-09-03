@@ -77,10 +77,9 @@
               <div class="concept"><strong>Flat sections</strong><p>The substance is changing state. Its temperature stays constant, so the average kinetic energy of its particles stays constant.</p></div>
               <div class="concept"><strong>What happens to the energy?</strong><p>During a change of state, energy changes the particle arrangement and potential energy rather than raising or lowering the temperature.</p></div>
             </div>
-            <table class="mini-table"><thead><tr><th>Graph section</th><th>Heating</th><th>Cooling</th></tr></thead><tbody>
-              <tr><td>First flat section</td><td>Melting</td><td>Condensation if starting as a gas, or freezing if starting as a liquid</td></tr>
-              <tr><td>Flat section at melting/freezing point</td><td>Solid → liquid</td><td>Liquid → solid</td></tr>
-              <tr><td>Flat section at boiling/condensing point</td><td>Liquid → gas</td><td>Gas → liquid</td></tr>
+            <table class="mini-table"><thead><tr><th>Flat section</th><th>Heating curve</th><th>Cooling curve</th></tr></thead><tbody>
+              <tr><td>Melting/freezing point</td><td>Melting: solid → liquid</td><td>Freezing: liquid → solid</td></tr>
+              <tr><td>Boiling/condensing point</td><td>Boiling: liquid → gas</td><td>Condensation: gas → liquid</td></tr>
             </tbody></table>
             <ul>
               <li>The temperature at a flat section is the <strong>melting/freezing point</strong> or the <strong>boiling/condensing point</strong>.</li>
