@@ -56,7 +56,7 @@ button:focus-visible, textarea:focus-visible, input:focus-visible, [tabindex="-1
 }
 
 .site-header { color: #fff; background: #07284f; border-bottom: 5px solid var(--cyan); }
-.header-inner { display:flex; align-items:center; gap:14px; max-width:1220px; margin:auto; padding:15px 20px; }
+.header-inner { display:flex; align-items:center; gap:14px; max-width:1500px; margin:auto; padding:15px 20px; }
 .back-link { display:grid; place-items:center; width:38px; height:38px; color:#fff; border:1px solid rgba(255,255,255,.35); border-radius:50%; text-decoration:none; font-weight:900; }
 .school-badge { display:grid; flex:0 0 50px; width:50px; height:50px; place-items:center; border-radius:13px; background:linear-gradient(145deg,#00a9d6,#05759d); font-weight:950; }
 .brand { flex:1; }
@@ -65,7 +65,7 @@ button:focus-visible, textarea:focus-visible, input:focus-visible, [tabindex="-1
 .xp-chip { display:flex; align-items:center; gap:5px; padding:8px 11px; color:#09233e; background:var(--gold); border-radius:999px; font-size:.85rem; }
 .theme-toggle { display:grid; width:41px; height:41px; place-items:center; color:#fff; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.35); border-radius:50%; cursor:pointer; }
 
-main { max-width:1220px; margin:auto; padding:25px 20px 48px; }
+main { max-width:1500px; margin:auto; padding:25px 20px 48px; }
 .dashboard { display:grid; grid-template-columns:1fr minmax(280px,360px); align-items:end; gap:24px; margin-bottom:20px; }
 .eyebrow { margin:0; color:var(--cyan-deep); font-size:.78rem; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
 .dashboard h2 { margin:5px 0 7px; font-size:clamp(2rem,4.5vw,3.65rem); line-height:1; letter-spacing:-.045em; }
@@ -81,7 +81,7 @@ main { max-width:1220px; margin:auto; padding:25px 20px 48px; }
 .mode-tab.active { color:#fff; background:var(--navy-2); }
 .mode-tab span { margin-left:4px; padding:2px 6px; color:#09233e; background:var(--gold); border-radius:99px; font-size:.72rem; }
 
-.workspace { display:grid; grid-template-columns:280px 1fr; align-items:start; gap:15px; }
+.workspace { display:grid; grid-template-columns:250px minmax(0,1fr); align-items:start; gap:18px; }
 .module-nav, .content-panel { background:var(--card); border:1px solid var(--line); border-radius:19px; box-shadow:var(--shadow); }
 .module-nav { position:sticky; top:16px; padding:14px; }
 .nav-title { margin:4px 6px 10px; color:var(--muted); font-size:.73rem; font-weight:900; letter-spacing:.09em; text-transform:uppercase; }
@@ -129,7 +129,7 @@ main { max-width:1220px; margin:auto; padding:25px 20px 48px; }
 .mini-table th { color:var(--muted); font-size:.76rem; text-transform:uppercase; }
 .diagram-wrap { margin:12px 0; padding:12px; overflow:auto; background:var(--card); border:1px solid var(--line); border-radius:12px; }
 .diagram-wrap svg { display:block; width:100%; min-width:420px; height:auto; }
-.info-diagram { float:right; width:min(44%,350px); margin:0 0 14px 18px; padding:10px; color:var(--module); background:var(--card); border:1px solid color-mix(in srgb,var(--module) 35%,var(--line)); border-radius:13px; }
+.info-diagram { float:right; width:min(60%,620px); margin:0 0 18px 24px; padding:12px; color:var(--module); background:var(--card); border:1px solid color-mix(in srgb,var(--module) 35%,var(--line)); border-radius:13px; }
 .info-diagram svg { display:block; width:100%; height:auto; }
 .info-diagram svg g { fill:color-mix(in srgb,var(--module) 18%,var(--card)); stroke:var(--module); stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
 .info-diagram svg text { fill:var(--ink); stroke:none; font-size:15px; font-weight:800; }
@@ -227,7 +227,7 @@ footer span { margin:0 4px; }
   display:block;
   width:100%;
   height:auto;
-  max-height:280px;
+  max-height:500px;
   object-fit:contain;
   background:#fff;
   border-radius:9px;
@@ -306,7 +306,7 @@ footer span { margin:0 4px; }
 .source-image-strip img {
   display:block;
   width:100%;
-  height:150px;
+  height:240px;
   object-fit:contain;
   background:#fff;
   border-radius:8px;
@@ -314,7 +314,7 @@ footer span { margin:0 4px; }
 .isotope-source > img {
   display:block;
   width:100%;
-  max-height:310px;
+  max-height:500px;
   object-fit:contain;
   background:#fff;
   border-radius:9px;
@@ -322,4 +322,13 @@ footer span { margin:0 4px; }
 @media (max-width:620px) {
   .source-image-strip { grid-template-columns:1fr; }
   .source-image-strip img { height:auto; max-height:220px; }
+}
+
+
+/* Wider BBC diagrams on desktop */
+@media (min-width:1100px) {
+  .content-panel { padding:32px 38px 38px; }
+  .sourced-diagram { width:min(64%,680px); }
+  .sourced-diagram figcaption { font-size:.82rem; }
+  .lesson-body p, .lesson-body li { font-size:.98rem; }
 }
