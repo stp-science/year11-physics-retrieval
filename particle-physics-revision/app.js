@@ -155,14 +155,14 @@
           body: `
             <p>An element's position in the periodic table is determined by its atomic number, so every atom of one element has the same number of protons.</p>
             <p><strong>Isotopes</strong> are atoms of the same element with the same number of protons but different numbers of neutrons.</p>
-            <div class="diagram-wrap"><svg viewBox="0 0 760 210" role="img" aria-label="Carbon-12 and carbon-14 isotope notation">
-              <rect x="80" y="35" width="240" height="140" rx="16" fill="none" stroke="#17875f" stroke-width="3"/><rect x="440" y="35" width="240" height="140" rx="16" fill="none" stroke="#17875f" stroke-width="3"/>
-              <text x="104" y="83" font-size="32" fill="currentColor">¹²₆C</text><text x="180" y="83" font-size="21" fill="currentColor">carbon-12</text>
-              <text x="104" y="125" font-size="18" fill="currentColor">6 protons, 6 neutrons</text>
-              <text x="464" y="83" font-size="32" fill="currentColor">¹⁴₆C</text><text x="540" y="83" font-size="21" fill="currentColor">carbon-14</text>
-              <text x="464" y="125" font-size="18" fill="currentColor">6 protons, 8 neutrons</text>
-              <text x="215" y="197" font-size="18" fill="currentColor">same atomic number</text><text x="445" y="197" font-size="18" fill="currentColor">different mass number</text>
-            </svg></div>
+            <figure class="isotope-source">
+              <div class="source-image-pair">
+                <a href="https://commons.wikimedia.org/wiki/File:Carbon-12.svg" target="_blank" rel="noopener"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Carbon-12.svg?width=430" alt="Sourced carbon-12 isotope diagram"></a>
+                <a href="https://commons.wikimedia.org/wiki/File:Carbon-14.svg" target="_blank" rel="noopener"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Carbon-14.svg?width=430" alt="Sourced carbon-14 isotope diagram"></a>
+              </div>
+              <figcaption><strong>Carbon-12 and carbon-14</strong><span>Jcwf · Wikimedia Commons · source & licence linked from each image</span></figcaption>
+            </figure>
+            <div class="worked"><strong>Compare them</strong><p>Carbon-12 has 6 protons and 6 neutrons. Carbon-14 has 6 protons and 8 neutrons. Both are carbon because both have 6 protons.</p></div>
           `,
         },
         {
@@ -340,22 +340,96 @@
     return `<div class="video-card"><div class="video-frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/${id}" title="${title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="video-copy"><h5>${title}</h5><p><strong>${channel}</strong></p><p>${note}</p><a href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener">Open on YouTube ↗</a></div></div>`;
   }
   function diagram(type) {
-    const diagrams = {
-      kinetic: ["Particles are always moving", `<circle cx="55" cy="65" r="13"/><circle cx="138" cy="42" r="13"/><circle cx="210" cy="88" r="13"/><circle cx="290" cy="48" r="13"/><path d="M72 62h38m45-13 31 20m42 9 35-22"/><path d="m99 53 11 9-11 9m77-10 10 8-13 4m80-25 10 8-12 5"/>`],
-      states: ["Particle arrangement in each state", `<g><text x="58" y="24">solid</text><circle cx="45" cy="55" r="9"/><circle cx="70" cy="55" r="9"/><circle cx="95" cy="55" r="9"/><circle cx="45" cy="80" r="9"/><circle cx="70" cy="80" r="9"/><circle cx="95" cy="80" r="9"/></g><g><text x="145" y="24">liquid</text><circle cx="140" cy="70" r="9"/><circle cx="164" cy="78" r="9"/><circle cx="190" cy="67" r="9"/><circle cx="151" cy="48" r="9"/><circle cx="180" cy="43" r="9"/></g><g><text x="250" y="24">gas</text><circle cx="240" cy="48" r="9"/><circle cx="305" cy="80" r="9"/><circle cx="273" cy="35" r="9"/><circle cx="247" cy="91" r="9"/></g>`],
-      changes: ["Changes of state", `<rect x="18" y="45" width="78" height="42" rx="10"/><rect x="121" y="45" width="78" height="42" rx="10"/><rect x="224" y="45" width="78" height="42" rx="10"/><text x="39" y="71">solid</text><text x="137" y="71">liquid</text><text x="250" y="71">gas</text><path d="M96 56h25m78 0h25M121 78H96m128 0h-25"/><text x="96" y="25">heating →</text><text x="106" y="111">← cooling</text>`],
-      temperature: ["Higher temperature means faster average motion", `<g opacity=".65"><circle cx="48" cy="62" r="11"/><circle cx="92" cy="39" r="11"/><circle cx="118" cy="82" r="11"/><path d="M60 60h15m28-17 10-9"/></g><path d="M157 20v82"/><g><circle cx="205" cy="65" r="11"/><circle cx="265" cy="34" r="11"/><circle cx="303" cy="82" r="11"/><path d="M218 61h35m24-22 22-13m-5 51 28 13"/></g><text x="38" y="112">cooler</text><text x="248" y="112">hotter</text>`],
-      transfer: ["Three pathways for thermal energy", `<rect x="12" y="35" width="88" height="48" rx="9"/><text x="20" y="28">conduction</text><circle cx="32" cy="59" r="7"/><circle cx="54" cy="59" r="7"/><circle cx="76" cy="59" r="7"/><path d="M100 59h28"/><text x="130" y="28">convection</text><path d="M155 82c-22-28 25-55 45-27m0 0-1-17m1 17-17-2"/><text x="235" y="28">radiation</text><path d="M238 53c17-18 34 18 51 0m-51 20c17-18 34 18 51 0"/>`],
-      shc: ["Energy raises the temperature", `<path d="M40 84h150l-16-52H56z"/><path d="M115 20v58"/><circle cx="115" cy="84" r="10"/><path d="M218 26v62m-12 0h24"/><text x="244" y="62">ΔT</text><text x="62" y="108">mass m, capacity c</text>`],
-      mixing: ["Energy lost equals energy gained", `<path d="M28 42h82l-9 61H37z"/><path d="M212 42h82l-9 61h-64z"/><path d="M110 70h91m-12-9 12 9-12 9"/><text x="45" y="31">hot</text><text x="235" y="31">cold</text><text x="111" y="101">shared final temperature</text>`],
-      latent: ["Temperature stays level during a state change", `<path d="M25 100 92 52h82l68-35"/><path d="M92 52h82" stroke-width="7"/><text x="98" y="43">change of state</text><path d="M21 14v91h285M18 17l3-7 3 7m279 85 8 3-8 3"/><text x="3" y="64" transform="rotate(-90 3 64)">temperature</text>`],
-      atom: ["A tiny nucleus with electrons around it", `<ellipse cx="160" cy="65" rx="125" ry="38"/><ellipse cx="160" cy="65" rx="38" ry="58" transform="rotate(60 160 65)"/><circle cx="160" cy="65" r="25"/><circle cx="38" cy="65" r="7"/><circle cx="278" cy="65" r="7"/><circle cx="180" cy="12" r="7"/><text x="138" y="71">nucleus</text>`],
-      radioactivity: ["Unstable nuclei decay randomly", `<circle cx="78" cy="65" r="40"/><circle cx="68" cy="57" r="10"/><circle cx="89" cy="71" r="10"/><circle cx="70" cy="80" r="8"/><path d="M120 65h80m-12-9 12 9-12 9"/><circle cx="242" cy="65" r="25"/><path d="M270 52l38-22m-35 38h43m-46 12 38 22"/><text x="29" y="118">unstable</text><text x="221" y="118">more stable</text>`],
-      decay: ["Track A and Z through decay", `<rect x="13" y="18" width="140" height="42" rx="9"/><text x="26" y="44">alpha: A −4, Z −2</text><rect x="13" y="76" width="160" height="42" rx="9"/><text x="26" y="102">beta: A same, Z +1</text><path d="M181 38h112m-12-9 12 9-12 9M181 96h112m-12-9 12 9-12 9"/>`],
+    const images = {
+      kinetic: {
+        file:"Solid-liquid-gas.svg",
+        page:"https://commons.wikimedia.org/wiki/File:Solid-liquid-gas.svg",
+        alt:"Sourced particle diagram comparing solid liquid and gas",
+        caption:"Particles in solids, liquids and gases",
+        credit:"Sadi Carnot / Dave.Dunford · Wikimedia Commons"
+      },
+      states: {
+        file:"Solids liquids and gases - particle model.jpg",
+        page:"https://commons.wikimedia.org/wiki/File:Solids_liquids_and_gases_-_particle_model.jpg",
+        alt:"Sourced particle model showing solid liquid and gas",
+        caption:"Particle model of the three states",
+        credit:"Brightyellowjeans · Wikimedia Commons"
+      },
+      changes: {
+        file:"Solid-liquid-gas.svg",
+        page:"https://commons.wikimedia.org/wiki/File:Solid-liquid-gas.svg",
+        alt:"Sourced diagram comparing the particle arrangement in solid liquid and gas",
+        caption:"Particle arrangement before and after a change of state",
+        credit:"Sadi Carnot / Dave.Dunford · Wikimedia Commons"
+      },
+      temperature: {
+        file:"CelsiusKelvinThermometer.jpg",
+        page:"https://commons.wikimedia.org/wiki/File:CelsiusKelvinThermometer.jpg",
+        alt:"Photograph of a thermometer marked with Celsius and kelvin scales",
+        caption:"Celsius and kelvin temperature scales",
+        credit:"Martinvl · Wikimedia Commons"
+      },
+      transfer: {
+        file:"Kettle-convection-conduction-radiation.png",
+        page:"https://commons.wikimedia.org/wiki/File:Kettle-convection-conduction-radiation.png",
+        alt:"Sourced diagram showing conduction convection and radiation around a kettle",
+        caption:"Conduction, convection and radiation",
+        credit:"P.wormer · Wikimedia Commons"
+      },
+      shc: {
+        file:"Aluminium Calorimeter.jpg",
+        page:"https://commons.wikimedia.org/wiki/File:Aluminium_Calorimeter.jpg",
+        alt:"Photograph of an aluminium calorimeter",
+        caption:"An aluminium calorimeter used in thermal measurements",
+        credit:"Maciej J. Mrowinski · Wikimedia Commons"
+      },
+      mixing: {
+        file:"Kalorimeter.png",
+        page:"https://commons.wikimedia.org/wiki/File:Kalorimeter.png",
+        alt:"Photograph of an aluminium calorimeter",
+        caption:"Calorimetry is used to measure thermal energy transfer",
+        credit:"Maciej J. Mrowinski · Wikimedia Commons"
+      },
+      latent: {
+        file:"Energy through phase changes.png",
+        page:"https://commons.wikimedia.org/wiki/File:Energy_through_phase_changes.png",
+        alt:"Sourced heating curve showing constant temperature during phase changes",
+        caption:"Heating curve: temperature stays constant during a phase change",
+        credit:"Greg L · Wikimedia Commons"
+      },
+      atom: {
+        file:"Structure of Atom.jpg",
+        page:"https://commons.wikimedia.org/wiki/File:Structure_of_Atom.jpg",
+        alt:"Sourced diagram showing protons neutrons and electrons in an atom",
+        caption:"Structure of an atom",
+        credit:"Brightyellowjeans · Wikimedia Commons"
+      },
+      radioactivity: {
+        file:"Alpha Decay.svg",
+        page:"https://commons.wikimedia.org/wiki/File:Alpha_Decay.svg",
+        alt:"Sourced diagram showing an alpha particle emitted from a nucleus",
+        caption:"An unstable nucleus can emit radiation",
+        credit:"Inductiveload · Wikimedia Commons"
+      },
+      decay: {
+        files:[
+          {file:"Alpha Decay.svg",page:"https://commons.wikimedia.org/wiki/File:Alpha_Decay.svg",alt:"Sourced alpha decay diagram"},
+          {file:"Beta-decay.png",page:"https://commons.wikimedia.org/wiki/File:Beta-decay.png",alt:"Sourced beta decay diagram"}
+        ],
+        caption:"Alpha decay and beta decay",
+        credit:"Wikimedia Commons"
+      }
     };
-    const [label, shapes] = diagrams[type];
-    return `<figure class="info-diagram"><svg viewBox="0 0 330 130" role="img" aria-label="${label}"><g>${shapes}</g></svg><figcaption>${label}</figcaption></figure>`;
+    const item=images[type];
+    if(!item)return "";
+    const imageUrl=file=>`https://commons.wikimedia.org/wiki/Special:Redirect/file/${encodeURIComponent(file)}?width=900`;
+    const media=item.files
+      ? `<div class="source-image-pair">${item.files.map(image=>`<a href="${image.page}" target="_blank" rel="noopener"><img loading="lazy" src="${imageUrl(image.file)}" alt="${image.alt}"></a>`).join("")}</div>`
+      : `<a href="${item.page}" target="_blank" rel="noopener"><img loading="lazy" src="${imageUrl(item.file)}" alt="${item.alt}"></a>`;
+    const sourcePage=item.page||(item.files&&item.files[0].page);
+    return `<figure class="info-diagram sourced-diagram">${media}<figcaption><strong>${item.caption}</strong><span>${item.credit} · <a href="${sourcePage}" target="_blank" rel="noopener">source & licence</a></span></figcaption></figure>`;
   }
+
   function q(id,module,question,options,correct,explanation){ return {id,module,question,options,correct,explanation}; }
   function mp(label,tests){ return {label,tests}; }
   function exam(id,module,marks,question,points,model){ return {id,module,marks,question,points,model}; }
