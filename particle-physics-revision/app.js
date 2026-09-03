@@ -18,7 +18,7 @@
       name: "Particle Model",
       number: "01",
       colour: "#6554c0",
-      intro: "Use the particle model to explain solids, liquids, gases, internal energy and changes of state.",
+      intro: "Use the particle model to explain solids, liquids, gases, internal energy, changes of state and heating or cooling curves.",
       lessons: [
         {
           title: "The particle model",
@@ -65,6 +65,30 @@
               <tr><td>Boiling / evaporation</td><td>Liquid</td><td>Gas</td></tr><tr><td>Condensation</td><td>Gas</td><td>Liquid</td></tr>
               <tr><td>Sublimation</td><td>Solid</td><td>Gas</td></tr><tr><td>Condensation</td><td>Gas</td><td>Solid</td></tr>
             </tbody></table>
+          `,
+        },
+        {
+          title: "Heating and cooling curves",
+          body: `
+            ${diagram("stategraph")}
+            <p>A <strong>heating or cooling curve</strong> shows how the temperature of a substance changes as energy is transferred to it or away from it.</p>
+            <div class="concept-grid">
+              <div class="concept"><strong>Sloping sections</strong><p>The substance stays in one state. Its temperature changes, so the average kinetic energy of its particles changes.</p></div>
+              <div class="concept"><strong>Flat sections</strong><p>The substance is changing state. Its temperature stays constant, so the average kinetic energy of its particles stays constant.</p></div>
+              <div class="concept"><strong>What happens to the energy?</strong><p>During a change of state, energy changes the particle arrangement and potential energy rather than raising or lowering the temperature.</p></div>
+            </div>
+            <table class="mini-table"><thead><tr><th>Graph section</th><th>Heating</th><th>Cooling</th></tr></thead><tbody>
+              <tr><td>First flat section</td><td>Melting</td><td>Condensation if starting as a gas, or freezing if starting as a liquid</td></tr>
+              <tr><td>Flat section at melting/freezing point</td><td>Solid → liquid</td><td>Liquid → solid</td></tr>
+              <tr><td>Flat section at boiling/condensing point</td><td>Liquid → gas</td><td>Gas → liquid</td></tr>
+            </tbody></table>
+            <ul>
+              <li>The temperature at a flat section is the <strong>melting/freezing point</strong> or the <strong>boiling/condensing point</strong>.</li>
+              <li>On a heating curve, the first plateau is usually melting and the second is boiling.</li>
+              <li>On a cooling curve, the reverse changes occur: condensation and freezing.</li>
+              <li>If the heater supplies energy at a constant rate, a longer flat section means more energy was needed for that change of state.</li>
+            </ul>
+            <div class="worked"><strong>Exam tip</strong><p>If a question asks why the line is flat, say that energy is changing the <strong>potential energy and arrangement</strong> of the particles. Their average kinetic energy does not change, so the temperature stays constant.</p></div>
           `,
         },
       ],
@@ -156,13 +180,10 @@
             <p>An element's position in the periodic table is determined by its atomic number, so every atom of one element has the same number of protons.</p>
             <p><strong>Isotopes</strong> are atoms of the same element with the same number of protons but different numbers of neutrons.</p>
             <figure class="isotope-source">
-              <div class="source-image-pair">
-                <a href="https://commons.wikimedia.org/wiki/File:Carbon-12.svg" target="_blank" rel="noopener"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Carbon-12.svg?width=430" alt="Sourced carbon-12 isotope diagram"></a>
-                <a href="https://commons.wikimedia.org/wiki/File:Carbon-14.svg" target="_blank" rel="noopener"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Carbon-14.svg?width=430" alt="Sourced carbon-14 isotope diagram"></a>
-              </div>
-              <figcaption><strong>Carbon-12 and carbon-14</strong><span>Jcwf · Wikimedia Commons · source & licence linked from each image</span></figcaption>
+              <img loading="lazy" src="https://bam.files.bbci.co.uk/bam/live/content/z3tprwx/small" alt="BBC Bitesize table comparing hydrogen isotopes">
+              <figcaption><strong>Hydrogen isotopes</strong><span>Image: BBC Bitesize GCSE Science</span></figcaption>
             </figure>
-            <div class="worked"><strong>Compare them</strong><p>Carbon-12 has 6 protons and 6 neutrons. Carbon-14 has 6 protons and 8 neutrons. Both are carbon because both have 6 protons.</p></div>
+            <div class="worked"><strong>What the diagram shows</strong><p>Hydrogen-1, hydrogen-2 and hydrogen-3 each have 1 proton but different numbers of neutrons. They are isotopes of the same element because they have the same number of protons.</p></div>
           `,
         },
         {
@@ -196,6 +217,7 @@
     q("p3","particle","What is internal energy?",["Only the kinetic energy of the fastest particle","The energy transferred by heating each second","The total kinetic and potential energy of all particles","The temperature multiplied by the mass"],2,"Internal energy is the total kinetic and potential energy of the particles."),
     q("p4","particle","Which change of state is gas directly to solid?",["Sublimation","Condensation","Melting","Freezing"],1,"In this course, gas changing directly to solid is called condensation."),
     q("p5","particle","During melting, what happens while the temperature stays constant?",["Particle kinetic energy steadily decreases","Energy changes particle separation and potential energy","All particles stop moving","The mass of the substance increases"],1,"The supplied energy changes arrangement and potential energy rather than temperature."),
+    q("p6","particle","What does a flat section on a heating curve show?",["The substance is cooling rapidly","A change of state at constant temperature","The particles have stopped moving","The mass of the substance is increasing"],1,"During a change of state, temperature stays constant while energy changes particle arrangement and potential energy."),
     q("t1","thermal","What does temperature measure in the particle model?",["Total potential energy","Average kinetic energy of particles","Total internal energy","The number of particles"],1,"Temperature measures average particle kinetic energy."),
     q("t2","thermal","What temperature is 25 °C on the Kelvin scale?",["248 K","273 K","298 K","325 K"],2,"25 + 273 = 298 K."),
     q("t3","thermal","How much energy heats 2.0 kg of water by 10 °C if c = 4180 J kg⁻¹ °C⁻¹?",["836 J","8,360 J","41,800 J","83,600 J"],3,"Q = mcΔT = 2.0 × 4180 × 10 = 83,600 J."),
@@ -235,6 +257,12 @@
       mp("Sublimation requires energy to be supplied",[["sublimation","energy","supplied"],["solid","gas","heating"]]),
       mp("Condensation transfers energy away from the substance",[["condensation","energy","away"],["gas","solid","cool"]]),
     ],"A solid changing directly into a gas is sublimation and needs energy to be supplied. In this course, a gas changing directly into a solid is called condensation; energy is transferred away from the substance."),
+    exam("pe7","particle",4,"Explain what the sloping and flat sections of a heating curve show in terms of the particles and their energy.",[
+      mp("On a sloping section the substance remains in one state",[["sloping","one state"],["slope","same state"]]),
+      mp("On a sloping section the average kinetic energy and temperature change",[["kinetic energy","temperature","increase"],["average kinetic","increase"]]),
+      mp("A flat section shows a change of state at constant temperature",[["flat","change of state"],["plateau","change of state"],["flat","temperature","constant"]]),
+      mp("During the flat section energy changes potential energy or particle arrangement rather than kinetic energy",[["potential energy","increase"],["particle","arrangement","energy"],["kinetic energy","not increase"]]),
+    ],"On a sloping section the substance stays in one state and its particles gain average kinetic energy, so the temperature rises. On a flat section the substance changes state. The energy changes particle arrangement and potential energy instead of increasing average kinetic energy, so the temperature remains constant."),
     exam("te1","thermal",4,"Calculate the energy needed to heat 2.0 kg of water from 20 °C to 30 °C. The specific heat capacity of water is 4180 J kg⁻¹ °C⁻¹.",[
       mp("Uses Q = mcΔT",[["q","m","c"],["energy","mass","specific heat","temperature"]]),
       mp("Finds ΔT = 10 °C",[["10","temperature"],["30","20","10"]]),
@@ -342,92 +370,72 @@
   function diagram(type) {
     const images = {
       kinetic: {
-        file:"Solid-liquid-gas.svg",
-        page:"https://commons.wikimedia.org/wiki/File:Solid-liquid-gas.svg",
-        alt:"Sourced particle diagram comparing solid liquid and gas",
-        caption:"Particles in solids, liquids and gases",
-        credit:"Sadi Carnot / Dave.Dunford · Wikimedia Commons"
+        url:"https://bam.files.bbci.co.uk/bam/live/content/zv7y4wx/small",
+        alt:"BBC Bitesize particle model comparing solid, liquid and gas particles",
+        caption:"Particle arrangement and movement in solids, liquids and gases"
       },
       states: {
-        file:"Solids liquids and gases - particle model.jpg",
-        page:"https://commons.wikimedia.org/wiki/File:Solids_liquids_and_gases_-_particle_model.jpg",
-        alt:"Sourced particle model showing solid liquid and gas",
-        caption:"Particle model of the three states",
-        credit:"Brightyellowjeans · Wikimedia Commons"
+        url:"https://bam.files.bbci.co.uk/bam/live/content/zv7y4wx/small",
+        alt:"BBC Bitesize diagram showing particles in solids, liquids and gases",
+        caption:"The particle model for solids, liquids and gases"
       },
       changes: {
-        file:"Solid-liquid-gas.svg",
-        page:"https://commons.wikimedia.org/wiki/File:Solid-liquid-gas.svg",
-        alt:"Sourced diagram comparing the particle arrangement in solid liquid and gas",
-        caption:"Particle arrangement before and after a change of state",
-        credit:"Sadi Carnot / Dave.Dunford · Wikimedia Commons"
+        url:"https://bam.files.bbci.co.uk/bam/live/content/zqjs8mn/small",
+        alt:"BBC Bitesize changes of state diagram showing melting, freezing, boiling, condensation and sublimation",
+        caption:"Changes of state"
+      },
+      stategraph: {
+        url:"https://bam.files.bbci.co.uk/bam/live/content/zttrmsg/small",
+        alt:"BBC Bitesize heating curve with flat sections at melting and boiling",
+        caption:"Heating curve showing changes of state"
       },
       temperature: {
-        file:"CelsiusKelvinThermometer.jpg",
-        page:"https://commons.wikimedia.org/wiki/File:CelsiusKelvinThermometer.jpg",
-        alt:"Photograph of a thermometer marked with Celsius and kelvin scales",
-        caption:"Celsius and kelvin temperature scales",
-        credit:"Martinvl · Wikimedia Commons"
+        url:"https://bam.files.bbci.co.uk/bam/live/content/zxxb7p3/small",
+        alt:"BBC Bitesize diagram of water being heated and particles moving faster",
+        caption:"Heating increases the energy of the particles"
       },
       transfer: {
-        file:"Kettle-convection-conduction-radiation.png",
-        page:"https://commons.wikimedia.org/wiki/File:Kettle-convection-conduction-radiation.png",
-        alt:"Sourced diagram showing conduction convection and radiation around a kettle",
-        caption:"Conduction, convection and radiation",
-        credit:"P.wormer · Wikimedia Commons"
+        urls:[
+          "https://bam.files.bbci.co.uk/bam/live/content/ztwngk7/small",
+          "https://bam.files.bbci.co.uk/bam/live/content/zhjsr82/small",
+          "https://bam.files.bbci.co.uk/bam/live/content/zpqfcdm/small"
+        ],
+        alt:"BBC Bitesize sequence showing conduction through a metal",
+        caption:"Conduction through a metal"
       },
       shc: {
-        file:"Aluminium Calorimeter.jpg",
-        page:"https://commons.wikimedia.org/wiki/File:Aluminium_Calorimeter.jpg",
-        alt:"Photograph of an aluminium calorimeter",
-        caption:"An aluminium calorimeter used in thermal measurements",
-        credit:"Maciej J. Mrowinski · Wikimedia Commons"
+        url:"https://bam.files.bbci.co.uk/bam/live/content/zxxb7p3/small",
+        alt:"BBC Bitesize diagram showing a substance being heated",
+        caption:"Energy transferred by heating raises temperature"
       },
-      mixing: {
-        file:"Kalorimeter.png",
-        page:"https://commons.wikimedia.org/wiki/File:Kalorimeter.png",
-        alt:"Photograph of an aluminium calorimeter",
-        caption:"Calorimetry is used to measure thermal energy transfer",
-        credit:"Maciej J. Mrowinski · Wikimedia Commons"
-      },
+      mixing: null,
       latent: {
-        file:"Energy through phase changes.png",
-        page:"https://commons.wikimedia.org/wiki/File:Energy_through_phase_changes.png",
-        alt:"Sourced heating curve showing constant temperature during phase changes",
-        caption:"Heating curve: temperature stays constant during a phase change",
-        credit:"Greg L · Wikimedia Commons"
+        url:"https://bam.files.bbci.co.uk/bam/live/content/zttrmsg/small",
+        alt:"BBC Bitesize heating curve showing constant temperature during changes of state",
+        caption:"Heating curve and latent heat"
       },
       atom: {
-        file:"Structure of Atom.jpg",
-        page:"https://commons.wikimedia.org/wiki/File:Structure_of_Atom.jpg",
-        alt:"Sourced diagram showing protons neutrons and electrons in an atom",
-        caption:"Structure of an atom",
-        credit:"Brightyellowjeans · Wikimedia Commons"
+        url:"https://bam.files.bbci.co.uk/bam/live/content/z8vbw6f/small",
+        alt:"BBC Bitesize atomic structure diagram showing protons, neutrons and electrons",
+        caption:"Structure of an atom"
       },
       radioactivity: {
-        file:"Alpha Decay.svg",
-        page:"https://commons.wikimedia.org/wiki/File:Alpha_Decay.svg",
-        alt:"Sourced diagram showing an alpha particle emitted from a nucleus",
-        caption:"An unstable nucleus can emit radiation",
-        credit:"Inductiveload · Wikimedia Commons"
+        url:"https://bam.files.bbci.co.uk/bam/live/content/z3rmb82/small",
+        alt:"BBC Bitesize graph showing the stability of nuclei",
+        caption:"Nuclear stability"
       },
       decay: {
-        files:[
-          {file:"Alpha Decay.svg",page:"https://commons.wikimedia.org/wiki/File:Alpha_Decay.svg",alt:"Sourced alpha decay diagram"},
-          {file:"Beta-decay.png",page:"https://commons.wikimedia.org/wiki/File:Beta-decay.png",alt:"Sourced beta decay diagram"}
-        ],
-        caption:"Alpha decay and beta decay",
-        credit:"Wikimedia Commons"
+        url:"https://bam.files.bbci.co.uk/bam/live/content/zghcjxs/small",
+        alt:"BBC Bitesize diagram comparing the penetration of alpha, beta and gamma radiation",
+        caption:"Alpha, beta and gamma radiation"
       }
     };
     const item=images[type];
     if(!item)return "";
-    const imageUrl=file=>`https://commons.wikimedia.org/wiki/Special:Redirect/file/${encodeURIComponent(file)}?width=900`;
-    const media=item.files
-      ? `<div class="source-image-pair">${item.files.map(image=>`<a href="${image.page}" target="_blank" rel="noopener"><img loading="lazy" src="${imageUrl(image.file)}" alt="${image.alt}"></a>`).join("")}</div>`
-      : `<a href="${item.page}" target="_blank" rel="noopener"><img loading="lazy" src="${imageUrl(item.file)}" alt="${item.alt}"></a>`;
-    const sourcePage=item.page||(item.files&&item.files[0].page);
-    return `<figure class="info-diagram sourced-diagram">${media}<figcaption><strong>${item.caption}</strong><span>${item.credit} · <a href="${sourcePage}" target="_blank" rel="noopener">source & licence</a></span></figcaption></figure>`;
+    const media=item.urls
+      ? `<div class="source-image-strip">${item.urls.map((url,i)=>`<img loading="lazy" src="${url}" alt="${item.alt} step ${i+1}">`).join("")}</div>`
+      : `<img loading="lazy" src="${item.url}" alt="${item.alt}">`;
+    return `<figure class="info-diagram sourced-diagram">${media}<figcaption><strong>${item.caption}</strong><span>Image: BBC Bitesize GCSE Science</span></figcaption></figure>`;
   }
 
   function q(id,module,question,options,correct,explanation){ return {id,module,question,options,correct,explanation}; }
@@ -462,7 +470,7 @@
   function heading(title,intro,number=modules[state.module].number){ return `<div class="section-heading"><div><h3>${title}</h3><p>${intro}</p></div><span class="module-number">${number}</span></div>`; }
   function knowledgeSummary(key){
     const items={
-      particle:[["Particle model","Arrangement and movement explain the three states."],["Internal energy","Total kinetic and potential energy of the particles."],["State changes","Know melting, freezing, boiling, condensation and sublimation."]],
+      particle:[["Particle model","Arrangement and movement explain the three states."],["Internal energy","Total kinetic and potential energy of the particles."],["State changes","Know melting, freezing, boiling, condensation and sublimation."],["Heating curves","Slopes show temperature change; flat sections show a change of state at constant temperature."]],
       thermal:[["Temperature","A measure of average particle kinetic energy."],["Energy transfer","Conduction, convection and infrared radiation."],["Heating","Use Q = mcΔT and convert values into the correct units."],["Changing state","Use Q = mL; temperature stays constant during the change."]],
       nuclear:[["The atom","Know the charge, mass and location of each particle."],["A and Z","Mass number = protons + neutrons; atomic number = protons."],["Isotopes","Same protons but different neutrons."],["Decay","Alpha: A −4, Z −2. Beta-minus: A same, Z +1."]],
     };
