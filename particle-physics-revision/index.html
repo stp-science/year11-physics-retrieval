@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Interactive Year 11 Particle Physics revision for St Peter's School." />
+    <meta name="theme-color" content="#07284f" />
+    <title>Year 11 Particle Physics Revision</title>
+    <link rel="preconnect" href="https://www.youtube-nocookie.com" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="back-link" href="../" aria-label="Back to Year 11 Physics retrieval practice">←</a>
+        <div class="school-badge" aria-hidden="true">SP</div>
+        <div class="brand">
+          <p>St Peter's School</p>
+          <h1>Particle Physics Revision</h1>
+        </div>
+        <div class="xp-chip" aria-live="polite"><span aria-hidden="true">⚡</span><strong id="xp-total">0</strong> XP</div>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Use dark theme">☾</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="dashboard" aria-labelledby="dashboard-title">
+        <div>
+          <p class="eyebrow">Year 11 Physics</p>
+          <h2 id="dashboard-title">Learn it. Check it. Apply it.</h2>
+          <p>Work through the course content, answer from memory and earn XP to unlock the revision arcade.</p>
+        </div>
+        <div class="progress-card">
+          <div class="progress-label"><span>Course progress</span><strong id="progress-percent">0%</strong></div>
+          <div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div>
+          <p id="next-unlock">3 XP until Particle Sort unlocks</p>
+        </div>
+      </section>
+
+      <nav class="mode-tabs" aria-label="Revision modes">
+        <button class="mode-tab active" data-view="learn" type="button">Learn</button>
+        <button class="mode-tab" data-view="check" type="button">Quick Check</button>
+        <button class="mode-tab" data-view="exam" type="button">Exam Practice</button>
+        <button class="mode-tab" data-view="games" type="button">Revision Arcade <span id="games-badge">0/3</span></button>
+      </nav>
+
+      <div class="workspace">
+        <aside class="module-nav" aria-label="Particle Physics sections">
+          <p class="nav-title">Course sections</p>
+          <button class="module-button active" data-module="particle" type="button">
+            <span class="module-icon particle-icon" aria-hidden="true">●</span>
+            <span><strong>Particle Model</strong><small>States, motion and changes</small></span>
+          </button>
+          <button class="module-button" data-module="thermal" type="button">
+            <span class="module-icon thermal-icon" aria-hidden="true">↟</span>
+            <span><strong>Thermal Physics</strong><small>Temperature and energy</small></span>
+          </button>
+          <button class="module-button" data-module="nuclear" type="button">
+            <span class="module-icon nuclear-icon" aria-hidden="true">⚛</span>
+            <span><strong>Nuclear Physics</strong><small>Atoms, isotopes and decay</small></span>
+          </button>
+          <div class="boundary-note">
+            <strong>Course boundary</strong>
+            <p>This site follows the St Peter's Year 11 course overview. It does not add half-life, fission or fusion.</p>
+          </div>
+        </aside>
+
+        <section class="content-panel" id="content-panel" aria-live="polite"></section>
+      </div>
+    </main>
+
+    <footer>
+      <span>Recall first</span><span>•</span><span>Check the physics</span><span>•</span><span>Return to difficult ideas</span>
+    </footer>
+  </body>
+</html>
