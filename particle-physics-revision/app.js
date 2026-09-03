@@ -306,32 +306,16 @@
 
   const gameData = {
     particle: {
-      title: "Particle Catch", colour: "#6554c0", icon: "●", unlock: 3,
-      description: "Move the collector and catch falling particle clues in the correct state lane.",
-      cards: [
-        ["Particles vibrate about fixed positions", "Solid"], ["Particles move rapidly in random directions", "Gas"],
-        ["Particles are close together but can move past each other", "Liquid"], ["Has a fixed shape", "Solid"],
-        ["Can be compressed easily", "Gas"], ["Has a fixed volume but takes the container's shape", "Liquid"],
-      ],
+      title: "Space Invaders", colour: "#6554c0", icon: "👾", unlock: 3,
+      description: "Defend the planet. Move, shoot and clear wave after wave of invaders."
     },
     thermal: {
-      title: "Heat Blaster", colour: "#e56b2f", icon: "✦", unlock: 7,
-      description: "Blast moving examples that match the mission before the timer reaches zero.",
-      cards: [
-        ["A metal spoon becomes hot in soup", "Conduction"], ["Warm air rises above a heater", "Convection"],
-        ["Energy travels from the Sun to Earth", "Radiation"], ["A pan handle heats from the pan", "Conduction"],
-        ["Water circulates as it boils", "Convection"], ["A shiny surface reduces infrared transfer", "Radiation"],
-      ],
+      title: "Breakout", colour: "#e56b2f", icon: "▦", unlock: 7,
+      description: "Keep the ball in play and smash every brick for the highest score."
     },
     nuclear: {
-      title: "Decay Reactor", colour: "#17875f", icon: "⚛", unlock: 12,
-      description: "Control mass and atomic number to stabilise each daughter nucleus against the clock.",
-      cards: [
-        { parent:"²³⁸₉₂U", decay:"alpha", a:238, z:92, targetA:234, targetZ:90, daughter:"Th" },
-        { parent:"¹⁴₆C", decay:"beta-minus", a:14, z:6, targetA:14, targetZ:7, daughter:"N" },
-        { parent:"²¹⁰₈₄Po", decay:"alpha", a:210, z:84, targetA:206, targetZ:82, daughter:"Pb" },
-        { parent:"⁹⁰₃₈Sr", decay:"beta-minus", a:90, z:38, targetA:90, targetZ:39, daughter:"Y" },
-      ],
+      title: "Snake", colour: "#17875f", icon: "◉", unlock: 12,
+      description: "Classic Snake. Grab the food, grow longer and avoid crashing."
     },
   };
 
@@ -341,6 +325,9 @@
   let arcadeInterval = null;
   let arcadeTimeout = null;
   let arcadeRun = 0;
+  let arcadeKeydown = null;
+  let arcadeKeyup = null;
+  const arcadeKeys = {};
   const panel = document.querySelector("#content-panel");
   const xpTotal = document.querySelector("#xp-total");
   const progressBar = document.querySelector("#progress-bar");
@@ -448,100 +435,258 @@
 
   function renderGames(){
     const score=xp(); const unlocked=Object.entries(gameData).filter(([,g])=>score>=g.unlock).length;
-    panel.innerHTML=`<div class="games-intro"><div><h3>Revision Arcade</h3><p>Correct science unlocks the games. Your best game scores stay on this device.</p></div><span class="mark-badge">${unlocked} of 3 unlocked</span></div><div class="game-grid">${Object.entries(gameData).map(([key,g])=>{const open=score>=g.unlock;return `<article class="game-card ${open?"":"locked"}" style="--game:${g.colour}"><span class="game-icon">${g.icon}</span><span class="lock-label">${open?`Best: ${progress.gameBest[key]||0}`:`🔒 ${g.unlock} XP`}</span><h4>${g.title}</h4><p>${g.description}</p><button class="${open?"primary-button":"secondary-button"}" data-game="${key}" type="button" ${open?"":"disabled"}>${open?"Play game":"Locked"}</button></article>`;}).join("")}</div><div id="game-stage"></div>`;
+    panel.innerHTML=`<div class="games-intro"><div><h3>Revision Arcade</h3><p>Earn XP through revision to unlock proper arcade games. The games themselves contain no physics questions.</p></div><span class="mark-badge">${unlocked} of 3 unlocked</span></div><div class="game-grid">${Object.entries(gameData).map(([key,g])=>{const open=score>=g.unlock;return `<article class="game-card ${open?"":"locked"}" style="--game:${g.colour}"><span class="game-icon">${g.icon}</span><span class="lock-label">${open?`Best: ${progress.gameBest[key]||0}`:`🔒 ${g.unlock} XP`}</span><h4>${g.title}</h4><p>${g.description}</p><button class="${open?"primary-button":"secondary-button"}" data-game="${key}" type="button" ${open?"":"disabled"}>${open?"Play game":"Locked"}</button></article>`;}).join("")}</div><div id="game-stage"></div>`;
     panel.querySelectorAll("[data-game]").forEach(b=>b.addEventListener("click",()=>startGame(b.dataset.game)));
     if(state.activeGame && score>=gameData[state.activeGame].unlock) renderGameStage();
   }
+
   function stopArcade(){
     arcadeRun++;
     if(arcadeFrame) cancelAnimationFrame(arcadeFrame);
     if(arcadeInterval) clearInterval(arcadeInterval);
     if(arcadeTimeout) clearTimeout(arcadeTimeout);
     arcadeFrame=arcadeInterval=arcadeTimeout=null;
+    if(arcadeKeydown) document.removeEventListener("keydown",arcadeKeydown);
+    if(arcadeKeyup) document.removeEventListener("keyup",arcadeKeyup);
+    arcadeKeydown=arcadeKeyup=null;
+    Object.keys(arcadeKeys).forEach(k=>delete arcadeKeys[k]);
   }
+
+  function bindArcadeKeys(){
+    arcadeKeydown=e=>{
+      if(["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"," ","a","d","w","s","A","D","W","S"].includes(e.key)) e.preventDefault();
+      arcadeKeys[e.key.toLowerCase()]=true;
+      arcadeKeys[e.key]=true;
+    };
+    arcadeKeyup=e=>{
+      arcadeKeys[e.key.toLowerCase()]=false;
+      arcadeKeys[e.key]=false;
+    };
+    document.addEventListener("keydown",arcadeKeydown);
+    document.addEventListener("keyup",arcadeKeyup);
+  }
+
+  function bindTouchControls(stage){
+    stage.querySelectorAll("[data-key]").forEach(button=>{
+      const key=button.dataset.key;
+      const down=e=>{e.preventDefault();arcadeKeys[key]=true;};
+      const up=e=>{e.preventDefault();arcadeKeys[key]=false;};
+      button.addEventListener("pointerdown",down);
+      button.addEventListener("pointerup",up);
+      button.addEventListener("pointercancel",up);
+      button.addEventListener("pointerleave",up);
+    });
+  }
+
   function startGame(key){
-    stopArcade(); state.activeGame=key;state.gameIndex=0;state.gameScore=0;state.gameLives=3;state.gamePosition=1;
+    stopArcade();
+    state.activeGame=key;
+    state.gameScore=0;
+    state.gameLives=3;
     renderGames();
   }
+
   function renderGameStage(){
-    if(state.activeGame==="particle") startParticleCatch();
-    else if(state.activeGame==="thermal") startHeatBlaster();
-    else startDecayReactor();
+    if(state.activeGame==="particle") startSpaceInvaders();
+    else if(state.activeGame==="thermal") startBreakout();
+    else startSnake();
   }
 
-  function arcadeHud(title, time=""){
-    return `<div class="arcade-hud"><strong>${title}</strong><span>Score <b id="arcade-score">${state.gameScore}</b></span><span>Lives <b id="arcade-lives">${"♥".repeat(state.gameLives)}</b></span>${time?`<span>Time <b id="arcade-time">${time}</b></span>`:""}</div>`;
+  function arcadeHud(title){
+    return `<div class="arcade-hud"><strong>${title}</strong><span>Score <b id="arcade-score">${state.gameScore}</b></span><span>Lives <b id="arcade-lives">${"♥".repeat(state.gameLives)}</b></span></div>`;
   }
+
   function updateArcadeHud(){
-    const score=document.querySelector("#arcade-score"); const lives=document.querySelector("#arcade-lives");
-    if(score) score.textContent=state.gameScore; if(lives) lives.textContent="♥".repeat(Math.max(0,state.gameLives));
+    const score=document.querySelector("#arcade-score");
+    const lives=document.querySelector("#arcade-lives");
+    if(score) score.textContent=state.gameScore;
+    if(lives) lives.textContent="♥".repeat(Math.max(0,state.gameLives));
   }
 
-  function startParticleCatch(){
-    const stage=document.querySelector("#game-stage"); const run=arcadeRun;
-    stage.innerHTML=`<section class="game-stage arcade-shell">${arcadeHud("Particle Catch")}<p class="arcade-instruction">Move the collector beneath the correct state. Use the arrow keys or buttons.</p><div class="catch-arena"><div class="lane-labels"><span>Solid</span><span>Liquid</span><span>Gas</span></div><div class="falling-clue" id="falling-clue"></div><div class="collector" id="collector">COLLECT</div></div><div class="arcade-controls"><button data-move="-1" type="button">◀ Move</button><button data-move="1" type="button">Move ▶</button></div><div class="game-feedback" id="game-feedback"></div></section>`;
-    stage.scrollIntoView({behavior:"smooth",block:"start"});
-    stage.querySelectorAll("[data-move]").forEach(b=>b.addEventListener("click",()=>moveCollector(Number(b.dataset.move))));
-    placeCollector(); startFallingClue(run);
+  function gameShell(title,instruction,controls){
+    return `<section class="game-stage arcade-shell">${arcadeHud(title)}<p class="arcade-instruction">${instruction}</p><div class="arcade-canvas-wrap"><canvas class="arcade-canvas" width="720" height="420"></canvas></div><div class="arcade-controls touch-controls">${controls}</div></section>`;
   }
-  function moveCollector(change){ state.gamePosition=Math.max(0,Math.min(2,state.gamePosition+change));placeCollector(); }
-  function placeCollector(){ const el=document.querySelector("#collector"); if(el) el.style.left=`calc(${state.gamePosition*33.333+16.666}% - 48px)`; }
-  function startFallingClue(run){
-    const g=gameData.particle; if(run!==arcadeRun)return; if(state.gameIndex>=g.cards.length||state.gameLives<=0){finishGame();return;}
-    const clue=document.querySelector("#falling-clue"); const feedback=document.querySelector("#game-feedback"); if(!clue)return;
-    clue.textContent=g.cards[state.gameIndex][0]; feedback.textContent=""; let y=38; let previous=performance.now();
-    const tick=now=>{ if(run!==arcadeRun)return; y+=(now-previous)*(0.075+state.gameIndex*0.006);previous=now;clue.style.transform=`translate(-50%, ${y}px)`;
-      if(y<238){arcadeFrame=requestAnimationFrame(tick);return;}
-      const answer=["Solid","Liquid","Gas"][state.gamePosition]; const correct=answer===g.cards[state.gameIndex][1];
-      if(correct)state.gameScore+=2;else state.gameLives--; updateArcadeHud(); feedback.textContent=correct?"Caught! +2":"Missed — that clue was "+g.cards[state.gameIndex][1]+"."; state.gameIndex++;
-      arcadeTimeout=setTimeout(()=>startFallingClue(run),650);
-    };
+
+  function startSpaceInvaders(){
+    const stage=document.querySelector("#game-stage");
+    const run=arcadeRun;
+    stage.innerHTML=gameShell("Space Invaders","Move with ← → or A/D. Fire with Space.","<button data-key=\"ArrowLeft\">◀</button><button data-key=\" \">FIRE</button><button data-key=\"ArrowRight\">▶</button>");
+    stage.scrollIntoView({behavior:"smooth",block:"start"});
+    bindArcadeKeys(); bindTouchControls(stage);
+    const canvas=stage.querySelector("canvas"), ctx=canvas.getContext("2d");
+    const player={x:339,y:386,w:42,h:16,speed:330};
+    let bullets=[], enemyBullets=[], aliens=[], direction=1, alienSpeed=38, last=performance.now(), lastShot=0, enemyShot=0;
+
+    function makeWave(){
+      aliens=[];
+      for(let r=0;r<4;r++) for(let col=0;col<9;col++) aliens.push({x:75+col*62,y:48+r*42,w:32,h:20,alive:true});
+      direction=1;
+      alienSpeed+=6;
+    }
+    makeWave();
+
+    function hit(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;}
+    function shoot(){
+      const now=performance.now();
+      if(now-lastShot>240){bullets.push({x:player.x+player.w/2-2,y:player.y-8,w:4,h:10});lastShot=now;}
+    }
+    function loseLife(){
+      state.gameLives--; updateArcadeHud();
+      enemyBullets=[]; player.x=339;
+      if(state.gameLives<=0) finishGame();
+    }
+    function tick(now){
+      if(run!==arcadeRun || state.gameLives<=0) return;
+      const dt=Math.min(.035,(now-last)/1000); last=now;
+      if(arcadeKeys.ArrowLeft||arcadeKeys.a) player.x-=player.speed*dt;
+      if(arcadeKeys.ArrowRight||arcadeKeys.d) player.x+=player.speed*dt;
+      player.x=Math.max(8,Math.min(canvas.width-player.w-8,player.x));
+      if(arcadeKeys[" "]) shoot();
+
+      bullets.forEach(b=>b.y-=440*dt);
+      enemyBullets.forEach(b=>b.y+=235*dt);
+      bullets=bullets.filter(b=>b.y>-20);
+      enemyBullets=enemyBullets.filter(b=>b.y<canvas.height+20);
+
+      let edge=false;
+      aliens.filter(a=>a.alive).forEach(a=>{a.x+=direction*alienSpeed*dt;if(a.x<16||a.x+a.w>canvas.width-16)edge=true;});
+      if(edge){
+        direction*=-1;
+        aliens.filter(a=>a.alive).forEach(a=>{a.y+=14;a.x+=direction*alienSpeed*dt*2;});
+      }
+
+      for(const b of bullets){
+        for(const a of aliens){
+          if(a.alive&&hit(b,a)){a.alive=false;b.y=-99;state.gameScore+=10;break;}
+        }
+      }
+      bullets=bullets.filter(b=>b.y>-20);
+      updateArcadeHud();
+
+      if(now-enemyShot>650){
+        const alive=aliens.filter(a=>a.alive);
+        if(alive.length){const a=alive[Math.floor(Math.random()*alive.length)];enemyBullets.push({x:a.x+a.w/2-2,y:a.y+a.h,w:4,h:10});}
+        enemyShot=now;
+      }
+      if(enemyBullets.some(b=>hit(b,player))){loseLife();if(state.gameLives<=0)return;}
+      if(aliens.some(a=>a.alive&&a.y+a.h>=player.y)){loseLife();makeWave();}
+      if(!aliens.some(a=>a.alive)){state.gameScore+=100;makeWave();}
+
+      ctx.fillStyle="#050b18";ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle="#ffffff";for(let i=0;i<45;i++)ctx.fillRect((i*137)%canvas.width,(i*83)%canvas.height,1.5,1.5);
+      ctx.fillStyle="#55e6ff";ctx.fillRect(player.x,player.y,player.w,player.h);ctx.fillRect(player.x+14,player.y-8,14,8);
+      aliens.forEach((a,i)=>{if(!a.alive)return;ctx.fillStyle=i%2?"#9cff68":"#ff6ed6";ctx.fillRect(a.x,a.y,a.w,a.h);ctx.fillStyle="#050b18";ctx.fillRect(a.x+7,a.y+7,5,5);ctx.fillRect(a.x+20,a.y+7,5,5);});
+      ctx.fillStyle="#ffe56b";bullets.forEach(b=>ctx.fillRect(b.x,b.y,b.w,b.h));
+      ctx.fillStyle="#ff665f";enemyBullets.forEach(b=>ctx.fillRect(b.x,b.y,b.w,b.h));
+      arcadeFrame=requestAnimationFrame(tick);
+    }
     arcadeFrame=requestAnimationFrame(tick);
   }
 
-  function startHeatBlaster(){
-    const stage=document.querySelector("#game-stage"); state.gameTime=30; const run=arcadeRun;
-    stage.innerHTML=`<section class="game-stage arcade-shell">${arcadeHud("Heat Blaster",state.gameTime)}<p class="arcade-mission">BLAST: <strong id="heat-mission">Radiation</strong> examples</p><div class="blaster-arena" id="blaster-arena"></div><p class="arcade-instruction">Targets keep moving. A wrong hit costs a life.</p><div class="game-feedback" id="game-feedback"></div></section>`;
-    stage.scrollIntoView({behavior:"smooth",block:"start"}); spawnHeatTargets();
-    arcadeInterval=setInterval(()=>{if(run!==arcadeRun)return;state.gameTime--;const el=document.querySelector("#arcade-time");if(el)el.textContent=state.gameTime;if(state.gameTime<=0||state.gameLives<=0)finishGame();},1000);
-  }
-  function spawnHeatTargets(){
-    const arena=document.querySelector("#blaster-arena"); if(!arena)return; const methods=["Conduction","Convection","Radiation"]; const mission=methods[Math.floor(Math.random()*methods.length)];
-    document.querySelector("#heat-mission").textContent=mission; const cards=[...gameData.thermal.cards].sort(()=>Math.random()-.5).slice(0,5);
-    arena.innerHTML=cards.map((card,i)=>`<button class="heat-target" data-method="${card[1]}" style="--x:${8+(i*19)%83}%;--y:${10+(i*37)%68}%;--delay:${i*.17}s" type="button">${card[0]}</button>`).join("");
-    arena.querySelectorAll(".heat-target").forEach(b=>b.addEventListener("click",()=>{
-      const correct=b.dataset.method===mission; if(correct)state.gameScore+=2;else state.gameLives--; updateArcadeHud();document.querySelector("#game-feedback").textContent=correct?"Direct hit! +2":"Wrong target — life lost.";
-      if(state.gameLives<=0){finishGame();return;} spawnHeatTargets();
-    }));
+  function startBreakout(){
+    const stage=document.querySelector("#game-stage");
+    const run=arcadeRun;
+    stage.innerHTML=gameShell("Breakout","Move the paddle with ← → or A/D. Clear the bricks.","<button data-key=\"ArrowLeft\">◀</button><button data-key=\"ArrowRight\">▶</button>");
+    stage.scrollIntoView({behavior:"smooth",block:"start"});
+    bindArcadeKeys(); bindTouchControls(stage);
+    const canvas=stage.querySelector("canvas"),ctx=canvas.getContext("2d");
+    const paddle={x:300,y:390,w:120,h:14,speed:420};
+    let ball={x:360,y:330,r:7,vx:220,vy:-250};
+    let last=performance.now();
+    let bricks=[];
+
+    function makeBricks(){
+      bricks=[];
+      for(let r=0;r<5;r++)for(let col=0;col<10;col++)bricks.push({x:34+col*66,y:45+r*30,w:58,h:20,alive:true});
+    }
+    function resetBall(){ball={x:360,y:330,r:7,vx:(Math.random()>.5?1:-1)*220,vy:-250};paddle.x=300;}
+    function circleRect(b,r){return b.x+b.r>r.x&&b.x-b.r<r.x+r.w&&b.y+b.r>r.y&&b.y-b.r<r.y+r.h;}
+    makeBricks();
+
+    function tick(now){
+      if(run!==arcadeRun||state.gameLives<=0)return;
+      const dt=Math.min(.035,(now-last)/1000);last=now;
+      if(arcadeKeys.ArrowLeft||arcadeKeys.a)paddle.x-=paddle.speed*dt;
+      if(arcadeKeys.ArrowRight||arcadeKeys.d)paddle.x+=paddle.speed*dt;
+      paddle.x=Math.max(8,Math.min(canvas.width-paddle.w-8,paddle.x));
+      ball.x+=ball.vx*dt;ball.y+=ball.vy*dt;
+      if(ball.x-ball.r<0){ball.x=ball.r;ball.vx=Math.abs(ball.vx);}
+      if(ball.x+ball.r>canvas.width){ball.x=canvas.width-ball.r;ball.vx=-Math.abs(ball.vx);}
+      if(ball.y-ball.r<0){ball.y=ball.r;ball.vy=Math.abs(ball.vy);}
+      if(circleRect(ball,paddle)&&ball.vy>0){
+        const offset=(ball.x-(paddle.x+paddle.w/2))/(paddle.w/2);
+        ball.vx=offset*330;ball.vy=-Math.abs(ball.vy);
+      }
+      for(const brick of bricks){
+        if(brick.alive&&circleRect(ball,brick)){brick.alive=false;ball.vy*=-1;state.gameScore+=10;updateArcadeHud();break;}
+      }
+      if(ball.y-ball.r>canvas.height){
+        state.gameLives--;updateArcadeHud();
+        if(state.gameLives<=0){finishGame();return;}
+        resetBall();
+      }
+      if(!bricks.some(b=>b.alive)){state.gameScore+=100;makeBricks();resetBall();updateArcadeHud();}
+
+      ctx.fillStyle="#061225";ctx.fillRect(0,0,canvas.width,canvas.height);
+      bricks.forEach((b,i)=>{if(!b.alive)return;ctx.fillStyle=["#55e6ff","#ff6ed6","#ffe56b","#9cff68","#ff865c"][Math.floor(i/10)%5];ctx.fillRect(b.x,b.y,b.w,b.h);});
+      ctx.fillStyle="#ffffff";ctx.fillRect(paddle.x,paddle.y,paddle.w,paddle.h);
+      ctx.beginPath();ctx.arc(ball.x,ball.y,ball.r,0,Math.PI*2);ctx.fillStyle="#ffe56b";ctx.fill();
+      arcadeFrame=requestAnimationFrame(tick);
+    }
+    arcadeFrame=requestAnimationFrame(tick);
   }
 
-  function startDecayReactor(){
-    const stage=document.querySelector("#game-stage"); const run=arcadeRun; state.gameTime=12;
-    stage.innerHTML=`<section class="game-stage arcade-shell">${arcadeHud("Decay Reactor",state.gameTime)}<p class="arcade-instruction">Adjust the daughter nucleus, then press STABILISE before the reactor overloads.</p><div id="reactor-board"></div><div class="game-feedback" id="game-feedback"></div></section>`;
-    stage.scrollIntoView({behavior:"smooth",block:"start"}); loadReactorRound();
-    arcadeInterval=setInterval(()=>{if(run!==arcadeRun)return;state.gameTime--;const el=document.querySelector("#arcade-time");if(el)el.textContent=state.gameTime;if(state.gameTime<=0){state.gameLives--;state.gameIndex++;updateArcadeHud();if(state.gameLives<=0||state.gameIndex>=gameData.nuclear.cards.length)finishGame();else{state.gameTime=12;loadReactorRound();}}},1000);
+  function startSnake(){
+    const stage=document.querySelector("#game-stage");
+    const run=arcadeRun;
+    state.gameLives=1;
+    stage.innerHTML=gameShell("Snake","Use the arrow keys or buttons. Eat the food and don't hit the wall or yourself.","<button data-key=\"ArrowUp\">▲</button><div></div><button data-key=\"ArrowLeft\">◀</button><button data-key=\"ArrowDown\">▼</button><button data-key=\"ArrowRight\">▶</button>");
+    stage.scrollIntoView({behavior:"smooth",block:"start"});
+    bindArcadeKeys(); bindTouchControls(stage);
+    const canvas=stage.querySelector("canvas"),ctx=canvas.getContext("2d");
+    const cell=20,cols=36,rows=21;
+    let snake=[{x:18,y:11},{x:17,y:11},{x:16,y:11}],dir={x:1,y:0},next={x:1,y:0};
+    let food={x:25,y:11};
+
+    function placeFood(){
+      do{food={x:Math.floor(Math.random()*cols),y:Math.floor(Math.random()*rows)};}
+      while(snake.some(s=>s.x===food.x&&s.y===food.y));
+    }
+    function setDirection(){
+      if((arcadeKeys.ArrowUp||arcadeKeys.w)&&dir.y!==1)next={x:0,y:-1};
+      else if((arcadeKeys.ArrowDown||arcadeKeys.s)&&dir.y!==-1)next={x:0,y:1};
+      else if((arcadeKeys.ArrowLeft||arcadeKeys.a)&&dir.x!==1)next={x:-1,y:0};
+      else if((arcadeKeys.ArrowRight||arcadeKeys.d)&&dir.x!==-1)next={x:1,y:0};
+    }
+    function draw(){
+      ctx.fillStyle="#061225";ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle="#ff6ed6";ctx.fillRect(food.x*cell+3,food.y*cell+3,cell-6,cell-6);
+      snake.forEach((s,i)=>{ctx.fillStyle=i===0?"#9cff68":"#55e6ff";ctx.fillRect(s.x*cell+2,s.y*cell+2,cell-4,cell-4);});
+    }
+    arcadeInterval=setInterval(()=>{
+      if(run!==arcadeRun)return;
+      setDirection();dir=next;
+      const head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
+      const crashed=head.x<0||head.x>=cols||head.y<0||head.y>=rows||snake.some(s=>s.x===head.x&&s.y===head.y);
+      if(crashed){state.gameLives=0;updateArcadeHud();finishGame();return;}
+      snake.unshift(head);
+      if(head.x===food.x&&head.y===food.y){state.gameScore+=10;updateArcadeHud();placeFood();}
+      else snake.pop();
+      draw();
+    },95);
+    draw();
   }
-  function loadReactorRound(){
-    const card=gameData.nuclear.cards[state.gameIndex]; if(!card){finishGame();return;} state.reactorA=card.a;state.reactorZ=card.z;
-    const board=document.querySelector("#reactor-board"); if(!board)return;
-    board.innerHTML=`<div class="reactor-equation"><span>${card.parent}</span><span class="decay-beam">${card.decay} →</span><span class="daughter-display"><sup id="reactor-a">${state.reactorA}</sup><sub id="reactor-z">${state.reactorZ}</sub>${card.daughter}</span></div><div class="reactor-controls"><div><span>Mass number A</span><button data-reactor="a:-1" type="button">− 1</button><button data-reactor="a:1" type="button">+ 1</button></div><div><span>Atomic number Z</span><button data-reactor="z:-1" type="button">− 1</button><button data-reactor="z:1" type="button">+ 1</button></div><button class="stabilise" id="stabilise" type="button">STABILISE</button></div>`;
-    board.querySelectorAll("[data-reactor]").forEach(b=>b.addEventListener("click",()=>{const [key,value]=b.dataset.reactor.split(":");if(key==="a")state.reactorA+=Number(value);else state.reactorZ+=Number(value);document.querySelector("#reactor-a").textContent=state.reactorA;document.querySelector("#reactor-z").textContent=state.reactorZ;}));
-    document.querySelector("#stabilise").addEventListener("click",()=>{
-      const correct=state.reactorA===card.targetA&&state.reactorZ===card.targetZ;if(correct)state.gameScore+=3;else state.gameLives--;state.gameIndex++;updateArcadeHud();document.querySelector("#game-feedback").textContent=correct?"Reactor stable! +3":`Unstable — target was A ${card.targetA}, Z ${card.targetZ}.`;
-      if(state.gameLives<=0||state.gameIndex>=gameData.nuclear.cards.length){arcadeTimeout=setTimeout(finishGame,650);}else{state.gameTime=12;arcadeTimeout=setTimeout(loadReactorRound,650);}
-    });
-  }
+
   function finishGame(){
-    const key=state.activeGame; stopArcade(); progress.gameBest[key]=Math.max(Number(progress.gameBest[key]||0),state.gameScore); saveProgress();
-    const stage=document.querySelector("#game-stage"); if(stage) stage.innerHTML=`<section class="game-stage arcade-finish"><span class="game-icon" style="--game:${gameData[key].colour}">${gameData[key].icon}</span><h4>Game over</h4><p>Final score: <strong>${state.gameScore}</strong> · Best score: <strong>${progress.gameBest[key]}</strong></p><button class="primary-button" id="play-again" type="button">Play again</button></section>`;
+    const key=state.activeGame;
+    stopArcade();
+    progress.gameBest[key]=Math.max(Number(progress.gameBest[key]||0),state.gameScore);
+    saveProgress();
+    const stage=document.querySelector("#game-stage");
+    if(stage) stage.innerHTML=`<section class="game-stage arcade-finish"><span class="game-icon" style="--game:${gameData[key].colour}">${gameData[key].icon}</span><h4>Game over</h4><p>Final score: <strong>${state.gameScore}</strong> · Best score: <strong>${progress.gameBest[key]}</strong></p><button class="primary-button" id="play-again" type="button">Play again</button></section>`;
     document.querySelector("#play-again")?.addEventListener("click",()=>startGame(key));
   }
 
-  document.addEventListener("keydown",event=>{
-    if(state.view!=="games"||state.activeGame!=="particle")return;
-    if(event.key==="ArrowLeft"){event.preventDefault();moveCollector(-1);}
-    if(event.key==="ArrowRight"){event.preventDefault();moveCollector(1);}
-  });
   document.querySelectorAll(".mode-tab").forEach(button=>button.addEventListener("click",()=>{stopArcade();state.view=button.dataset.view;state.activeGame=null;render();}));
   document.querySelectorAll(".module-button").forEach(button=>button.addEventListener("click",()=>{stopArcade();state.module=button.dataset.module;state.checkIndex=0;state.checkAnswered=null;state.examId=moduleExams()[0].id;render();}));
   function applyTheme(theme){ document.documentElement.dataset.theme=theme; themeToggle.textContent=theme==="dark"?"☀":"☾"; themeToggle.setAttribute("aria-label",theme==="dark"?"Use light theme":"Use dark theme"); }
