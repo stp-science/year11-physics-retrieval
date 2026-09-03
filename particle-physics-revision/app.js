@@ -243,7 +243,7 @@
           body: `
             ${diagram("decay")}
             <table class="mini-table"><thead><tr><th>Radiation</th><th>What it is</th><th>Charge</th><th>Ionising</th><th>Penetrating</th></tr></thead><tbody>
-              <tr><td><strong>Alpha (α)</strong></td><td>2 protons + 2 neutrons</td><td>+2</td><td>Strongest</td><td>Lowest</td></tr>
+              <tr><td><strong>Alpha (α)</strong></td><td>Helium nucleus: 2 protons + 2 neutrons</td><td>+2</td><td>Strongest</td><td>Lowest</td></tr>
               <tr><td><strong>Beta-minus (β)</strong></td><td>Fast electron emitted from the nucleus</td><td>-1</td><td>Medium</td><td>Medium</td></tr>
               <tr><td><strong>Gamma (γ)</strong></td><td>High-energy electromagnetic wave</td><td>0</td><td>Weakest</td><td>Highest</td></tr>
             </tbody></table>
@@ -527,7 +527,7 @@
   };
 
   let progress = loadProgress();
-  const state = { view: "learn", module: "particle", checkIndex: 0, checkAnswered: null, examId: "pe1", activeGame: null, gameIndex: 0, gameScore: 0, gameLives: 3, gameTime: 0, gamePosition: 1, reactorA: 0, reactorZ: 0 };
+  const state = { view: "learn", module: "particle", checkIndex: 0, checkAnswered: null, examId: "pe2", activeGame: null, gameIndex: 0, gameScore: 0, gameLives: 3, gameTime: 0, gamePosition: 1, reactorA: 0, reactorZ: 0 };
   let arcadeFrame = null;
   let arcadeInterval = null;
   let arcadeTimeout = null;
