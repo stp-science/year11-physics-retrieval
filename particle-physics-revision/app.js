@@ -661,15 +661,56 @@
   }
   function saveProgress(){ try { localStorage.setItem(STORAGE_KEY,JSON.stringify(progress)); } catch {} updateProgress(); }
   function xp(){ return progress.earned.length + Object.values(progress.examBest).reduce((a,b)=>a+Number(b||0),0); }
-  function awardCheck(id){ if(!progress.earned.includes(id)){ progress.earned.push(id); saveProgress(); toast("+1 XP — new game progress!"); } }
+
+  function masteredQuickChecks(){
+    return checks.filter(item=>progress.earned.includes(item.id)).length;
+  }
+  function masteredExamQuestions(){
+    return examQuestions.filter(item=>Number(progress.examBest[item.id]||0)>=item.marks).length;
+  }
+  function masteryStatus(){
+    const quickDone=masteredQuickChecks();
+    const examDone=masteredExamQuestions();
+    const quickTotal=checks.length;
+    const examTotal=examQuestions.length;
+    return {
+      quickDone, examDone, quickTotal, examTotal,
+      done:quickDone+examDone,
+      total:quickTotal+examTotal,
+      complete:quickDone===quickTotal && examDone===examTotal
+    };
+  }
+  function awardCheck(id){
+    if(!progress.earned.includes(id)){
+      progress.earned.push(id);
+      saveProgress();
+      toast("Correct — Quick Check mastered!");
+    }
+  }
   function updateProgress(){
-    const score=xp(); xpTotal.textContent=score;
-    const completed=new Set(progress.visited).size+progress.earned.length+Object.keys(progress.examBest).length;
-    const total=Object.values(modules).reduce((s,m)=>s+m.lessons.length,0)+checks.length+examQuestions.length;
-    const percent=Math.min(100,Math.round(completed/total*100)); progressBar.style.width=`${percent}%`; progressPercent.textContent=`${percent}%`;
-    const unlocks=Object.values(gameData).filter(g=>score>=g.unlock).length; gamesBadge.textContent=`${unlocks}/3`;
-    const next=Object.values(gameData).find(g=>score<g.unlock);
-    nextUnlock.textContent=next ? `${next.unlock-score} XP until ${next.title} unlocks` : "All revision games unlocked";
+    const score=xp();
+    xpTotal.textContent=score;
+
+    const mastery=masteryStatus();
+    const lessonsVisited=new Set(progress.visited).size;
+    const lessonTotal=Object.values(modules).reduce((s,m)=>s+m.lessons.length,0);
+    const completed=lessonsVisited+mastery.done;
+    const total=lessonTotal+mastery.total;
+    const percent=Math.min(100,Math.round(completed/total*100));
+    progressBar.style.width=`${percent}%`;
+    progressPercent.textContent=`${percent}%`;
+
+    gamesBadge.textContent=mastery.complete ? "3/3" : "0/3";
+    if(mastery.complete){
+      nextUnlock.textContent="All Quick Checks and exam questions mastered — arcade unlocked!";
+    } else {
+      const quickLeft=mastery.quickTotal-mastery.quickDone;
+      const examLeft=mastery.examTotal-mastery.examDone;
+      const parts=[];
+      if(quickLeft) parts.push(`${quickLeft} Quick Check${quickLeft===1?"":"s"}`);
+      if(examLeft) parts.push(`${examLeft} exam question${examLeft===1?"":"s"}`);
+      nextUnlock.textContent=`Master ${parts.join(" and ")} to unlock the arcade`;
+    }
   }
   function toast(message){ const old=document.querySelector(".toast"); old?.remove(); const el=document.createElement("div"); el.className="toast"; el.textContent=message; document.body.append(el); setTimeout(()=>el.remove(),2400); }
 
@@ -710,30 +751,55 @@
   }
   function showCheckFeedback(item){
     panel.querySelectorAll(".option-button").forEach((b,i)=>{ if(i===item.correct)b.classList.add("correct"); else if(i===state.checkAnswered)b.classList.add("incorrect"); });
-    const right=state.checkAnswered===item.correct; document.querySelector("#check-feedback").innerHTML=`<div class="feedback-box ${right?"good":"review"}"><strong>${right?"Correct — 1 XP earned":"Not yet — check the physics"}</strong><br>${item.explanation}</div>`;
+    const right=state.checkAnswered===item.correct;
+    const mastered=progress.earned.includes(item.id);
+    document.querySelector("#check-feedback").innerHTML=`<div class="feedback-box ${right?"good":"review"}"><strong>${right?"Correct — mastered":mastered?"Already mastered — but this attempt needs another go":"Not yet — try this one again later"}</strong><br>${item.explanation}${right?"":"<br><span class=\"provisional\">An incorrect attempt does not block you. Return to this question and get it correct to master it.</span>"}</div>`;
   }
 
   function moduleExams(){ return examQuestions.filter(item=>item.module===state.module); }
   function renderExam(){
     const pool=moduleExams(); if(!pool.some(q=>q.id===state.examId)) state.examId=pool[0].id; const item=pool.find(q=>q.id===state.examId);
-    panel.innerHTML=heading("Exam Practice","Write a complete answer, then check which marking points you included.","✎")+`<div class="exam-shell"><div class="exam-picker">${pool.map((q,i)=>`<button data-exam="${q.id}" class="${q.id===item.id?"active":""}" type="button">Question ${i+1}</button>`).join("")}</div><article class="question-card"><div class="question-meta"><span>${modules[state.module].name}</span><span class="mark-badge">${item.marks} marks</span></div><h4>${item.question}</h4><textarea class="answer-input" id="exam-answer" placeholder="Write your answer here..." aria-label="Your exam answer"></textarea><div class="control-row"><button class="primary-button" id="mark-answer" type="button">Check my answer</button><button class="secondary-button" id="clear-answer" type="button">Clear</button></div><div id="marker-output"></div></article><p class="provisional">This gives an estimated mark by checking for key physics ideas. Always compare your answer with the model answer.</p></div>`;
+    panel.innerHTML=heading("Exam Practice","Write a complete answer, then check which marking points you included.","✎")+`<div class="exam-shell"><div class="exam-picker">${pool.map((q,i)=>{const done=Number(progress.examBest[q.id]||0)>=q.marks;return `<button data-exam="${q.id}" class="${q.id===item.id?"active":""} ${done?"mastered":""}" type="button">${done?"✓ ":""}Question ${i+1}</button>`;}).join("")}</div><article class="question-card"><div class="question-meta"><span>${modules[state.module].name}</span><span class="mark-badge">${item.marks} marks</span></div><h4>${item.question}</h4><textarea class="answer-input" id="exam-answer" placeholder="Write your answer here..." aria-label="Your exam answer"></textarea><div class="control-row"><button class="primary-button" id="mark-answer" type="button">Check my answer</button><button class="secondary-button" id="clear-answer" type="button">Clear</button></div><div id="marker-output"></div></article><p class="provisional">This gives an estimated mark by checking for key physics ideas. Always compare your answer with the model answer.</p></div>`;
     panel.querySelectorAll("[data-exam]").forEach(b=>b.addEventListener("click",()=>{state.examId=b.dataset.exam;renderExam();}));
     document.querySelector("#mark-answer").addEventListener("click",()=>markExam(item)); document.querySelector("#clear-answer").addEventListener("click",()=>{document.querySelector("#exam-answer").value="";document.querySelector("#marker-output").innerHTML="";});
   }
   function normalise(text){ return text.toLowerCase().replace(/[×*]/g," ").replace(/[⁻−–—]/g,"-").replace(/[,()=:]/g," ").replace(/\s+/g," ").trim(); }
   function pointHit(answer,point){ return point.tests.some(test=>test.every(term=>answer.includes(normalise(term)))); }
   function markExam(item){
-    const raw=document.querySelector("#exam-answer").value.trim(); if(raw.length<8){toast("Write a fuller answer before checking.");return;}
-    const answer=normalise(raw); const hits=item.points.map(p=>pointHit(answer,p)); const score=hits.filter(Boolean).length; const old=Number(progress.examBest[item.id]||0);
-    if(score>old){ progress.examBest[item.id]=score; saveProgress(); toast(`Best score improved: +${score-old} XP`); }
-    document.querySelector("#marker-output").innerHTML=`<div class="marker-result"><div class="score-line"><strong>${score} / ${item.marks}</strong><span class="provisional">estimated mark</span></div><div class="mark-points">${item.points.map((p,i)=>`<div class="mark-point ${hits[i]?"hit":"miss"}"><span aria-hidden="true">${hits[i]?"✓":"○"}</span><span>${hits[i]?"Included":"Add"}: ${p.label}</span></div>`).join("")}</div><div class="model-answer"><strong>Model answer</strong>${item.model}</div></div>`;
+    const raw=document.querySelector("#exam-answer").value.trim();
+    if(raw.length<8){toast("Write a fuller answer before checking.");return;}
+    const answer=normalise(raw);
+    const hits=item.points.map(p=>pointHit(answer,p));
+    const score=hits.filter(Boolean).length;
+    const old=Number(progress.examBest[item.id]||0);
+    const wasMastered=old>=item.marks;
+
+    if(score>old){
+      progress.examBest[item.id]=score;
+      saveProgress();
+      if(score>=item.marks && !wasMastered) toast("Full marks — exam question mastered!");
+      else toast(`Best score improved: ${score} / ${item.marks}`);
+    } else if(score>=item.marks && !wasMastered){
+      progress.examBest[item.id]=item.marks;
+      saveProgress();
+      toast("Full marks — exam question mastered!");
+    }
+
+    const mastered=Number(progress.examBest[item.id]||0)>=item.marks;
+    document.querySelector("#marker-output").innerHTML=`<div class="marker-result"><div class="score-line"><strong>${score} / ${item.marks}</strong><span class="provisional">${mastered?"✓ mastered":"estimated mark"}</span></div><div class="mark-points">${item.points.map((p,i)=>`<div class="mark-point ${hits[i]?"hit":"miss"}"><span aria-hidden="true">${hits[i]?"✓":"○"}</span><span>${hits[i]?"Included":"Add"}: ${p.label}</span></div>`).join("")}</div><div class="model-answer"><strong>Model answer</strong>${item.model}</div>${mastered?"":`<div class="feedback-box review"><strong>Not mastered yet</strong><br>Improve the missing marking points and check this question again. A previous incorrect attempt does not matter once you achieve full marks.</div>`}</div>`;
   }
 
   function renderGames(){
-    const score=xp(); const unlocked=Object.entries(gameData).filter(([,g])=>score>=g.unlock).length;
-    panel.innerHTML=`<div class="games-intro"><div><h3>Revision Arcade</h3><p>Earn XP through revision to unlock proper arcade games. The games themselves contain no physics questions.</p></div><span class="mark-badge">${unlocked} of 3 unlocked</span></div><div class="game-grid">${Object.entries(gameData).map(([key,g])=>{const open=score>=g.unlock;return `<article class="game-card ${open?"":"locked"}" style="--game:${g.colour}"><span class="game-icon">${g.icon}</span><span class="lock-label">${open?`Best: ${progress.gameBest[key]||0}`:`🔒 ${g.unlock} XP`}</span><h4>${g.title}</h4><p>${g.description}</p><button class="${open?"primary-button":"secondary-button"}" data-game="${key}" type="button" ${open?"":"disabled"}>${open?"Play game":"Locked"}</button></article>`;}).join("")}</div><div id="game-stage"></div>`;
+    const mastery=masteryStatus();
+    const open=mastery.complete;
+    const remaining=mastery.total-mastery.done;
+
+    panel.innerHTML=`<div class="games-intro"><div><h3>Revision Arcade</h3><p>The arcade unlocks only after every Quick Check has been answered correctly and every exam-style question has achieved full marks. Wrong first attempts are fine — go back, improve them and master them.</p></div><span class="mark-badge">${open?"3 of 3 unlocked":`${mastery.done} / ${mastery.total} mastered`}</span></div>
+      ${open?"":`<div class="mastery-gate"><strong>🔒 Arcade locked</strong><p>You still need to master <strong>${remaining}</strong> question${remaining===1?"":"s"}.</p><div class="mastery-breakdown"><span>Quick Check: <b>${mastery.quickDone}/${mastery.quickTotal}</b></span><span>Exam Practice: <b>${mastery.examDone}/${mastery.examTotal}</b></span></div><p class="provisional">A question counts once you eventually get it correct. Earlier incorrect attempts do not count against you.</p></div>`}
+      <div class="game-grid">${Object.entries(gameData).map(([key,g])=>`<article class="game-card ${open?"":"locked"}" style="--game:${g.colour}"><span class="game-icon">${g.icon}</span><span class="lock-label">${open?`Best: ${progress.gameBest[key]||0}`:"🔒 Master all questions"}</span><h4>${g.title}</h4><p>${g.description}</p><button class="${open?"primary-button":"secondary-button"}" data-game="${key}" type="button" ${open?"":"disabled"}>${open?"Play game":"Locked"}</button></article>`).join("")}</div><div id="game-stage"></div>`;
+
     panel.querySelectorAll("[data-game]").forEach(b=>b.addEventListener("click",()=>startGame(b.dataset.game)));
-    if(state.activeGame && score>=gameData[state.activeGame].unlock) renderGameStage();
+    if(state.activeGame && open) renderGameStage();
   }
 
   function stopArcade(){
@@ -775,6 +841,10 @@
   }
 
   function startGame(key){
+    if(!masteryStatus().complete){
+      toast("Master every Quick Check and exam question to unlock the arcade.");
+      return;
+    }
     stopArcade();
     state.activeGame=key;
     state.gameScore=0;
