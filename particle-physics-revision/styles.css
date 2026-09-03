@@ -380,3 +380,37 @@ footer span { margin:0 4px; }
   .support-visual-grid { grid-template-columns:1fr; }
   .support-visual img { height:auto; max-height:340px; }
 }
+
+
+/* Mastery-gated arcade */
+.mastery-gate {
+  margin:0 0 16px;
+  padding:16px;
+  background:color-mix(in srgb,var(--gold) 10%,var(--card));
+  border:1px solid color-mix(in srgb,var(--gold) 55%,var(--line));
+  border-radius:14px;
+}
+.mastery-gate > strong {
+  display:block;
+  margin-bottom:5px;
+  color:var(--warn);
+  font-size:1.05rem;
+}
+.mastery-gate p { margin:5px 0; }
+.mastery-breakdown {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:10px 0;
+}
+.mastery-breakdown span {
+  padding:7px 10px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:999px;
+  font-size:.82rem;
+}
+.exam-picker button.mastered:not(.active) {
+  border-color:var(--good);
+  background:color-mix(in srgb,var(--good) 10%,var(--card));
+}
