@@ -48,6 +48,15 @@
               <tr><td>Liquid</td><td>Takes container shape</td><td>Fixed</td><td>Very difficult</td></tr>
               <tr><td>Gas</td><td>Fills container</td><td>Not fixed</td><td>Can be compressed</td></tr>
             </tbody></table>
+            <div class="worked"><strong>Using melting and boiling points</strong><p>Compare the temperature with the substance's melting point and boiling point.</p>
+              <ul>
+                <li>If the temperature is <strong>below the melting point</strong>, the substance is solid.</li>
+                <li>If it is <strong>between the melting point and boiling point</strong>, it is liquid.</li>
+                <li>If it is <strong>above the boiling point</strong>, it is gas.</li>
+                <li>At the melting or boiling point itself, a change of state can be taking place, so two states may be present.</li>
+              </ul>
+            </div>
+            <div class="worked"><strong>Example</strong><p>A substance melts at -20 °C and boils at 85 °C. At 30 °C it is a liquid because 30 °C lies between the two temperatures.</p></div>
             ${videos.states}
           `,
         },
@@ -60,11 +69,15 @@
               <li>Heating within one state usually increases average kinetic energy and temperature.</li>
               <li>During a change of state, energy changes particle separation and potential energy while temperature remains constant.</li>
             </ul>
-            <table class="mini-table"><thead><tr><th>Change</th><th>From</th><th>To</th></tr></thead><tbody>
-              <tr><td>Melting</td><td>Solid</td><td>Liquid</td></tr><tr><td>Freezing</td><td>Liquid</td><td>Solid</td></tr>
-              <tr><td>Boiling / evaporation</td><td>Liquid</td><td>Gas</td></tr><tr><td>Condensation</td><td>Gas</td><td>Liquid</td></tr>
-              <tr><td>Sublimation</td><td>Solid</td><td>Gas</td></tr><tr><td>Condensation</td><td>Gas</td><td>Solid</td></tr>
+            <table class="mini-table"><thead><tr><th>Change</th><th>From</th><th>To</th><th>Energy transfer</th></tr></thead><tbody>
+              <tr><td>Melting</td><td>Solid</td><td>Liquid</td><td>Takes in energy</td></tr>
+              <tr><td>Freezing</td><td>Liquid</td><td>Solid</td><td>Gives out energy</td></tr>
+              <tr><td>Boiling / evaporation</td><td>Liquid</td><td>Gas</td><td>Takes in energy</td></tr>
+              <tr><td>Condensation</td><td>Gas</td><td>Liquid</td><td>Gives out energy</td></tr>
+              <tr><td>Sublimation</td><td>Solid</td><td>Gas</td><td>Takes in energy</td></tr>
+              <tr><td>Condensation</td><td>Gas</td><td>Solid</td><td>Gives out energy</td></tr>
             </tbody></table>
+            <div class="worked"><strong>Energy rule</strong><p>Changes toward a less ordered, more separated state need energy to be supplied. The reverse changes release energy to the surroundings.</p></div>
           `,
         },
         {
@@ -121,10 +134,16 @@
           body: `
             ${diagram("transfer")}
             <div class="concept-grid">
-              <div class="concept"><strong>Conduction</strong><p>Energy passes through collisions and vibrations between neighbouring particles. Free electrons make metals effective conductors.</p></div>
-              <div class="concept"><strong>Convection</strong><p>Warmer, less-dense liquids and gases rise. Cooler, denser liquids and gases sink. This makes a convection current.</p></div>
-              <div class="concept"><strong>Radiation</strong><p>Infrared electromagnetic waves transfer energy and do not require particles.</p></div>
+              <div class="concept"><strong>Conduction</strong><p>Energy is passed between neighbouring particles. In metals, free electrons also transfer energy quickly, so metals are good thermal conductors.</p></div>
+              <div class="concept"><strong>Convection</strong><p>Heating a liquid or gas makes it expand. The same mass occupies a larger volume, so its density decreases and it rises. Cooler, denser fluid sinks.</p></div>
+              <div class="concept"><strong>Radiation</strong><p>Infrared electromagnetic waves transfer energy. Radiation does not need particles, so it can travel through a vacuum.</p></div>
             </div>
+            <div class="worked"><strong>Good and poor conductors</strong><p>Metals are good conductors. Materials such as plastic, wood and trapped air are poor conductors and are used as thermal insulators. Water is also a relatively poor conductor, which is why heating water from above transfers energy downward only slowly.</p></div>
+            <table class="mini-table"><thead><tr><th>Surface</th><th>Infrared absorption</th><th>Infrared emission</th><th>Reflection</th></tr></thead><tbody>
+              <tr><td>Dull black</td><td>Best absorber</td><td>Best emitter</td><td>Poor reflector</td></tr>
+              <tr><td>Shiny / light</td><td>Poor absorber</td><td>Poor emitter</td><td>Good reflector</td></tr>
+            </tbody></table>
+            <div class="worked"><strong>Explaining convection fully</strong><p>Do not say that the particles themselves become less dense. Heating makes the fluid expand because the particles become more spread out. The fluid's density decreases, so that region rises and cooler, denser fluid moves in to replace it.</p></div>
             <div class="worked"><strong>Vacuum flask</strong><p>The vacuum reduces conduction and stops convection. Shiny surfaces reduce infrared emission and absorption. An insulating stopper reduces conduction.</p></div>
             ${videos.transfer}
           `,
@@ -136,7 +155,10 @@
             <p>Specific heat capacity, <strong>c</strong>, is the energy required to raise the temperature of 1 kg of a substance by 1 °C (or 1 K).</p>
             <div class="equation">Q = mcΔT</div>
             <table class="mini-table"><tbody><tr><th>Q</th><td>energy transferred, J</td><th>m</th><td>mass, kg</td></tr><tr><th>c</th><td>specific heat capacity, J kg⁻¹ °C⁻¹</td><th>ΔT</th><td>temperature change, °C or K</td></tr></tbody></table>
-            <div class="worked"><strong>Worked example</strong><p>Heating 2.0 kg of water (c = 4180 J kg⁻¹ °C⁻¹) by 10 °C requires Q = 2.0 × 4180 × 10 = 83,600 J.</p></div>
+            <div class="equation">c = Q ÷ (mΔT) &nbsp;&nbsp; ΔT = Q ÷ (mc) &nbsp;&nbsp; m = Q ÷ (cΔT)</div>
+            <div class="worked"><strong>Worked example: find energy</strong><p>Heating 1.5 kg of water (c = 4200 J kg⁻¹ °C⁻¹) by 8 °C requires Q = 1.5 × 4200 × 8 = 50,400 J.</p></div>
+            <div class="worked"><strong>Worked example: find specific heat capacity</strong><p>A 0.50 kg block receives 18,000 J and its temperature rises by 30 °C. c = 18,000 ÷ (0.50 × 30) = 1200 J kg⁻¹ °C⁻¹.</p></div>
+            <div class="mistake"><strong>Check units:</strong> mass must be in kilograms and ΔT means the temperature change, not the final temperature.</div>
             ${videos.shc}
           `,
         },
@@ -156,8 +178,17 @@
             ${diagram("latent")}
             <p>Specific latent heat is the energy needed to change the state of 1 kg of a substance without changing its temperature.</p>
             <div class="equation">Q = mL</div>
-            <ul><li><strong>Specific latent heat of fusion:</strong> solid ↔ liquid.</li><li><strong>Specific latent heat of vaporisation:</strong> liquid ↔ gas.</li></ul>
-            <div class="worked"><strong>Worked example</strong><p>Melting 0.50 kg of ice where L = 334,000 J kg⁻¹ requires Q = 0.50 × 334,000 = 167,000 J.</p></div>
+            <ul>
+              <li><strong>Specific latent heat of fusion:</strong> solid ↔ liquid.</li>
+              <li><strong>Specific latent heat of vaporisation:</strong> liquid ↔ gas.</li>
+              <li>Melting and boiling take in energy. Freezing and condensation give out energy.</li>
+            </ul>
+            <div class="worked"><strong>Worked example</strong><p>Melting 0.30 kg of a solid where L = 250,000 J kg⁻¹ requires Q = 0.30 × 250,000 = 75,000 J.</p></div>
+            <div class="worked"><strong>Why steam can cause a worse burn</strong><p>Steam at 100 °C condenses on the skin. During condensation it releases its latent heat of vaporisation. The resulting hot water can then cool further and transfer even more energy to the skin.</p></div>
+            <div class="worked"><strong>Multi-stage calculation</strong><p>If a liquid is first heated and then boiled, calculate each stage separately and add them:</p>
+              <div class="equation">total energy = mcΔT + mL</div>
+              <p>Example: 0.10 kg of water is heated from 25 °C to 100 °C and then vaporised. Using c = 4200 J kg⁻¹ °C⁻¹ and L = 2,260,000 J kg⁻¹: heating = 31,500 J; vaporising = 226,000 J; total = 257,500 J.</p>
+            </div>
             ${videos.latent}
           `,
         },
@@ -194,11 +225,17 @@
           `,
         },
         {
-          title: "Natural radioactivity",
+          title: "Natural radioactivity, activity and risk",
           body: `
             ${diagram("radioactivity")}
-            <p>Some nuclei are unstable. They give out radiation to become more stable. This decay is random, so we cannot predict exactly when one nucleus will decay.</p>
-            <div class="worked"><strong>Random decay</strong><p>Radioactive decay is spontaneous and random. We cannot predict when one particular nucleus will decay, but we can predict how a large sample changes over time using half-life.</p></div>
+            <p>Some nuclei are unstable. They give out radiation to become more stable. Radioactive decay is <strong>spontaneous</strong> and <strong>random</strong>.</p>
+            <div class="concept-grid">
+              <div class="concept"><strong>Activity</strong><p>The number of nuclear decays each second. The SI unit is the becquerel (Bq), where 1 Bq = 1 decay per second.</p></div>
+              <div class="concept"><strong>Count rate</strong><p>The number of detections recorded by a detector each second or minute. It is a measured value and can be lower than the true activity.</p></div>
+              <div class="concept"><strong>Random decay</strong><p>We cannot predict when one particular nucleus will decay, but large samples follow a predictable decay pattern.</p></div>
+            </div>
+            <div class="worked"><strong>Why ionising radiation can be harmful</strong><p>Ionising radiation can remove electrons from atoms in living cells. This can damage molecules and DNA, cause mutations and increase the risk of cancer.</p></div>
+            <div class="worked"><strong>Internal vs external exposure</strong><p>An alpha source outside the body is usually less dangerous because alpha is stopped by skin. If an alpha-emitting substance is inhaled or swallowed, it can be much more dangerous because strongly ionising alpha radiation is then released inside the body close to living cells. Radioactive gases such as radon are an example.</p></div>
           `,
         },
         {
@@ -216,6 +253,14 @@
               <div class="concept"><strong>Gamma penetration</strong><p>Gamma is weakly ionising, so it is less likely to interact with matter and can travel much further. Thick lead or concrete reduces it.</p></div>
             </div>
             <div class="worked"><strong>The key link</strong><p>The more strongly ionising a radiation is, the faster it loses energy as it travels through matter, so the less penetrating it is.</p></div>
+            <div class="worked"><strong>Identifying radiation using absorbers</strong>
+              <ul>
+                <li>A large drop when paper or thin card is inserted shows that <strong>alpha</strong> was present.</li>
+                <li>A further drop when aluminium is inserted shows that <strong>beta</strong> was present.</li>
+                <li>Radiation that still reaches the detector through paper and aluminium, but is reduced by thick lead, indicates <strong>gamma</strong>.</li>
+                <li>A source can emit more than one type, so compare how the count rate changes at each stage.</li>
+              </ul>
+            </div>
           `,
         },
         {
@@ -230,6 +275,7 @@
             <div class="equation">¹⁴₆C → ¹⁴₇N + ⁰₋₁e</div>
             <div class="equation">excited nucleus → same nucleus + γ</div>
             <div class="worked"><strong>Conservation rule</strong><p>Total mass number and total atomic number must balance on both sides of a nuclear equation.</p></div>
+            <div class="worked"><strong>More than one decay</strong><p>Apply each decay one at a time. For example, after one alpha decay and then one beta-minus decay: mass number changes by -4 overall, while atomic number changes by -2 then +1, so the overall atomic-number change is -1.</p></div>
             ${videos.decay}
           `,
         },
@@ -244,8 +290,24 @@
               <div class="concept"><strong>Shape of the graph</strong><p>Radioactive decay gives a curved exponential graph. It falls quickly at first and then more slowly, but each half-life takes the same amount of time.</p></div>
             </div>
             <div class="equation">number of half-lives = total time ÷ half-life</div>
-            <div class="worked"><strong>Worked example</strong><p>A source has a half-life of 5 days and an initial count rate of 800 counts/s. After 15 days, 3 half-lives have passed: 800 → 400 → 200 → 100 counts/s.</p></div>
+            <div class="worked"><strong>Worked example</strong><p>A source has a half-life of 6 hours and an initial count rate of 720 counts/s. After 18 hours, 3 half-lives have passed: 720 → 360 → 180 → 90 counts/s.</p></div>
             <div class="worked"><strong>Working backwards</strong><p>If a sample falls from 640 g to 80 g, it has halved three times: 640 → 320 → 160 → 80. If this took 18 hours, the half-life is 18 ÷ 3 = 6 hours.</p></div>
+            <table class="mini-table"><thead><tr><th>Half-lives elapsed</th><th>Fraction remaining</th><th>Percentage remaining</th></tr></thead><tbody>
+              <tr><td>0</td><td>1</td><td>100%</td></tr>
+              <tr><td>1</td><td>1/2</td><td>50%</td></tr>
+              <tr><td>2</td><td>1/4</td><td>25%</td></tr>
+              <tr><td>3</td><td>1/8</td><td>12.5%</td></tr>
+              <tr><td>4</td><td>1/16</td><td>6.25%</td></tr>
+            </tbody></table>
+            <div class="worked"><strong>Graph skills</strong>
+              <ul>
+                <li>Plot points accurately using sensible, labelled axes and units.</li>
+                <li>For radioactive decay, draw a <strong>smooth curve</strong> through the trend rather than joining every point with straight segments.</li>
+                <li>To estimate a missing reading, interpolate from the smooth curve.</li>
+                <li>To find half-life, choose an activity or count rate, halve it, use horizontal and vertical guide lines to read the two times, then find the time difference.</li>
+              </ul>
+            </div>
+            <div class="worked"><strong>Practice dataset</strong><p>A different source gives 600, 426, 302, 214 and 151 counts/min at 0, 2, 4, 6 and 8 minutes. Plotting these would give a smooth decay curve. The data suggest a half-life of about 4 minutes because the count rate falls from about 600 to about 300 in that time.</p></div>
             <div class="mistake"><strong>Common mistake:</strong> The amount does not decrease by the same number each half-life. It decreases by the same <em>fraction</em>: one half.</div>
           `,
         },
@@ -259,12 +321,18 @@
     q("p4","particle","Which change of state is gas directly to solid?",["Sublimation","Condensation","Melting","Freezing"],1,"In this course, gas changing directly to solid is called condensation."),
     q("p5","particle","During melting, what happens while the temperature stays constant?",["Particle kinetic energy steadily decreases","Energy changes particle separation and potential energy","All particles stop moving","The mass of the substance increases"],1,"The supplied energy changes arrangement and potential energy rather than temperature."),
     q("p6","particle","What does a flat section on a heating curve show?",["The substance is cooling rapidly","A change of state at constant temperature","The particles have stopped moving","The mass of the substance is increasing"],1,"During a change of state, temperature stays constant while energy changes particle arrangement and potential energy."),
+    q("p7","particle","A substance melts at 12 °C and boils at 96 °C. What state is it in at 45 °C?",["Solid","Liquid","Gas","Changing directly from solid to gas"],1,"45 °C lies between the melting point and boiling point, so the substance is liquid."),
+    q("p8","particle","Which pair of changes both give energy out to the surroundings?",["Melting and boiling","Freezing and condensation","Melting and sublimation","Boiling and condensation"],1,"Freezing and condensation release energy; melting and boiling require energy to be supplied."),
     q("t0","thermal","Which statement best defines heat?",["The temperature of an object","Energy transferred because of a temperature difference","The total kinetic energy of one particle","The energy stored only in hot objects"],1,"Heat is energy transferred from a hotter object to a colder object because of a temperature difference."),
     q("t1","thermal","What does temperature measure in the particle model?",["Total potential energy","Average kinetic energy of particles","Total internal energy","The number of particles"],1,"Temperature measures average particle kinetic energy."),
     q("t2","thermal","What temperature is 25 °C on the Kelvin scale?",["248 K","273 K","298 K","325 K"],2,"25 + 273 = 298 K."),
     q("t3","thermal","How much energy heats 2.0 kg of water by 10 °C if c = 4180 J kg⁻¹ °C⁻¹?",["836 J","8,360 J","41,800 J","83,600 J"],3,"Q = mcΔT = 2.0 × 4180 × 10 = 83,600 J."),
     q("t4","thermal","Which process can transfer thermal energy through a vacuum?",["Conduction only","Convection only","Infrared radiation","Conduction and convection"],2,"Electromagnetic radiation does not require particles."),
     q("t5","thermal","Why does temperature remain constant during a change of state?",["No energy is transferred","Energy changes particle potential energy and arrangement","The particles lose all kinetic energy","The thermometer stops working"],1,"Latent heat changes particle arrangement and potential energy."),
+    q("t6","thermal","Which surface is the best absorber of infrared radiation?",["Shiny silver","Dull black","Glossy white","Transparent glass"],1,"Dull black surfaces are the best absorbers and emitters of infrared radiation."),
+    q("t7","thermal","Why does heated water rise in a convection current?",["Its particles gain mass","The water becomes less dense as it expands","Its molecules become less dense","Gravity stops acting on it"],1,"Heating makes the water expand. The same mass occupies a larger volume, so the water becomes less dense and rises."),
+    q("t8","thermal","A 0.40 kg block receives 9600 J and warms by 20 °C. What is its specific heat capacity?",["480 J kg⁻¹ °C⁻¹","960 J kg⁻¹ °C⁻¹","1200 J kg⁻¹ °C⁻¹","19,200 J kg⁻¹ °C⁻¹"],2,"c = Q ÷ (mΔT) = 9600 ÷ (0.40 × 20) = 1200 J kg⁻¹ °C⁻¹."),
+    q("t9","thermal","Why can steam at 100 °C cause a more severe burn than liquid water at 100 °C?",["Steam has a higher temperature","Steam releases latent heat when it condenses","Steam has no internal energy","Water cannot transfer energy"],1,"Steam releases additional latent heat when it condenses on the skin."),
     q("n1","nuclear","What determines which element an atom is?",["Number of neutrons","Mass number","Number of protons","Number of electron shells"],2,"The atomic number, or number of protons, identifies the element."),
     q("n2","nuclear","How many neutrons are in carbon-14?",["6","8","14","20"],1,"Neutrons = mass number - atomic number = 14 - 6 = 8."),
     q("n3","nuclear","Which statement describes isotopes?",["Same neutrons, different protons","Same protons, different neutrons","Different protons and different electrons only","Same mass number, different atomic number"],1,"Isotopes have the same proton number but different neutron numbers."),
@@ -272,7 +340,10 @@
     q("n5","nuclear","What happens to mass number A and atomic number Z in beta-minus decay?",["A decreases by 4; Z decreases by 2","A stays the same; Z increases by 1","A increases by 1; Z stays the same","A stays the same; Z decreases by 1"],1,"A neutron becomes a proton, so A is unchanged and Z increases by 1."),
     q("n6","nuclear","What happens to mass number and atomic number when a nucleus emits gamma radiation?",["Both decrease","Mass number decreases only","Atomic number increases only","Neither changes"],3,"Gamma emission removes energy from the nucleus but does not change the number of protons or neutrons."),
     q("n7","nuclear","Why is alpha radiation less penetrating than gamma radiation?",["Alpha travels more slowly because it has no energy","Alpha is more strongly ionising and loses energy more quickly in matter","Gamma has a larger mass","Gamma is stopped by paper"],1,"Alpha interacts strongly with matter and ionises frequently, so it loses energy quickly. Gamma is weakly ionising and travels further."),
-    q("n8","nuclear","A source has a half-life of 5 days and starts at 800 counts/s. What is its count rate after 15 days?",["400 counts/s","200 counts/s","100 counts/s","50 counts/s"],2,"15 days is 3 half-lives: 800 → 400 → 200 → 100 counts/s."),
+    q("n8","nuclear","A source has a half-life of 3 hours and starts at 640 counts/min. What is its count rate after 9 hours?",["320 counts/min","160 counts/min","80 counts/min","40 counts/min"],2,"9 hours is 3 half-lives: 640 → 320 → 160 → 80 counts/min."),
+    q("n9","nuclear","After three half-lives, what percentage of the original radioactive nuclei remain undecayed?",["50%","25%","12.5%","6.25%"],2,"After three half-lives the remaining fraction is 1/8, which is 12.5%."),
+    q("n10","nuclear","A detector reading drops a lot when thin card is added, drops again with aluminium, and is reduced further by thick lead. What does this suggest?",["Only alpha is present","Only gamma is present","Alpha and beta only","Alpha, beta and gamma are present"],3,"The separate drops show alpha is stopped first, beta next, and penetrating gamma remains until thick shielding reduces it."),
+    q("n11","nuclear","Why is an alpha-emitting substance especially dangerous if inhaled?",["Alpha passes easily through the body","It places strongly ionising radiation close to living cells","Alpha cannot ionise atoms","It turns into gamma inside the lungs"],1,"Inside the body, short-range but strongly ionising alpha radiation can damage nearby cells and DNA."),
   ];
 
   const examQuestions = [
@@ -375,11 +446,11 @@
       mp("Mass number stays 24",[["mass number","24","same"],["mass number","unchanged"]]),
       mp("Atomic number increases to 12",[["atomic number","12"],["11","12"]]),
     ],"A neutron changes into a proton and an electron is emitted. The mass number stays 24 and the atomic number increases from 11 to 12."),
-    exam("te7","thermal",3,"Explain the difference between heat and temperature.",[
-      mp("Heat is energy transferred because of a temperature difference",[["heat","energy","transfer"],["thermal energy","transfer","temperature difference"]]),
-      mp("Temperature is linked to the average kinetic energy of particles",[["temperature","average kinetic energy"],["temperature","kinetic energy","particle"]]),
-      mp("Heat flows from a hotter object to a colder object",[["hot","cold","energy"],["hotter","colder","transfer"]]),
-    ],"Heat is energy transferred from a hotter object to a colder object because of a temperature difference. Temperature is linked to the average kinetic energy of the particles."),
+    exam("te7","thermal",3,"Two beakers are both at 50 °C, but one contains much more water than the other. Explain what the equal temperature tells you, why their internal energies may differ, and what happens if one is placed in contact with an object at 20 °C.",[
+      mp("Equal temperature means the particles have the same average kinetic energy",[["same","temperature","average kinetic"],["equal temperature","kinetic energy"]]),
+      mp("The larger amount of water can have more internal energy because it contains more particles",[["more water","internal energy"],["more particles","internal energy"]]),
+      mp("Energy is transferred by heating from the warmer water to the cooler object",[["energy","warm","cool"],["heat","hotter","colder"]]),
+    ],"The equal temperature means the water particles have the same average kinetic energy. The larger amount of water can have more internal energy because it contains more particles. When placed against the 20 °C object, energy is transferred by heating from the warmer water to the cooler object."),
     exam("ne7","nuclear",4,"Explain why alpha radiation is strongly ionising but has low penetrating power, whereas gamma radiation is weakly ionising but has high penetrating power.",[
       mp("Alpha interacts strongly or frequently with matter",[["alpha","interact","matter"],["alpha","collision","frequent"]]),
       mp("Alpha loses energy quickly so is stopped over a short distance",[["alpha","lose","energy","quick"],["alpha","short distance","stopp"]]),
@@ -392,6 +463,52 @@
       mp("After two half-lives the count rate is 240 counts/s",[["240"]]),
       mp("After three half-lives the count rate is 120 counts/s",[["120"]]),
     ],"12 ÷ 4 = 3 half-lives. The count rate halves three times: 960 → 480 → 240 → 120 counts/s. Therefore the final count rate is 120 counts/s."),
+    exam("pe8","particle",3,"A material has a melting point of -8 °C and a boiling point of 72 °C. State its physical state at -20 °C, 25 °C and 90 °C, and explain how you decided.",[
+      mp("At -20 °C it is solid",[["-20","solid"]]),
+      mp("At 25 °C it is liquid",[["25","liquid"]]),
+      mp("At 90 °C it is gas and the decision is made by comparing each temperature with the melting and boiling points",[["90","gas"],["compare","melting","boiling"]]),
+    ],"Below -8 °C the material is solid, between -8 °C and 72 °C it is liquid, and above 72 °C it is gas. Therefore the three states are solid, liquid and gas."),
+    exam("te8","thermal",4,"A 0.60 kg metal block receives 27,000 J of energy and its temperature rises by 45 °C. Calculate its specific heat capacity and state the correct unit.",[
+      mp("Uses c = Q ÷ (mΔT)",[["c","q","m"],["27000","0.60","45"]]),
+      mp("Multiplies 0.60 × 45 = 27",[["27"]]),
+      mp("Calculates c = 1000",[["1000"]]),
+      mp("Gives J kg⁻¹ °C⁻¹",[["j kg"],["kg","°c"],["kg","c-1"]]),
+    ],"c = 27,000 ÷ (0.60 × 45) = 1000 J kg⁻¹ °C⁻¹."),
+    exam("te9","thermal",4,"Explain why a dull black solar collector warms more effectively than a shiny metal one, and explain how a plastic handle reduces the chance of a burn.",[
+      mp("Dull black surfaces absorb infrared radiation well",[["black","absorb","infrared"],["dull black","radiation"]]),
+      mp("Shiny surfaces reflect more infrared and are poor absorbers",[["shiny","reflect"],["shiny","poor absorber"]]),
+      mp("Plastic is a poor thermal conductor or an insulator",[["plastic","poor conductor"],["plastic","insulator"]]),
+      mp("So less thermal energy is conducted to the hand",[["less","energy","hand"],["reduce","conduction"]]),
+    ],"A dull black surface is a very good absorber of infrared radiation, whereas a shiny surface reflects more and absorbs less. Plastic is a poor thermal conductor, so it reduces the rate at which energy is conducted to the user's hand."),
+    exam("te10","thermal",4,"A 0.12 kg liquid is heated from 30 °C to its boiling point of 90 °C and then completely vaporised. Its specific heat capacity is 2500 J kg⁻¹ °C⁻¹ and its specific latent heat of vaporisation is 1.8 × 10⁶ J kg⁻¹. Calculate the total energy required.",[
+      mp("Calculates heating energy using mcΔT",[["0.12","2500","60"],["18000"]]),
+      mp("Heating energy is 18,000 J",[["18000"]]),
+      mp("Calculates vaporising energy using mL = 216,000 J",[["216000"],["0.12","1.8"]]),
+      mp("Adds the stages to obtain 234,000 J",[["234000"]]),
+    ],"Heating: Q = 0.12 × 2500 × 60 = 18,000 J. Vaporising: Q = 0.12 × 1.8 × 10⁶ = 216,000 J. Total = 234,000 J."),
+    exam("ne9","nuclear",4,"A source is tested with three absorbers. Paper causes a large fall in count rate, aluminium causes a further fall, and thick lead reduces the remaining count rate. Explain what this tells you about the radiation emitted.",[
+      mp("The drop with paper shows alpha radiation is present",[["paper","alpha"]]),
+      mp("The further drop with aluminium shows beta radiation is present",[["aluminium","beta"]]),
+      mp("The radiation remaining after aluminium indicates gamma is present",[["gamma","remain"],["gamma","aluminium"]]),
+      mp("Thick lead reduces gamma because gamma is the most penetrating",[["lead","gamma"],["gamma","penetrating"]]),
+    ],"Paper removing part of the count shows alpha is present. A further decrease with aluminium shows beta is also present. Radiation still reaching the detector after aluminium is gamma, which is more penetrating and is reduced by thick lead."),
+    exam("ne10","nuclear",4,"A nucleus has mass number 212 and atomic number 84. It emits one alpha particle and then one beta-minus particle. Determine the final mass number and atomic number, showing the effect of each decay.",[
+      mp("After alpha, mass number becomes 208",[["208"]]),
+      mp("After alpha, atomic number becomes 82",[["82"]]),
+      mp("Beta-minus leaves mass number at 208",[["beta","208"],["mass","same"]]),
+      mp("Beta-minus increases atomic number to 83",[["83"]]),
+    ],"Alpha decay changes A by -4 and Z by -2, giving A = 208 and Z = 82. Beta-minus leaves A unchanged and increases Z by 1, giving final values A = 208 and Z = 83."),
+    exam("ne11","nuclear",4,"A radioactive sample falls from 480 counts/min to about 60 counts/min in 21 minutes. Calculate its half-life and explain the halving steps.",[
+      mp("480 to 240 is one half-life",[["480","240"]]),
+      mp("240 to 120 is the second half-life",[["240","120"]]),
+      mp("120 to 60 is the third half-life",[["120","60"]]),
+      mp("21 minutes ÷ 3 gives a half-life of 7 minutes",[["7","minute"],["21","3"]]),
+    ],"480 → 240 → 120 → 60 is three half-lives. Therefore the half-life is 21 ÷ 3 = 7 minutes."),
+    exam("ne12","nuclear",3,"A radioactive gas is inhaled and emits alpha radiation inside the lungs. Explain why this can increase the person's health risk.",[
+      mp("Alpha radiation is strongly ionising",[["alpha","strong","ionis"]]),
+      mp("Ionisation can damage cells or DNA and cause mutations",[["damage","dna"],["damage","cell"],["mutation"]]),
+      mp("Because the source is inside the body, the short-range alpha radiation is released close to living tissue",[["inside","body"],["close","cell"],["inhaled","tissue"]]),
+    ],"Alpha radiation is strongly ionising. If the source is inside the lungs, the alpha particles deposit their energy close to living cells, where ionisation can damage DNA, cause mutations and increase cancer risk."),
   ];
 
   const gameData = {
@@ -537,9 +654,9 @@
   function heading(title,intro,number=modules[state.module].number){ return `<div class="section-heading"><div><h3>${title}</h3><p>${intro}</p></div><span class="module-number">${number}</span></div>`; }
   function knowledgeSummary(key){
     const items={
-      particle:[["Particle model","Arrangement and movement explain the three states."],["Internal energy","Total kinetic and potential energy of the particles."],["State changes","Know melting, freezing, boiling, condensation and sublimation."],["Heating curves","Slopes show temperature change; flat sections show a change of state at constant temperature."]],
-      thermal:[["Heat","Energy transferred from hotter to colder because of a temperature difference."],["Temperature","Linked to the average kinetic energy of particles."],["Energy transfer","Conduction, convection and infrared radiation."],["Heating","Use Q = mcΔT and convert values into the correct units."],["Changing state","Use Q = mL; temperature stays constant during the change."]],
-      nuclear:[["The atom","Know the charge, mass and location of each particle."],["Radiation","Alpha, beta and gamma differ in ionising and penetrating power."],["Gamma","An electromagnetic wave; no mass or charge; A and Z stay the same."],["Decay","Alpha: A −4, Z −2. Beta-minus: A same, Z +1."],["Half-life","Time for activity, count rate or undecayed nuclei to halve."]],
+      particle:[["Particle model","Arrangement and movement explain the three states."],["State from data","Use melting and boiling points to identify whether a substance is solid, liquid or gas."],["Internal energy","Total kinetic and potential energy of the particles."],["State changes","Know the changes and whether energy is taken in or given out."],["Heating curves","Slopes show temperature change; flat sections show a change of state at constant temperature."]],
+      thermal:[["Heat","Energy transferred from hotter to colder because of a temperature difference."],["Temperature","Linked to the average kinetic energy of particles."],["Conduction & insulation","Know good and poor conductors, including metals, plastics and water."],["Convection","Explain expansion, density change, rising warm fluid and sinking cool fluid."],["Infrared","Dull black = good absorber/emitter; shiny surfaces = good reflectors."],["Specific heat capacity","Use and rearrange Q = mcΔT."],["Latent heat","Use Q = mL and combine heating + state-change stages when needed."]],
+      nuclear:[["The atom","Read isotope notation and calculate protons, neutrons and electrons."],["Activity","Know activity, count rate and the random nature of decay."],["Radiation","Identify alpha, beta and gamma and compare ionising and penetrating power."],["Absorbers","Use paper/card, aluminium and lead results to identify radiation."],["Decay","Apply alpha, beta-minus and gamma changes, including sequential decays."],["Half-life","Calculate repeated halving, percentages and read half-life from decay graphs."],["Health effects","Ionisation can damage cells and DNA; internal alpha sources are especially hazardous."]],
     };
     return `<section class="knowledge-summary"><div class="summary-title"><span>KNOWLEDGE ORGANISER</span><strong>Must know</strong></div><div class="summary-grid">${items[key].map(([title,text])=>`<div><strong>${title}</strong><p>${text}</p></div>`).join("")}</div></section>`;
   }
