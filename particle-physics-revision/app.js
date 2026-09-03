@@ -656,8 +656,12 @@
   function mp(label,tests){ return {label,tests}; }
   function exam(id,module,marks,question,points,model){ return {id,module,marks,question,points,model}; }
   function loadProgress(){
-    try { const data=JSON.parse(localStorage.getItem(STORAGE_KEY)); return data && typeof data==="object" ? {earned:[],examBest:{},visited:[],gameBest:{},...data} : {earned:[],examBest:{},visited:[],gameBest:{}}; }
-    catch { return {earned:[],examBest:{},visited:[],gameBest:{}}; }
+    const blank={earned:[],examBest:{},examAttempts:{},visited:[],gameBest:{}};
+    try {
+      const data=JSON.parse(localStorage.getItem(STORAGE_KEY));
+      return data && typeof data==="object" ? {...blank,...data,examAttempts:{...blank.examAttempts,...(data.examAttempts||{})}} : blank;
+    }
+    catch { return blank; }
   }
   function saveProgress(){ try { localStorage.setItem(STORAGE_KEY,JSON.stringify(progress)); } catch {} updateProgress(); }
   function xp(){ return progress.earned.length + Object.values(progress.examBest).reduce((a,b)=>a+Number(b||0),0); }
@@ -762,34 +766,97 @@
   function moduleExams(){ return examQuestions.filter(item=>item.module===state.module); }
   function renderExam(){
     const pool=moduleExams(); if(!pool.some(q=>q.id===state.examId)) state.examId=pool[0].id; const item=pool.find(q=>q.id===state.examId);
-    panel.innerHTML=heading("Exam Practice","Write a complete answer, then check which marking points you included.","✎")+`<div class="exam-shell"><div class="exam-picker">${pool.map((q,i)=>{const done=Number(progress.examBest[q.id]||0)>=q.marks;return `<button data-exam="${q.id}" class="${q.id===item.id?"active":""} ${done?"mastered":""}" type="button">${done?"✓ ":""}Question ${i+1}</button>`;}).join("")}</div><article class="question-card"><div class="question-meta"><span>${modules[state.module].name}</span><span class="mark-badge">${item.marks} marks</span></div><h4>${item.question}</h4><textarea class="answer-input" id="exam-answer" placeholder="Write your answer here..." aria-label="Your exam answer"></textarea><div class="control-row"><button class="primary-button" id="mark-answer" type="button">Check my answer</button><button class="secondary-button" id="clear-answer" type="button">Clear</button></div><div id="marker-output"></div></article><p class="provisional">This gives an estimated mark by checking for key physics ideas. Always compare your answer with the model answer.</p></div>`;
+    panel.innerHTML=heading("Exam Practice","Write a complete answer and improve it through feedback. Hints become more detailed after repeated attempts.","✎")+`<div class="exam-shell"><div class="exam-picker">${pool.map((q,i)=>{const done=Number(progress.examBest[q.id]||0)>=q.marks;return `<button data-exam="${q.id}" class="${q.id===item.id?"active":""} ${done?"mastered":""}" type="button">${done?"✓ ":""}Question ${i+1}</button>`;}).join("")}</div><article class="question-card"><div class="question-meta"><span>${modules[state.module].name}</span><span class="mark-badge">${item.marks} marks</span></div><h4>${item.question}</h4><textarea class="answer-input" id="exam-answer" placeholder="Write your answer here..." aria-label="Your exam answer"></textarea><div class="control-row"><button class="primary-button" id="mark-answer" type="button">Check my answer</button><button class="secondary-button" id="clear-answer" type="button">Clear</button></div><div id="marker-output"></div></article><p class="provisional">The marker checks for key physics ideas. The model answer stays hidden at first: use the feedback, improve your response and try again.</p></div>`;
     panel.querySelectorAll("[data-exam]").forEach(b=>b.addEventListener("click",()=>{state.examId=b.dataset.exam;renderExam();}));
     document.querySelector("#mark-answer").addEventListener("click",()=>markExam(item)); document.querySelector("#clear-answer").addEventListener("click",()=>{document.querySelector("#exam-answer").value="";document.querySelector("#marker-output").innerHTML="";});
   }
   function normalise(text){ return text.toLowerCase().replace(/[×*]/g," ").replace(/[⁻−–—]/g,"-").replace(/[,()=:]/g," ").replace(/\s+/g," ").trim(); }
   function pointHit(answer,point){ return point.tests.some(test=>test.every(term=>answer.includes(normalise(term)))); }
+  function broadExamHint(item){
+    if(item.module==="particle"){
+      return "Use the particle model precisely: think about state, particle arrangement or movement, and how energy changes kinetic or potential energy.";
+    }
+    if(item.module==="thermal"){
+      if(/[Cc]alculate|energy|heat capacity|latent|temperature/.test(item.question)){
+        return "Identify the correct equation, write down the known quantities with units, calculate the temperature change if needed, and show each stage separately.";
+      }
+      return "Name the heat-transfer process, then explain it using particles, density, conductivity or infrared radiation rather than just describing what happens.";
+    }
+    if(/[Hh]alf-life|count rate|activity/.test(item.question)){
+      return "Use repeated halving carefully. Count how many half-lives have passed and keep the units consistent.";
+    }
+    if(/[Aa]lpha|[Bb]eta|[Gg]amma|radiation|penetrat|ionis/.test(item.question)){
+      return "Think about what the radiation is, its ionising power, its penetrating power, and how it interacts with matter.";
+    }
+    return "Track mass number and atomic number carefully and apply each nuclear change one step at a time.";
+  }
+
+  function targetedExamHints(item,hits){
+    const missing=item.points.filter((p,i)=>!hits[i]).map(p=>p.label);
+    if(!missing.length) return [];
+    return missing.slice(0,2).map(label=>{
+      const clean=label.replace(/[.]+$/,"");
+      return `Think about this missing idea: ${clean.charAt(0).toLowerCase()+clean.slice(1)}.`;
+    });
+  }
+
   function markExam(item){
     const raw=document.querySelector("#exam-answer").value.trim();
     if(raw.length<8){toast("Write a fuller answer before checking.");return;}
+
     const answer=normalise(raw);
     const hits=item.points.map(p=>pointHit(answer,p));
     const score=hits.filter(Boolean).length;
     const old=Number(progress.examBest[item.id]||0);
     const wasMastered=old>=item.marks;
+    const attempt=Number(progress.examAttempts[item.id]||0)+1;
+    progress.examAttempts[item.id]=attempt;
 
     if(score>old){
       progress.examBest[item.id]=score;
-      saveProgress();
-      if(score>=item.marks && !wasMastered) toast("Full marks — exam question mastered!");
-      else toast(`Best score improved: ${score} / ${item.marks}`);
-    } else if(score>=item.marks && !wasMastered){
-      progress.examBest[item.id]=item.marks;
-      saveProgress();
-      toast("Full marks — exam question mastered!");
     }
+    if(score>=item.marks){
+      progress.examBest[item.id]=item.marks;
+    }
+    saveProgress();
 
     const mastered=Number(progress.examBest[item.id]||0)>=item.marks;
-    document.querySelector("#marker-output").innerHTML=`<div class="marker-result"><div class="score-line"><strong>${score} / ${item.marks}</strong><span class="provisional">${mastered?"✓ mastered":"estimated mark"}</span></div><div class="mark-points">${item.points.map((p,i)=>`<div class="mark-point ${hits[i]?"hit":"miss"}"><span aria-hidden="true">${hits[i]?"✓":"○"}</span><span>${hits[i]?"Included":"Add"}: ${p.label}</span></div>`).join("")}</div><div class="model-answer"><strong>Model answer</strong>${item.model}</div>${mastered?"":`<div class="feedback-box review"><strong>Not mastered yet</strong><br>Improve the missing marking points and check this question again. A previous incorrect attempt does not matter once you achieve full marks.</div>`}</div>`;
+    if(mastered && !wasMastered) toast("Full marks — exam question mastered!");
+    else if(score>old) toast(`Best score improved: ${score} / ${item.marks}`);
+    else if(!mastered) toast(`Attempt ${attempt}: ${score} / ${item.marks}`);
+
+    let feedback="";
+    if(mastered){
+      feedback=`
+        <div class="feedback-box good"><strong>Full marks — mastered</strong><br>You have included all of the required physics ideas.</div>
+        <div class="model-answer"><strong>Model answer</strong>${item.model}</div>
+      `;
+    } else if(attempt===1){
+      feedback=`
+        <div class="feedback-box review"><strong>Attempt 1 — improve and try again</strong><br>You have included <strong>${score} of ${item.marks}</strong> key ideas. ${broadExamHint(item)}</div>
+        <p class="provisional">The marking points and model answer are still hidden.</p>
+      `;
+    } else if(attempt===2){
+      const hints=targetedExamHints(item,hits);
+      feedback=`
+        <div class="feedback-box review"><strong>Attempt 2 — targeted hints</strong><br>You have included <strong>${score} of ${item.marks}</strong> key ideas.</div>
+        <div class="hint-list">${hints.map(h=>`<div class="hint-chip">💡 ${h}</div>`).join("")}</div>
+        <p class="provisional">The full answer is still hidden. Use the hints and try again.</p>
+      `;
+    } else {
+      feedback=`
+        <div class="feedback-box review"><strong>Attempt ${attempt} — worked support unlocked</strong><br>You have had several attempts, so the marking points and model answer are now shown. Study them, then rewrite the answer yourself and submit again for mastery.</div>
+        <div class="mark-points">${item.points.map((p,i)=>`<div class="mark-point ${hits[i]?"hit":"miss"}"><span aria-hidden="true">${hits[i]?"✓":"○"}</span><span>${p.label}</span></div>`).join("")}</div>
+        <div class="model-answer"><strong>Model answer</strong>${item.model}</div>
+        <p class="provisional"><strong>This is not yet mastered.</strong> You still need to submit a full-mark answer yourself.</p>
+      `;
+    }
+
+    document.querySelector("#marker-output").innerHTML=`
+      <div class="marker-result">
+        <div class="score-line"><strong>${score} / ${item.marks}</strong><span class="provisional">${mastered?"✓ mastered":`attempt ${attempt}`}</span></div>
+        ${feedback}
+      </div>`;
   }
 
   function renderGames(){
