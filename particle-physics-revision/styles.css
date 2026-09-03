@@ -414,3 +414,19 @@ footer span { margin:0 4px; }
   border-color:var(--good);
   background:color-mix(in srgb,var(--good) 10%,var(--card));
 }
+
+
+/* Progressive exam hints */
+.hint-list {
+  display:grid;
+  gap:8px;
+  margin:12px 0;
+}
+.hint-chip {
+  padding:10px 12px;
+  background:color-mix(in srgb,var(--gold) 12%,var(--card));
+  border:1px solid color-mix(in srgb,var(--gold) 48%,var(--line));
+  border-radius:10px;
+  line-height:1.45;
+  font-size:.88rem;
+}
