@@ -96,16 +96,24 @@
       name: "Thermal Physics",
       number: "02",
       colour: "#e56b2f",
-      intro: "Connect temperature to particle motion, explain thermal transfer and calculate energy changes using specific heat capacity and latent heat.",
+      intro: "Distinguish heat from temperature, connect temperature to particle motion, explain thermal transfer and calculate energy changes using specific heat capacity and latent heat.",
       lessons: [
         {
-          title: "Temperature, Celsius and Kelvin",
+          title: "Heat and temperature",
           body: `
             ${diagram("temperature")}
-            <p>Temperature measures the <strong>average kinetic energy</strong> of the particles. It is not the same as internal energy, which depends on all particles and includes potential energy.</p>
+            <p><strong>Heat</strong> is energy transferred from a hotter object to a colder object because there is a temperature difference.</p>
+            <p><strong>Temperature</strong> tells us how hot or cold something is and, in the particle model, is linked to the <strong>average kinetic energy</strong> of its particles.</p>
+            <div class="concept-grid">
+              <div class="concept"><strong>Heat</strong><p>An energy transfer. It moves from higher temperature to lower temperature. Energy transferred is measured in joules (J).</p></div>
+              <div class="concept"><strong>Temperature</strong><p>A measure linked to the average kinetic energy of particles. It is measured in °C or K.</p></div>
+              <div class="concept"><strong>Internal energy</strong><p>The total kinetic and potential energy of all the particles in the system.</p></div>
+            </div>
+            <div class="worked"><strong>Key difference</strong><p>Two objects can have the same temperature but different internal energies because they may contain different amounts of material or be made from different substances.</p></div>
+            <p>When two objects at different temperatures touch, energy is transferred by heating from the hotter object to the colder object until they reach the same temperature. This is called <strong>thermal equilibrium</strong>.</p>
             <div class="equation">temperature in K = temperature in °C + 273</div>
             <div class="worked"><strong>Example</strong><p>25 °C = 25 + 273 = 298 K. Absolute zero is 0 K, approximately -273 °C.</p></div>
-            <div class="mistake"><strong>Common mistake:</strong> Do not write a degree symbol with kelvin. Use 298 K, not 298 °K.</div>
+            <div class="mistake"><strong>Common mistake:</strong> Heat and temperature are not the same thing. Heat is an energy transfer; temperature describes the thermal state of an object.</div>
           `,
         },
         {
@@ -159,7 +167,7 @@
       name: "Nuclear Physics",
       number: "03",
       colour: "#17875f",
-      intro: "Describe atoms and isotopes, calculate particle numbers and track mass number and atomic number through alpha and beta decay.",
+      intro: "Describe atoms and isotopes, compare alpha, beta and gamma radiation, explain penetration and ionisation, use nuclear equations and calculate half-life.",
       lessons: [
         {
           title: "Inside the atom",
@@ -179,7 +187,7 @@
             <p>An element's position in the periodic table is determined by its atomic number, so every atom of one element has the same number of protons.</p>
             <p><strong>Isotopes</strong> are atoms of the same element with the same number of protons but different numbers of neutrons.</p>
             <figure class="isotope-source">
-              <img loading="lazy" src="https://bam.files.bbci.co.uk/bam/live/content/z3tprwx/small" alt="BBC Bitesize table comparing hydrogen isotopes">
+              <img loading="lazy" src="https://bam.files.bbci.co.uk/bam/live/content/z3tprwx/large" alt="BBC Bitesize table comparing hydrogen isotopes">
               <figcaption><strong>Hydrogen isotopes</strong><span>Image: BBC Bitesize GCSE Science</span></figcaption>
             </figure>
             <div class="worked"><strong>What the diagram shows</strong><p>Hydrogen-1, hydrogen-2 and hydrogen-3 each have 1 proton but different numbers of neutrons. They are isotopes of the same element because they have the same number of protons.</p></div>
@@ -190,21 +198,55 @@
           body: `
             ${diagram("radioactivity")}
             <p>Some nuclei are unstable. They give out radiation to become more stable. This decay is random, so we cannot predict exactly when one nucleus will decay.</p>
-            <div class="mistake"><strong>Course boundary:</strong> You need alpha and beta decay here. Half-life, fission and fusion are not included in this topic overview.</div>
+            <div class="worked"><strong>Random decay</strong><p>Radioactive decay is spontaneous and random. We cannot predict when one particular nucleus will decay, but we can predict how a large sample changes over time using half-life.</p></div>
           `,
         },
         {
-          title: "Alpha and beta decay",
+          title: "Alpha, beta and gamma radiation",
           body: `
             ${diagram("decay")}
+            <table class="mini-table"><thead><tr><th>Radiation</th><th>What it is</th><th>Charge</th><th>Ionising</th><th>Penetrating</th></tr></thead><tbody>
+              <tr><td><strong>Alpha (α)</strong></td><td>2 protons + 2 neutrons</td><td>+2</td><td>Strongest</td><td>Lowest</td></tr>
+              <tr><td><strong>Beta-minus (β)</strong></td><td>Fast electron emitted from the nucleus</td><td>-1</td><td>Medium</td><td>Medium</td></tr>
+              <tr><td><strong>Gamma (γ)</strong></td><td>High-energy electromagnetic wave</td><td>0</td><td>Weakest</td><td>Highest</td></tr>
+            </tbody></table>
             <div class="concept-grid">
-              <div class="concept"><strong>Alpha decay</strong><p>The nucleus loses 2 protons and 2 neutrons. Mass number decreases by 4; atomic number decreases by 2.</p></div>
-              <div class="concept"><strong>Beta decay</strong><p>A neutron changes into a proton and an electron is emitted. Mass number stays the same; atomic number increases by 1.</p></div>
-              <div class="concept"><strong>Conservation</strong><p>Total mass numbers and total atomic numbers balance on both sides of a nuclear equation.</p></div>
+              <div class="concept"><strong>Alpha penetration</strong><p>Alpha is strongly ionising, so it interacts with matter very often and loses its energy quickly. A sheet of paper or a few centimetres of air stops it.</p></div>
+              <div class="concept"><strong>Beta penetration</strong><p>Beta is less ionising than alpha, so it travels further. A few millimetres of aluminium can stop it.</p></div>
+              <div class="concept"><strong>Gamma penetration</strong><p>Gamma is weakly ionising, so it is less likely to interact with matter and can travel much further. Thick lead or concrete reduces it.</p></div>
+            </div>
+            <div class="worked"><strong>The key link</strong><p>The more strongly ionising a radiation is, the faster it loses energy as it travels through matter, so the less penetrating it is.</p></div>
+          `,
+        },
+        {
+          title: "Nuclear equations",
+          body: `
+            <div class="concept-grid">
+              <div class="concept"><strong>Alpha decay</strong><p>The nucleus loses 2 protons and 2 neutrons. Mass number decreases by 4 and atomic number decreases by 2.</p></div>
+              <div class="concept"><strong>Beta-minus decay</strong><p>A neutron changes into a proton and an electron is emitted. Mass number stays the same and atomic number increases by 1.</p></div>
+              <div class="concept"><strong>Gamma emission</strong><p>The nucleus loses excess energy as a gamma ray. Mass number and atomic number do not change.</p></div>
             </div>
             <div class="equation">²³⁸₉₂U → ²³⁴₉₀Th + ⁴₂He</div>
             <div class="equation">¹⁴₆C → ¹⁴₇N + ⁰₋₁e</div>
+            <div class="equation">excited nucleus → same nucleus + γ</div>
+            <div class="worked"><strong>Conservation rule</strong><p>Total mass number and total atomic number must balance on both sides of a nuclear equation.</p></div>
             ${videos.decay}
+          `,
+        },
+        {
+          title: "Half-life and decay graphs",
+          body: `
+            ${diagram("halflife")}
+            <p><strong>Half-life</strong> is the time taken for the number of undecayed radioactive nuclei in a sample, or its activity/count rate, to fall to half its value.</p>
+            <div class="concept-grid">
+              <div class="concept"><strong>Reading a graph</strong><p>Choose a count rate, halve it, read across to the decay curve and then down to the time axis. The time difference is one half-life.</p></div>
+              <div class="concept"><strong>Repeated halving</strong><p>After each half-life, half of the radioactive nuclei remain: 1, 1/2, 1/4, 1/8, 1/16 ...</p></div>
+              <div class="concept"><strong>Shape of the graph</strong><p>Radioactive decay gives a curved exponential graph. It falls quickly at first and then more slowly, but each half-life takes the same amount of time.</p></div>
+            </div>
+            <div class="equation">number of half-lives = total time ÷ half-life</div>
+            <div class="worked"><strong>Worked example</strong><p>A source has a half-life of 5 days and an initial count rate of 800 counts/s. After 15 days, 3 half-lives have passed: 800 → 400 → 200 → 100 counts/s.</p></div>
+            <div class="worked"><strong>Working backwards</strong><p>If a sample falls from 640 g to 80 g, it has halved three times: 640 → 320 → 160 → 80. If this took 18 hours, the half-life is 18 ÷ 3 = 6 hours.</p></div>
+            <div class="mistake"><strong>Common mistake:</strong> The amount does not decrease by the same number each half-life. It decreases by the same <em>fraction</em>: one half.</div>
           `,
         },
       ],
@@ -217,6 +259,7 @@
     q("p4","particle","Which change of state is gas directly to solid?",["Sublimation","Condensation","Melting","Freezing"],1,"In this course, gas changing directly to solid is called condensation."),
     q("p5","particle","During melting, what happens while the temperature stays constant?",["Particle kinetic energy steadily decreases","Energy changes particle separation and potential energy","All particles stop moving","The mass of the substance increases"],1,"The supplied energy changes arrangement and potential energy rather than temperature."),
     q("p6","particle","What does a flat section on a heating curve show?",["The substance is cooling rapidly","A change of state at constant temperature","The particles have stopped moving","The mass of the substance is increasing"],1,"During a change of state, temperature stays constant while energy changes particle arrangement and potential energy."),
+    q("t0","thermal","Which statement best defines heat?",["The temperature of an object","Energy transferred because of a temperature difference","The total kinetic energy of one particle","The energy stored only in hot objects"],1,"Heat is energy transferred from a hotter object to a colder object because of a temperature difference."),
     q("t1","thermal","What does temperature measure in the particle model?",["Total potential energy","Average kinetic energy of particles","Total internal energy","The number of particles"],1,"Temperature measures average particle kinetic energy."),
     q("t2","thermal","What temperature is 25 °C on the Kelvin scale?",["248 K","273 K","298 K","325 K"],2,"25 + 273 = 298 K."),
     q("t3","thermal","How much energy heats 2.0 kg of water by 10 °C if c = 4180 J kg⁻¹ °C⁻¹?",["836 J","8,360 J","41,800 J","83,600 J"],3,"Q = mcΔT = 2.0 × 4180 × 10 = 83,600 J."),
@@ -227,6 +270,9 @@
     q("n3","nuclear","Which statement describes isotopes?",["Same neutrons, different protons","Same protons, different neutrons","Different protons and different electrons only","Same mass number, different atomic number"],1,"Isotopes have the same proton number but different neutron numbers."),
     q("n4","nuclear","What happens to a nucleus in alpha decay?",["A decreases by 4 and Z decreases by 2","A stays the same and Z increases by 1","A increases by 4 and Z increases by 2","A decreases by 1 and Z stays the same"],0,"An alpha particle contains 2 protons and 2 neutrons."),
     q("n5","nuclear","What happens to mass number A and atomic number Z in beta-minus decay?",["A decreases by 4; Z decreases by 2","A stays the same; Z increases by 1","A increases by 1; Z stays the same","A stays the same; Z decreases by 1"],1,"A neutron becomes a proton, so A is unchanged and Z increases by 1."),
+    q("n6","nuclear","What happens to mass number and atomic number when a nucleus emits gamma radiation?",["Both decrease","Mass number decreases only","Atomic number increases only","Neither changes"],3,"Gamma emission removes energy from the nucleus but does not change the number of protons or neutrons."),
+    q("n7","nuclear","Why is alpha radiation less penetrating than gamma radiation?",["Alpha travels more slowly because it has no energy","Alpha is more strongly ionising and loses energy more quickly in matter","Gamma has a larger mass","Gamma is stopped by paper"],1,"Alpha interacts strongly with matter and ionises frequently, so it loses energy quickly. Gamma is weakly ionising and travels further."),
+    q("n8","nuclear","A source has a half-life of 5 days and starts at 800 counts/s. What is its count rate after 15 days?",["400 counts/s","200 counts/s","100 counts/s","50 counts/s"],2,"15 days is 3 half-lives: 800 → 400 → 200 → 100 counts/s."),
   ];
 
   const examQuestions = [
@@ -329,6 +375,23 @@
       mp("Mass number stays 24",[["mass number","24","same"],["mass number","unchanged"]]),
       mp("Atomic number increases to 12",[["atomic number","12"],["11","12"]]),
     ],"A neutron changes into a proton and an electron is emitted. The mass number stays 24 and the atomic number increases from 11 to 12."),
+    exam("te7","thermal",3,"Explain the difference between heat and temperature.",[
+      mp("Heat is energy transferred because of a temperature difference",[["heat","energy","transfer"],["thermal energy","transfer","temperature difference"]]),
+      mp("Temperature is linked to the average kinetic energy of particles",[["temperature","average kinetic energy"],["temperature","kinetic energy","particle"]]),
+      mp("Heat flows from a hotter object to a colder object",[["hot","cold","energy"],["hotter","colder","transfer"]]),
+    ],"Heat is energy transferred from a hotter object to a colder object because of a temperature difference. Temperature is linked to the average kinetic energy of the particles."),
+    exam("ne7","nuclear",4,"Explain why alpha radiation is strongly ionising but has low penetrating power, whereas gamma radiation is weakly ionising but has high penetrating power.",[
+      mp("Alpha interacts strongly or frequently with matter",[["alpha","interact","matter"],["alpha","collision","frequent"]]),
+      mp("Alpha loses energy quickly so is stopped over a short distance",[["alpha","lose","energy","quick"],["alpha","short distance","stopp"]]),
+      mp("Gamma interacts less frequently with matter",[["gamma","interact","less"],["gamma","less likely","interact"]]),
+      mp("Gamma loses energy more slowly and so penetrates further",[["gamma","penetrat","further"],["gamma","lose energy","slow"]]),
+    ],"Alpha is strongly ionising because it interacts frequently with matter. It loses energy quickly, so it has a short range and low penetrating power. Gamma is much less likely to interact, so it is weakly ionising and can travel much further through matter."),
+    exam("ne8","nuclear",4,"A radioactive source has an initial count rate of 960 counts/s and a half-life of 4 hours. Calculate the count rate after 12 hours and explain your method.",[
+      mp("12 hours is 3 half-lives",[["12","3","half"],["12","4","3"]]),
+      mp("After one half-life the count rate is 480 counts/s",[["480"]]),
+      mp("After two half-lives the count rate is 240 counts/s",[["240"]]),
+      mp("After three half-lives the count rate is 120 counts/s",[["120"]]),
+    ],"12 ÷ 4 = 3 half-lives. The count rate halves three times: 960 → 480 → 240 → 120 counts/s. Therefore the final count rate is 120 counts/s."),
   ];
 
   const gameData = {
@@ -369,64 +432,69 @@
   function diagram(type) {
     const images = {
       kinetic: {
-        url:"https://bam.files.bbci.co.uk/bam/live/content/zv7y4wx/small",
+        url:"https://bam.files.bbci.co.uk/bam/live/content/zv7y4wx/large",
         alt:"BBC Bitesize particle model comparing solid, liquid and gas particles",
         caption:"Particle arrangement and movement in solids, liquids and gases"
       },
       states: {
-        url:"https://bam.files.bbci.co.uk/bam/live/content/zv7y4wx/small",
+        url:"https://bam.files.bbci.co.uk/bam/live/content/zv7y4wx/large",
         alt:"BBC Bitesize diagram showing particles in solids, liquids and gases",
         caption:"The particle model for solids, liquids and gases"
       },
       changes: {
-        url:"https://bam.files.bbci.co.uk/bam/live/content/zqjs8mn/small",
+        url:"https://bam.files.bbci.co.uk/bam/live/content/zqjs8mn/large",
         alt:"BBC Bitesize changes of state diagram showing melting, freezing, boiling, condensation and sublimation",
         caption:"Changes of state"
       },
       stategraph: {
-        url:"https://bam.files.bbci.co.uk/bam/live/content/zttrmsg/small",
+        url:"https://bam.files.bbci.co.uk/bam/live/content/zttrmsg/large",
         alt:"BBC Bitesize heating curve with flat sections at melting and boiling",
         caption:"Heating curve showing changes of state"
       },
       temperature: {
-        url:"https://bam.files.bbci.co.uk/bam/live/content/zxxb7p3/small",
+        url:"https://bam.files.bbci.co.uk/bam/live/content/zxxb7p3/large",
         alt:"BBC Bitesize diagram of water being heated and particles moving faster",
         caption:"Heating increases the energy of the particles"
       },
       transfer: {
         urls:[
-          "https://bam.files.bbci.co.uk/bam/live/content/ztwngk7/small",
-          "https://bam.files.bbci.co.uk/bam/live/content/zhjsr82/small",
-          "https://bam.files.bbci.co.uk/bam/live/content/zpqfcdm/small"
+          "https://bam.files.bbci.co.uk/bam/live/content/ztwngk7/large",
+          "https://bam.files.bbci.co.uk/bam/live/content/zhjsr82/large",
+          "https://bam.files.bbci.co.uk/bam/live/content/zpqfcdm/large"
         ],
         alt:"BBC Bitesize sequence showing conduction through a metal",
         caption:"Conduction through a metal"
       },
       shc: {
-        url:"https://bam.files.bbci.co.uk/bam/live/content/zxxb7p3/small",
+        url:"https://bam.files.bbci.co.uk/bam/live/content/zxxb7p3/large",
         alt:"BBC Bitesize diagram showing a substance being heated",
         caption:"Energy transferred by heating raises temperature"
       },
       mixing: null,
       latent: {
-        url:"https://bam.files.bbci.co.uk/bam/live/content/zttrmsg/small",
+        url:"https://bam.files.bbci.co.uk/bam/live/content/zttrmsg/large",
         alt:"BBC Bitesize heating curve showing constant temperature during changes of state",
         caption:"Heating curve and latent heat"
       },
       atom: {
-        url:"https://bam.files.bbci.co.uk/bam/live/content/z8vbw6f/small",
+        url:"https://bam.files.bbci.co.uk/bam/live/content/z8vbw6f/large",
         alt:"BBC Bitesize atomic structure diagram showing protons, neutrons and electrons",
         caption:"Structure of an atom"
       },
       radioactivity: {
-        url:"https://bam.files.bbci.co.uk/bam/live/content/z3rmb82/small",
+        url:"https://bam.files.bbci.co.uk/bam/live/content/z3rmb82/large",
         alt:"BBC Bitesize graph showing the stability of nuclei",
         caption:"Nuclear stability"
       },
       decay: {
-        url:"https://bam.files.bbci.co.uk/bam/live/content/zghcjxs/small",
-        alt:"BBC Bitesize diagram comparing the penetration of alpha, beta and gamma radiation",
-        caption:"Alpha, beta and gamma radiation"
+        url:"https://bam.files.bbci.co.uk/bam/live/content/zghcjxs/large",
+        alt:"BBC Bitesize diagram comparing the penetrating power of alpha, beta and gamma radiation",
+        caption:"Penetrating power of alpha, beta and gamma radiation"
+      },
+      halflife: {
+        url:"https://bam.files.bbci.co.uk/bam/live/content/ztyxy4j/large",
+        alt:"BBC Bitesize radioactive decay graph used to determine half-life",
+        caption:"Using a radioactive decay graph to determine half-life"
       }
     };
     const item=images[type];
@@ -470,8 +538,8 @@
   function knowledgeSummary(key){
     const items={
       particle:[["Particle model","Arrangement and movement explain the three states."],["Internal energy","Total kinetic and potential energy of the particles."],["State changes","Know melting, freezing, boiling, condensation and sublimation."],["Heating curves","Slopes show temperature change; flat sections show a change of state at constant temperature."]],
-      thermal:[["Temperature","A measure of average particle kinetic energy."],["Energy transfer","Conduction, convection and infrared radiation."],["Heating","Use Q = mcΔT and convert values into the correct units."],["Changing state","Use Q = mL; temperature stays constant during the change."]],
-      nuclear:[["The atom","Know the charge, mass and location of each particle."],["A and Z","Mass number = protons + neutrons; atomic number = protons."],["Isotopes","Same protons but different neutrons."],["Decay","Alpha: A −4, Z −2. Beta-minus: A same, Z +1."]],
+      thermal:[["Heat","Energy transferred from hotter to colder because of a temperature difference."],["Temperature","Linked to the average kinetic energy of particles."],["Energy transfer","Conduction, convection and infrared radiation."],["Heating","Use Q = mcΔT and convert values into the correct units."],["Changing state","Use Q = mL; temperature stays constant during the change."]],
+      nuclear:[["The atom","Know the charge, mass and location of each particle."],["Radiation","Alpha, beta and gamma differ in ionising and penetrating power."],["Gamma","An electromagnetic wave; no mass or charge; A and Z stay the same."],["Decay","Alpha: A −4, Z −2. Beta-minus: A same, Z +1."],["Half-life","Time for activity, count rate or undecayed nuclei to halve."]],
     };
     return `<section class="knowledge-summary"><div class="summary-title"><span>KNOWLEDGE ORGANISER</span><strong>Must know</strong></div><div class="summary-grid">${items[key].map(([title,text])=>`<div><strong>${title}</strong><p>${text}</p></div>`).join("")}</div></section>`;
   }
