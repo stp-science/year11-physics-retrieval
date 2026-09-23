@@ -714,3 +714,5 @@ footer span {
     font-size: 0.88rem;
   }
 }
+
+.course-links{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
