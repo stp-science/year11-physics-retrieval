@@ -115,10 +115,22 @@ exam.push(
 );
 
 extendSection('electromagnet',[
-['Compare magnetic field strengths around a straight wire',`<p>For a long straight wire, at the same distance from it, magnetic field strength is proportional to current. At the same current, field strength decreases as distance from the wire increases. Field strength B is measured in tesla (T).</p>${model('Compare field strength when current changes',['At a fixed point, a wire carrying 2 A produces a field of 0.040 mT.','The current rises to 6 A: 6 ÷ 2 = 3 times the original current.','At the same point, the field is 3 × 0.040 = 0.120 mT.'],'Keep the wire and observation point unchanged when comparing currents.')}`]
+['Calculate magnetic field strength: B = KI/d',`<p class="formula">B = KI/d</p><p>Use this equation for the magnetic field around a <strong>long straight current carrying wire</strong> in air. B is magnetic field strength in tesla (T); I is current in amperes (A); d is the perpendicular distance from the centre of the wire in metres (m). Use <strong>K = 2.0 × 10<sup>−7</sup> T m/A</strong>.</p><p>Convert distances before substituting: 1 cm = 0.01 m and 1 mm = 0.001 m. Give B in T, or convert using 1 mT = 10<sup>−3</sup> T and 1 μT = 10<sup>−6</sup> T. Use the right hand grip rule separately to find the field direction.</p><p>Rearrange to find <strong>I = Bd/K</strong> or <strong>d = KI/B</strong>. At fixed distance, doubling current doubles B. At fixed current, doubling distance halves B: B is inversely proportional to distance. This straight-wire equation is not the equation for the field inside a solenoid.</p>${model('Calculate B',['A long straight wire carries 4.0 A. Find the field 5.0 cm from its centre.','Convert d = 5.0 cm = 0.050 m.','B = KI/d = (2.0 × 10⁻⁷ × 4.0)/0.050.','B = 1.6 × 10⁻⁵ T = 16 μT.'],'Divide by distance in metres, not by the wire length.')}${model('Calculate current',['At d = 0.020 m, the field is 3.0 × 10⁻⁵ T.','Rearrange B = KI/d to I = Bd/K.','I = (3.0 × 10⁻⁵ × 0.020)/(2.0 × 10⁻⁷) = 3.0 A.'],'Use brackets around numerator and denominator.')}${model('Calculate distance',['A wire carries 5.0 A and produces B = 2.0 × 10⁻⁵ T.','Rearrange to d = KI/B.','d = (2.0 × 10⁻⁷ × 5.0)/(2.0 × 10⁻⁵) = 0.050 m = 5.0 cm.'],'d is the shortest distance from the wire to the observation point.')}`]
 ],[
-['At a fixed distance, a straight wire produces a 0.020 mT field at 1 A. Find the field at 4 A.','The current is four times as large, so B = 4 × 0.020 = 0.080 mT.']
+['State B = KI/d and the meaning and unit of each symbol.','B is field strength in T; I is current in A; d is perpendicular distance from the wire’s centre in m; K = 2.0 × 10⁻⁷ T m/A.'],
+['A wire carries 3.0 A. Calculate B at 2.0 cm from its centre.','d = 0.020 m. B = (2.0 × 10⁻⁷ × 3.0)/0.020 = 3.0 × 10⁻⁵ T = 30 μT.'],
+['B = 4.0 × 10⁻⁵ T at d = 0.030 m. Calculate the current.','I = Bd/K = (4.0 × 10⁻⁵ × 0.030)/(2.0 × 10⁻⁷) = 6.0 A.'],
+['A 2.0 A wire produces B = 1.0 × 10⁻⁵ T. Calculate the distance.','d = KI/B = (2.0 × 10⁻⁷ × 2.0)/(1.0 × 10⁻⁵) = 0.040 m = 4.0 cm.'],
+['What happens to B if current doubles at the same distance?','B doubles because B = KI/d is directly proportional to I when d is fixed.'],
+['What happens to B if distance doubles at the same current?','B halves because B = KI/d is inversely proportional to d when I is fixed.'],
+['Current doubles and distance doubles. What happens to B?','B stays the same: the factor of two in the numerator cancels the factor of two in the denominator.']
 ]);
+exam.push(
+['A long straight wire carries 6.0 A. Calculate the field strength 4.0 cm from its centre. Use K = 2.0 × 10⁻⁷ T m/A. [3]','d = 0.040 m (1). B = KI/d = (2.0 × 10⁻⁷ × 6.0)/0.040 (1). B = 3.0 × 10⁻⁵ T = 30 μT (1).','electromagnet'],
+['The magnetic field 5.0 cm from a long straight wire is 2.0 × 10⁻⁵ T. Find the current. Use K = 2.0 × 10⁻⁷ T m/A. [3]','d = 0.050 m (1). I = Bd/K (1). I = (2.0 × 10⁻⁵ × 0.050)/(2.0 × 10⁻⁷) = 5.0 A (1).','electromagnet'],
+['A long straight wire carries 8.0 A. At what distance is B = 4.0 × 10⁻⁵ T? Use K = 2.0 × 10⁻⁷ T m/A. [3]','d = KI/B (1). d = (2.0 × 10⁻⁷ × 8.0)/(4.0 × 10⁻⁵) (1). d = 0.040 m = 4.0 cm (1).','electromagnet'],
+['A wire’s current triples while the distance from it doubles. Use B = KI/d to explain the change in field strength. [2]','B is proportional to I and inversely proportional to d (1). New B is 3/2 = 1.5 times the original field (1).','electromagnet']
+);
 extendSection('charge',[],[
 ['What happens to electric potential energy as opposite charges move closer together?','It decreases. The attractive electrostatic force does work as the charges approach.'],
 ['Compare charge separation in a neutral conductor and a neutral insulator near a charged rod.','Mobile electrons move across the conductor, allowing greater charge separation. In an insulator, bound charges shift only locally. Under comparable conditions the conductor can experience stronger attraction.'],
