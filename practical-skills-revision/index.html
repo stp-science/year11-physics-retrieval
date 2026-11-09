@@ -13,7 +13,7 @@ function tab(id){document.querySelectorAll('main>section').forEach(s=>s.classLis
 $('#learn-cards').innerHTML=learn.map((a,i)=>`<article class="card"><div class="number">0${i+1} / ${a[0]}</div><h3>${a[1]}</h3><p>${a[2]}</p><button data-skill="${a[0]}">Practise ${a[0].toLowerCase()} →</button></article>`).join('');document.querySelectorAll('[data-skill]').forEach(b=>b.onclick=()=>{$('#topic').value=b.dataset.skill;renderPractice();tab('practice')});
 
 const diagramAssets={
-pendulum:\`<svg viewBox="0 0 520 260" role="img" aria-label="Pendulum hanging from clamp stand, ruler for length and stopwatch for ten swings" xmlns="http://www.w3.org/2000/svg">
+pendulum:`<svg viewBox="0 0 520 260" role="img" aria-label="Pendulum hanging from clamp stand, ruler for length and stopwatch for ten swings" xmlns="http://www.w3.org/2000/svg">
 <path d="M32 235H245" stroke="#263e56" stroke-width="5" stroke-linecap="round"/><path d="M82 233V25H220" stroke="#263e56" stroke-width="7" fill="none" stroke-linecap="round"/>
 <path d="M217 27V187" stroke="#47627e" stroke-width="2.5"/><circle cx="217" cy="202" r="15" fill="#c59a58" stroke="#384e65" stroke-width="2"/>
 <path d="M217 27L166 177" stroke="#95abc0" stroke-dasharray="6 5" stroke-width="2"/><circle cx="161" cy="192" r="14" fill="none" stroke="#95abc0" stroke-dasharray="5 4" stroke-width="2"/>
@@ -22,8 +22,8 @@ pendulum:\`<svg viewBox="0 0 520 260" role="img" aria-label="Pendulum hanging fr
 <text x="256" y="117" font-size="15" fill="#294660">Length</text><text x="256" y="135" font-size="13" fill="#5a6c7d">(pivot to centre)</text>
 <circle cx="395" cy="107" r="40" fill="#f6fafc" stroke="#264b73" stroke-width="4"/><rect x="385" y="58" width="20" height="10" rx="3" fill="#264b73"/><path d="M395 107V84M395 107L416 119" stroke="#264b73" stroke-width="3"/>
 <text x="351" y="168" font-size="15" fill="#294660">Stopwatch</text><text x="323" y="188" font-size="13" fill="#5a6c7d">Time 10 full swings</text><text x="115" y="252" font-size="13" fill="#294660">Clamp stand and bob</text>
-</svg>\`,
-towel:\`<svg viewBox="0 0 520 260" role="img" aria-label="Identical paper towel sample lowered into a measured volume of water in a beaker, measuring cylinder used to determine uptake" xmlns="http://www.w3.org/2000/svg">
+</svg>`,
+towel:`<svg viewBox="0 0 520 260" role="img" aria-label="Identical paper towel sample lowered into a measured volume of water in a beaker, measuring cylinder used to determine uptake" xmlns="http://www.w3.org/2000/svg">
 <path d="M84 75V214Q84 224 94 224H220Q230 224 230 214V75" stroke="#365573" fill="none" stroke-width="4"/><path d="M89 145H225V215Q225 219 220 219H94Q89 219 89 215Z" fill="#abd8f6" opacity=".8"/>
 <path d="M143 30H190V162H143Z" fill="#f3e7c9" stroke="#b18e56" stroke-width="2"/><path d="M143 48H190M143 68H190M143 88H190M143 108H190" stroke="#d1b98a" stroke-width="1.5" stroke-dasharray="4 6"/>
 <path d="M198 34H245" stroke="#57718a" stroke-width="1.5"/><text x="250" y="38" fill="#294660" font-size="14">Same-size</text><text x="250" y="56" fill="#294660" font-size="14">towel piece</text>
@@ -31,8 +31,8 @@ towel:\`<svg viewBox="0 0 520 260" role="img" aria-label="Identical paper towel 
 <path d="M388 45V211Q388 221 399 221H421Q432 221 432 211V45" stroke="#365573" fill="none" stroke-width="3"/><path d="M391 153H429V210Q429 217 420 217H400Q391 217 391 210Z" fill="#abd8f6"/>
 <path d="M389 70H406M389 89H400M389 108H406M389 127H400M389 146H406M389 165H400M389 184H406" stroke="#446884" stroke-width="1.5"/>
 <text x="353" y="245" fill="#294660" font-size="13">Measure water volume</text>
-</svg>\`,
-spring:\`<svg viewBox="0 0 520 265" role="img" aria-label="Spring suspended from a clamp stand with mass attached and vertical ruler beside it to measure extension" xmlns="http://www.w3.org/2000/svg">
+</svg>`,
+spring:`<svg viewBox="0 0 520 265" role="img" aria-label="Spring suspended from a clamp stand with mass attached and vertical ruler beside it to measure extension" xmlns="http://www.w3.org/2000/svg">
 <path d="M40 240H270M94 240V23H246" stroke="#29445c" stroke-width="7" fill="none" stroke-linecap="round"/>
 <path d="M235 25V50L223 59L247 70L223 81L247 92L223 103L247 114L223 125L247 136L223 147L235 155V174" stroke="#33658c" stroke-width="3.5" stroke-linejoin="round" fill="none"/>
 <path d="M235 174V185" stroke="#33658c" stroke-width="3"/><rect x="209" y="185" width="52" height="40" rx="5" fill="#c6a16b" stroke="#4c5b6b" stroke-width="2"/><text x="235" y="209" font-size="14" fill="#1f354a" text-anchor="middle">Load</text>
@@ -40,8 +40,8 @@ spring:\`<svg viewBox="0 0 520 265" role="img" aria-label="Spring suspended from
 <path d="M318 45h16M318 65h9M318 85h16M318 105h9M318 125h16M318 145h9M318 165h16M318 185h9M318 205h16" stroke="#706343" stroke-width="1.5"/>
 <path d="M271 156H305" stroke="#ba8238" stroke-width="2" stroke-dasharray="5 4"/>
 <text x="351" y="87" font-size="15" fill="#294660">Ruler</text><text x="351" y="107" font-size="13" fill="#5a6c7d">Measure extension</text><text x="130" y="255" font-size="13" fill="#294660">Clamp stand and spring</text>
-</svg>\`,
-sugar:\`<svg viewBox="0 0 520 260" role="img" aria-label="Beaker of water with sugar cube, thermometer and stopwatch for measuring dissolving time" xmlns="http://www.w3.org/2000/svg">
+</svg>`,
+sugar:`<svg viewBox="0 0 520 260" role="img" aria-label="Beaker of water with sugar cube, thermometer and stopwatch for measuring dissolving time" xmlns="http://www.w3.org/2000/svg">
 <path d="M80 64V222Q80 231 91 231H261Q272 231 272 222V64" fill="none" stroke="#294b68" stroke-width="4"/><path d="M85 128H267V220Q267 226 260 226H92Q85 226 85 220Z" fill="#b3dcf5" opacity=".8"/>
 <rect x="146" y="171" width="39" height="37" rx="2" fill="#f7f4e7" stroke="#b1a68c" stroke-width="2"/><path d="M148 185L181 195M150 199L177 177" stroke="#d4cbb7" stroke-width="1"/>
 <path d="M223 28V185" stroke="#52687e" stroke-width="8" stroke-linecap="round"/><path d="M223 93V184" stroke="#d95c5c" stroke-width="4"/><circle cx="223" cy="187" r="10" fill="#d95c5c" stroke="#52687e" stroke-width="2"/>
@@ -49,14 +49,14 @@ sugar:\`<svg viewBox="0 0 520 260" role="img" aria-label="Beaker of water with s
 <path d="M184 178L298 165" stroke="#59758c" stroke-width="1.5"/><text x="301" y="168" font-size="14" fill="#294660">Sugar cube</text>
 <circle cx="411" cy="95" r="37" stroke="#294b68" stroke-width="4" fill="#fff"/><path d="M411 95V68M411 95L431 106" stroke="#294b68" stroke-width="3"/><rect x="403" y="47" width="16" height="10" rx="2" fill="#294b68"/>
 <text x="375" y="153" font-size="14" fill="#294660">Stopwatch</text><text x="117" y="252" font-size="14" fill="#294660">100 mL of water</text>
-</svg>\`,
-timing:\`<svg viewBox="0 0 520 190" role="img" aria-label="Stopwatch and three repeated time measurements, one noticeably different" xmlns="http://www.w3.org/2000/svg">
+</svg>`,
+timing:`<svg viewBox="0 0 520 190" role="img" aria-label="Stopwatch and three repeated time measurements, one noticeably different" xmlns="http://www.w3.org/2000/svg">
 <circle cx="112" cy="85" r="50" fill="#f9fbfd" stroke="#294b68" stroke-width="4"/><rect x="102" y="21" width="20" height="12" rx="3" fill="#294b68"/><path d="M112 85V56M112 85L138 100" stroke="#294b68" stroke-width="4"/>
 <text x="209" y="60" font-size="16" fill="#294660">Trial 1: 1.42 s</text><text x="209" y="94" font-size="16" fill="#294660">Trial 2: 1.45 s</text><text x="209" y="128" font-size="16" fill="#9e5a24">Trial 3: 2.81 s  ?</text><text x="83" y="156" font-size="14" fill="#294660">Timing trials</text>
-</svg>\`,
-ruler:\`<svg viewBox="0 0 520 170" role="img" aria-label="Ruler positioned so its zero begins two centimetres above floor level" xmlns="http://www.w3.org/2000/svg">
+</svg>`,
+ruler:`<svg viewBox="0 0 520 170" role="img" aria-label="Ruler positioned so its zero begins two centimetres above floor level" xmlns="http://www.w3.org/2000/svg">
 <path d="M30 136H490" stroke="#294b68" stroke-width="4"/><rect x="200" y="15" width="55" height="119" fill="#f3e5c1" stroke="#806f51" stroke-width="2"/><path d="M200 28h21M200 48h12M200 68h21M200 88h12M200 108h21M200 128h12" stroke="#806f51" stroke-width="2"/><text x="224" y="31" font-size="12">0</text><text x="224" y="71" font-size="12">1</text><text x="224" y="111" font-size="12">2</text><text x="274" y="76" font-size="14" fill="#294660">Incorrect zero position</text><text x="274" y="95" font-size="14" fill="#294660">causes a consistent offset</text><text x="36" y="158" font-size="14" fill="#294660">Floor level</text>
-</svg>\`
+</svg>`
 };
 function diagramFor(q){
 let kind=/^p/.test(q.id)?'pendulum':/^d[12367]$/.test(q.id)?'towel':/^g[1-6]$/.test(q.id)?'spring':/^e[1-5]$/.test(q.id)?'sugar':/^d[45]$/.test(q.id)?'timing':q.id==='e6'?'ruler':null;
